@@ -42,17 +42,17 @@ export type SpringInfo = {
 
 export type StateFunc = {
 	_init: (self: State, prop: string, instance: Instance) -> (),
+    _Bind: (self: State, prop: string, instance: Instance) -> (),
 	Get: (self: State) -> any,
-	Set: (self: State, newValue: any) -> State,
-	Listen: (self: State, fn: (newValue: any, oldValue: any) -> ()) -> () -> (),
+	Set: (self: State, value: any) -> State,
+	Listen: (self: State, listener: (new: any, old: any) -> ()) -> () -> (),
 	Destroy: (self: State) -> (),
 }
 
 export type StateProps = {
-	ConstructorClass: "state",
-	_state: any,
-	_listeners: { (newValue: any, oldValue: any) -> () },
-	_protectType: boolean,
+	_Type: "state",
+	_State: any,
+	_Listeners: { (newValue: any, oldValue: any) -> () },
 }
 
 export type State = typeof(setmetatable({} :: StateProps, {} :: { __index: StateFunc }))

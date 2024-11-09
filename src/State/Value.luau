@@ -1,62 +1,28 @@
--- FOLDERS >
-local Aegis = script.Parent.Parent
-local Utility = Aegis.Utility
+-- Variables
+local Root = script.Parent.Parent
+local Packages = script.Parent.Parent.Parent.Parent.Packages
+local Types = require(Root.Types)
+local Utility = require(Root.Utility)
+local Debugger = require(Packages.debugger)
 
--- DEPENDENCIES >
-local Types = require(Aegis.Types)
-
-local Utils = require(Utility.Utils)
-local Debugger = require(Utility.Debugger)
-
--- VARIABLES >
 local Class = {} :: Types.StateFunc
 
--- FUNCTIONS >
-local function SetNewValue(self: Types.State, newValue: any, oldValue: any)
-	-- Setting the actual value and triggering the listeners
-	self._state = newValue
+-- Functions
 
-	-- Loop through the listeners table and call every function each of them have.
-	for _, fn in self._listeners do
-		task.spawn(fn, newValue, oldValue)
-	end
-end
+--[=[
+	Returns the current value of the object.
 
---[[
-	### `State:Get()`
-	Returns the runtime value of the state object.
-
-	#### Returns
-	- `any`
-
-	#### Examples
-	```luau
-	local MyState = Aegis.state(1)
-	print(MyState:Get()) -- 1
-	```
-]]
+	[Learn More](https://luminlabsdev.github.io/ui-framework/api/value/#get)
+]=]
 function Class.Get(self: Types.State): any
-	return self._state
+	return self._State
 end
 
---[[
-	### `State:Set(newValue: any)`
-	Sets a new value for the state.
+--[=[
+	Sets the current value of the object.
 
-	#### Parameters
-	- **newValue:** The new value for the state.
-
-	#### Returns
-	- [`state`](https://lumin-dev.github.io/Aegis/api/state) | [`Tutorial`](https://lumin-dev.github.io/Aegis/guide/managing-states)
-
-	#### Example
-	```luau
-	local MyState = Aegis.state(1)
-	print(MyState:Get()) -- 1
-	MyState:Set(2)
-	print(MyState:Get()) -- 2
-	```
-]]
+	[Learn More](https://luminlabsdev.github.io/ui-framework/api/value/#set)
+]=]
 function Class.Set(self: Types.State, newValue: any): Types.State
 	local Type = type(newValue)
 
@@ -65,53 +31,38 @@ function Class.Set(self: Types.State, newValue: any): Types.State
 		return self
 	end
 
-	local OldValue = self._state
+	local OldValue = self._State
 
 	-- Normal checks
-	if self._state == newValue then
+	if self._State == newValue then
 		return self
 	end
 
-	if self._protectType == true then
-		Utils.CheckTypeAndCall(OldValue, newValue, SetNewValue :: any, self, newValue, OldValue)
-	else
-		SetNewValue(self, newValue, OldValue)
-	end
+	-- Setting the actual value and triggering the listeners
+	self._State = newValue
+
+	-- Loop through the listeners table and call every function each of them have.
+	for _, fn in self._Listeners do
+		task.spawn(fn, newValue, OldValue)
+    end
 
 	return self
 end
 
---[[
-	### `State:Listen(listenerFunction: (newValue: any, oldValue: any) -> ())`
-	Listens to state changes.
+--[=[
+	Listens to changes of state within the object.
 
-	#### Parameters
-	- **listenerFunction:** The listener function that will be called on value change.
-
-	#### Returns
-	- `DisconnectingFunction: () -> ()`
-
-	#### Example
-	```luau
-	local MyState = Aegis.state(1)
-	local DisconnectListener = MyState:Listen(function(newValue, oldValue)
-		print(`Old: {oldValue} | New: {newValue}`)
-	end)
-
-	MyState:Set(2) -- Old: 1 | New: 2
-
-	DisconnectListener() -- listener no longer valid.
-	```
-]]
-function Class.Listen(self: Types.State, listenerFunction: (newValue: any, oldValue: any) -> ()): () -> ()
-	table.insert(self._listeners, listenerFunction) -- Add a listener
+	[Learn More](https://luminlabsdev.github.io/ui-framework/api/value/#listen)
+]=]
+function Class.Listen(self: Types.State, listener: (new: any, old: any) -> ()): () -> ()
+	table.insert(self._Listeners, listener) -- Add a listener
 
 	-- Disconnecting function
 	return function()
-		local FoundListener = table.find(self._listeners, listenerFunction)
+		local FoundListener = table.find(self._Listeners, listener)
 
 		if FoundListener then
-			table.remove(self._listeners, FoundListener)
+			table.remove(self._Listeners, FoundListener)
 		else
 			Debugger.Warn("CannotFindIndex", "State:Listen(...)")
 			return
@@ -119,51 +70,44 @@ function Class.Listen(self: Types.State, listenerFunction: (newValue: any, oldVa
 	end
 end
 
-function Class._bind(self: Types.State, prop: string, instance: Instance)
-	(instance :: any)[prop] = self._state
+function Class._Bind(self: Types.State, prop: string, instance: Instance)
+	(instance :: any)[prop] = self._State
 
 	self:Listen(function(newValue)
 		(instance :: any)[prop] = newValue
 	end)
 end
 
---[[
-	### `State:Destroy()`
-	Destroys and removes the state.
+--[=[
+	Destroys the value object.
 
-	#### Returns
-	- `nil`
-
-	#### Example
-	```luau
-	local MyState = Aegis.state(1)
-	MyState:Destroy() -- state no longer valid.
-	```
-]]
+	[Learn More](https://luminlabsdev.github.io/ui-framework/api/value/#destroy)
+]=]
 function Class.Destroy(self: Types.State): nil
-	Utils.CleanMetatable(self :: any)
+	Utility.CleanMetatable(self :: any)
 	return nil
 end
 
+-- Module
+
 --[=[
-	Creates a new value/state object that dynamically changes in UI whe changed itself.
+	Creates a new value/state object that dynamically changes in UI when changed itself.
 
 	[Learn More](https://luminlabsdev.github.io/ui-framework/api/#value)
 ]=]
-return function(initialValue: any, protectType: boolean?): Types.State
-	local Type = type(initialValue)
+return function(initial: any): Types.State
+	local Type = type(initial)
 
 	if Type == "table" then
 		Debugger.Warn("RestrictedType", Type)
-		initialValue = initialValue or nil
+		initial = initial or nil
 	end
 
 	local self = setmetatable({} :: Types.StateProps, { __index = Class } :: { __index: Types.StateFunc })
 
-	self.ConstructorClass = "state"
-	self._state = initialValue
-	self._listeners = {}
-	self._protectType = protectType or true
+	self._Type = "state"
+	self._State = initial
+	self._Listeners = {}
 
 	return self
 end
