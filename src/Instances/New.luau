@@ -54,7 +54,7 @@ return function<T>(
 
 			Component = Result
 		else -- If it wasn't successful, error it because instance creation has to be complete.
-			Debugger.Fatal("FailedToCreate", component, Result)
+			Debugger.Fatal("FailedCreation", component, Result)
 		end
 	else
 		if children then
