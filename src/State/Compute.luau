@@ -112,31 +112,11 @@ function Class.Destroy(self: Types.Compute): nil
 	return nil
 end
 
---[[
-	## `Aegis.compute`
-	A constructor that calculates the result while listening to the value of its dependencies.
-	#### Parameters
-	- **processor:** The processing function that will run everytime the value changes.
-	- **dependencies:** Table of dependencies whose values will be listened to.
-	#### Returns
-	- [`compute`](https://lumin-dev.github.io/Aegis/api/compute) | [`Tutorial`](https://lumin-dev.github.io/Aegis/guide/managing-computes)
-	#### Example
-	```luau
-	local state = Aegis.state
-	local compute = Aegis.compute
+--[=[
+	Creates a new compute which is similar to a value but will compute the value on change.
 
-	local Coins = state(100) -- State object for coins
-	local Price = state(50) -- State object for price value
-
-	local CalculateCoins = compute(function(get)
-		return get(Coins) - get(Price)
-	end, { Coins }) -- adding a dependency
-
-	print(CalculateCoins:Get()) -- 50
-	Coins:Set(200) -- changing the value
-	print(CalculateCoins:Get()) -- 150
-	```
-]]
+	[Learn More](https://luminlabsdev.github.io/ui-framework/api/#compute)
+]=]
 return function(
 	processor: (get: typeof(get)) -> (),
 	dependencies: { Types.State | Types.Spring | Types.Constructor }?

@@ -1,45 +1,17 @@
 {
-	"name": "aegis-dev",
+	"emitLegacyScripts": false,
+	"name": "ui-framework",
 	"tree": {
 		"$className": "DataModel",
-		"Workspace": {
-			"$path": "tests/workspace"
-		},
-		"Lighting": {
-			"$path": "tests/lighting",
-			"$properties": {
-				"Technology": "Voxel",
-				"Ambient": {
-					"Color3": [
-						0.470588,
-						0.470588,
-						0.470588
-					]
-				},
-				"OutdoorAmbient": {
-					"Color3": [
-						0.470588,
-						0.470588,
-						0.470588
-					]
-				}
-			}
-		},
 		"ReplicatedStorage": {
-			"$path": "tests/shared",
 			"Packages": {
 				"$path": "Packages",
 				"ui-framework": {
 					"$path": "src"
 				}
-			}
-		},
-		"ServerScriptService": {
-			"$path": "tests/server"
-		},
-		"StarterPlayer": {
-			"StarterPlayerScripts": {
-				"$path": "tests/client"
+			},
+			"Tests": {
+                "$path": "tests"
 			}
 		}
 	}

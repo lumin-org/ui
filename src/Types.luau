@@ -1,4 +1,3 @@
--- EXTRA TYPES >
 export type Animatable =
 	boolean
 	| number
@@ -41,7 +40,6 @@ export type SpringInfo = {
 	Frequency: number?,
 }
 
--- State types
 export type StateFunc = {
 	_init: (self: State, prop: string, instance: Instance) -> (),
 	Get: (self: State) -> any,
@@ -59,7 +57,6 @@ export type StateProps = {
 
 export type State = typeof(setmetatable({} :: StateProps, {} :: { __index: StateFunc }))
 
--- Spring types
 export type SpringFunc = {
 	_init: (self: Spring, prop: string, instance: Instance) -> (),
 	Get: (self: Spring) -> any,
@@ -82,7 +79,6 @@ export type SpringProps = {
 
 export type Spring = typeof(setmetatable({} :: SpringProps, {} :: { __index: SpringFunc }))
 
--- Compute types
 export type ComputeFunc = {
 	_init: (self: Compute, prop: string, instance: Instance) -> (),
 	Get: (self: Compute) -> any,

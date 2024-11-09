@@ -145,37 +145,11 @@ function Class.Destroy(self: Types.State): nil
 	return nil
 end
 
---[[
-	## `Aegis.state`
-	A constructor to create new state objects.
-	#### Parameters
-	- **initialValue:** The initial value of the state object.
-	- **protectType:** Whether to do type checking when setting value (default: true)
-	#### Returns
-	- [`state`](https://lumin-dev.github.io/Aegis/api/state) | [`Tutorial`](https://lumin-dev.github.io/Aegis/guide/managing-states)
-	#### Example
-	```luau
-	local MyState = Aegis.state("Hello Aegis")
+--[=[
+	Creates a new value/state object that dynamically changes in UI whe changed itself.
 
-	MyState:Listen(function(newValue: string, oldValue: string)
-		print(`Before: {oldValue}`)
-		print(`After: {newValue}`)
-		print("-----")
-	end)
-
-	MyState:Set("hi fellow developers")
-	MyState:Set("how are you guys")
-	```
-
-	#### Output:
-	```txt
-	Before: Hello Aegis
-	After: hi fellow developers
-	-----
-	Before: hi fellow developers
-	After: how are you guys
-	-----
-]]
+	[Learn More](https://luminlabsdev.github.io/ui-framework/api/#value)
+]=]
 return function(initialValue: any, protectType: boolean?): Types.State
 	local Type = type(initialValue)
 
