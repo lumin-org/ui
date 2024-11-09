@@ -11,7 +11,7 @@ local Default = require(Root.Instances.Default)
 -- Module
 
 --[=[
-	Creates a new instance or component with the provided children and props.
+	Creates a new instance or component with the provided children and properties.
 
 	[Learn More](https://luminlabsdev.github.io/ui-framework/api/#new)
 ]=]
@@ -25,11 +25,11 @@ return function<T>(
 		local Success, Result = pcall(Instance.new, component) -- Create the instance wrapped inside pcall
 
 		if Success then
-            if Default[component] then
-                for prop, value in Default[component] do
-                   (Result :: any)[prop] = value
-                end
-            end
+			if Default[component] then
+				for prop, value in Default[component] do
+					(Result :: any)[prop] = value
+				end
+			end
 
 			if properties then
 				for property, value in properties :: any do

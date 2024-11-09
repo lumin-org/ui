@@ -7,11 +7,6 @@ local Keys = script.Keys
 
 local Types = require(script.Types)
 local Debugger = require(Packages.debugger)
-local RegisterKey = require(Keys.RegisterKey)
-
-for _, key in script.Keys:GetChildren() do
-	RegisterKey(require(key) :: Types.Key)
-end
 
 -- Types
 export type Key = Types.Key
@@ -32,15 +27,15 @@ Debugger.SetMetadata({
 return table.freeze({
 	New = require(Instances.New),
     Update = require(Instances.Update),
+
 	Value = require(State.Value),
     Compute = require(State.Compute),
+
 	Spring = require(Animation.Spring),
     Tween = require(Animation.Tween),
 
-    OnEvent = require(Keys.List.OnEvent),
-    OnChange = require(Keys.List.OnChange),
-
-	Key = require(Keys.Key),
-	UnregisterKey = require(Keys.UnregisterKey),
-	RegisterKey = RegisterKey,
+    Event = require(Keys.Event),
+    Change = require(Keys.Change),
+    Tag = require(Keys.Tag),
+    Clean = require(Keys.Clean),
 })

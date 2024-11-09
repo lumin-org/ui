@@ -37,6 +37,7 @@ end
 local function ApplyConstructorProperty(instance: Instance, prop: string, value: Types.Constructor)
 	local Property = (instance :: any)[prop]
 
+    property(instance, value)
 	-- Call the _bind method of the Service.
 	CheckTypeAndCall(Property, value:Get(), function()
 		(value :: Types.Constructor):_bind(prop, instance)
@@ -54,8 +55,8 @@ end
 
 local function ApplyProperty(instance: Instance, property: any, value: any)
 	-- If the property is an Aegis key then
-	if Is.Key(property) then
-		(property :: Types.Key).ApplyKey(instance, value)
+	if type(property) == "function" then
+        property(instance, value)
 	elseif type(property) == "string" then
 		-- but if the property is a string then
 		if Is.AegisConstructor(value) then

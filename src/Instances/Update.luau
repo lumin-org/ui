@@ -5,7 +5,7 @@ local Types = require(script.Parent.Parent.Types)
 -- Module
 
 --[=[
-	Updates an instance, adding properties or children.
+	Updates an instance, writing to its properties or adding children.
 
 	[Learn More](https://luminlabsdev.github.io/ui-framework/api/#update)
 ]=]
