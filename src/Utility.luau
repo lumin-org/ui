@@ -1,13 +1,11 @@
--- FOLDERS >
-local Utility = script.Parent
+-- Variables
+local Root = script.Parent
+local Debugger = require(Root.Parent.debugger)
+local Storage = require(Root.Runtime.Storage)
+local Types = require(Root.Types)
+local Is = require(Root.Is)
 
--- DEPENDENCIES >
-local Storage = require(script.Parent.Parent.Runtime.Storage)
-local Types = require(script.Parent.Parent.Types)
-local Debugger = require(Utility.Debugger)
-local Is = require(Utility.Is)
-
--- Private Functions
+-- Functions
 local function RunCallback(callback, thread, ...)
 	callback(...)
 	table.insert(Storage.FreeThreads, thread)
@@ -19,9 +17,8 @@ local function Yielder()
 	end
 end
 
--- Public Functions
 local function CheckTypeAndCall(expected: any, received: any, interaction: () -> (), ...: any): ()
-	if Is.TypeSame(expected, received) then
+	if typeof(expected) == typeof(received) then
 		interaction(...) -- Type matches, call the interaction function.
 	else -- type didn't match
 		-- Check either of the types is nil. If they are, let the interaction get through.
@@ -37,10 +34,9 @@ end
 local function ApplyConstructorProperty(instance: Instance, prop: string, value: Types.Constructor)
 	local Property = (instance :: any)[prop]
 
-    property(instance, value)
 	-- Call the _bind method of the Service.
 	CheckTypeAndCall(Property, value:Get(), function()
-		(value :: Types.Constructor):_bind(prop, instance)
+		(value :: Types.Constructor):_Bind(prop, instance)
 	end)
 end
 
@@ -54,13 +50,13 @@ local function ApplyNormalProperty(instance: Instance, prop: string, value: any)
 end
 
 local function ApplyProperty(instance: Instance, property: any, value: any)
-	-- If the property is an Aegis key then
-	if type(property) == "function" then
-        property(instance, value)
+	-- If the property is a key then
+	if Is.Key(property) then
+        (property :: Types.Key).Apply(instance, value)
 	elseif type(property) == "string" then
 		-- but if the property is a string then
-		if Is.AegisConstructor(value) then
-			-- If the value is an Aegis service then
+		if Is.Constructor(value) then
+			-- If the value is a constructor then
 			ApplyConstructorProperty(instance, property, value)
 		else
 			-- else if the value is a normal data type then
@@ -69,7 +65,7 @@ local function ApplyProperty(instance: Instance, property: any, value: any)
 	end
 end
 
---[[ Forked from red-blox's bin library ]]
+-- Forked from redblox/bin
 local function Spawn(callback: () -> (), ...)
 	local Thread
 
@@ -89,7 +85,7 @@ local function CleanMetatable(t)
 	setmetatable(t, nil) -- Removes the attached metatable
 end
 
--- RETURNING >
+-- Module
 return table.freeze({
 	CheckTypeAndCall = CheckTypeAndCall,
 	ApplyConstructorProperty = ApplyConstructorProperty,

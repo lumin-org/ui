@@ -1,10 +1,9 @@
 -- Variables
 local Root = script.Parent.Parent
-local Utility = Root.Utility
 local Packages = script.Parent.Parent.Parent.Parent.Packages
 
 local Debugger = require(Packages.debugger)
-local Utils = require(Utility.Utils)
+local Utility = require(Root.Utility)
 local Types = require(Root.Types)
 local Default = require(Root.Instances.Default)
 
@@ -37,11 +36,11 @@ return function<T>(
 						continue
 					end
 
-					Utils.ApplyProperty(Result, property, value)
+					Utility.ApplyProperty(Result, property, value)
 				end
 
 				if (properties :: any).Parent then
-					Utils.ApplyProperty(Result, "Parent", (properties :: any).Parent)
+					Utility.ApplyProperty(Result, "Parent", (properties :: any).Parent)
 				end
 			end
 

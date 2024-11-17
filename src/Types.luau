@@ -20,18 +20,16 @@ export type Component<T> = (props: T) -> Instance
 export type Properties = { [string | Key]: any }
 export type Children = { [string | number]: any }
 
-export type DefaultKeys = "Ref" | "Events" | "Changes" | "Cleanup" | "Attributes" | "Tags"
-
 export type Key = {
-	KeyName: DefaultKeys | string,
-	ApplyKey: (instance: Instance, value: any) -> (),
+    Name: string,
+    Apply: (instance: Instance, ...any) -> (),
 }
 
 export type Constructor = {
-	_init: (self: any, prop: string, instance: Instance) -> (),
+    _Bind: (self: any, prop: string, instance: Instance) -> (),
+	_Type: string,
 	Get: (self: any) -> any,
 	Destroy: (self: any) -> (),
-	ConstructorClass: string,
 }
 
 export type SpringInfo = {

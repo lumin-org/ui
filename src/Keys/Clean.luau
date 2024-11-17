@@ -4,7 +4,6 @@ local Utility = script.Parent.Utility
 local Keys = require(Utility.Keys)
 local Debugger = require(Packages.debugger)
 
-
 -- Module
 
 --[=[
@@ -14,12 +13,13 @@ local Debugger = require(Packages.debugger)
 ]=]
 return function()
 	if not Keys["Clean"] then
-		Keys["Clean"] = function(instance: Instance, values: {any})
-            Debugger.Assert(type(values) == "table", "InvalidType", "table", type(values))
-            instance.Destroying:Once(function()
-
-            end)
-		end
+		Keys["Clean"] = {
+			Name = "Clean",
+			Apply = function(instance: Instance, values: { any })
+				Debugger.Assert(type(values) == "table", "InvalidType", "table", type(values))
+				instance.Destroying:Once(function() end)
+			end,
+		}
 	end
 	return Keys["Clean"]
 end

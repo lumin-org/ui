@@ -5,15 +5,21 @@ local Keys = require(Utility.Keys)
 -- Module
 
 --[=[
-	Adds a tag with the provided name to the instance.
+	Adds a tag (or multiple) with the provided name to the instance.
 
 	[Learn More](https://luminlabsdev.github.io/ui-framework/api/keys/#tag)
 ]=]
 return function()
 	if not Keys["Tag"] then
-		Keys["Tag"] = function(instance: Instance, name: string)
-            instance:AddTag(name)
-		end
+		Keys["Tag"] = {
+			Name = "Tag",
+			Apply = function(instance: Instance, names: string)
+                local TagsList = names:split(" ")
+                for _, tag in TagsList do
+                    instance:AddTag(tag)
+                end
+			end,
+		}
 	end
 	return Keys["Tag"]
 end

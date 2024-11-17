@@ -1,5 +1,5 @@
 -- Variables
-local Utils = require(script.Parent.Parent.Utility.Utils)
+local Utility = require(script.Parent.Parent.Utility)
 local Types = require(script.Parent.Parent.Types)
 
 -- Module
@@ -16,10 +16,10 @@ return function(component: Instance, properties: Types.Properties?, children: Ty
 				continue
 			end
 
-			Utils.ApplyProperty(component, property, value)
+            Utility.ApplyProperty(component, property, value)
 		end
 		if (properties :: any).Parent then
-			Utils.ApplyProperty(component, "Parent", (properties :: any).Parent)
+            Utility.ApplyProperty(component, "Parent", (properties :: any).Parent)
 		end
 	end
 

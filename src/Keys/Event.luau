@@ -14,13 +14,16 @@ local Debugger = require(Packages.debugger)
 ]=]
 return function(event: string)
 	if not Keys["Event"] then
-		Keys["Event"] = function(instance: Instance, callback: (...any) -> ())
-			local Success, Event = pcall(FindProp, instance :: any, event :: any)
-			if not Success or type(callback) ~= "function" then
-				Debugger.Fatal("")
-			end
-			Event:Connect(callback)
-		end
+		Keys["Event"] = {
+			Name = "Event",
+			Apply = function(instance: Instance, callback: (...any) -> ())
+				local Success, Event = pcall(FindProp, instance :: any, event :: any)
+				if not Success or type(callback) ~= "function" then
+					Debugger.Fatal("")
+				end
+				Event:Connect(callback)
+			end,
+		}
 	end
 	return Keys["Event"]
 end

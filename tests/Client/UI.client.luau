@@ -6,13 +6,14 @@ local Players = game:GetService("Players")
 local Packages = ReplicatedStorage.Packages
 
 -- DEPENDENCIES >
-local Aegis = require(Packages.Aegis)
+local Framework = require(Packages["ui-framework"])
 local MyComponent = require(script.Parent.components.Background)
 
 -- VARIABLES >
 local Player = Players.LocalPlayer
-local New = Aegis.new
-
+local New = Framework.New
+local State = Framework.Value("Hello")
+local c = 1
 -- UI
 New("ScreenGui", {
 	Name = "MenuUI",
@@ -30,7 +31,8 @@ New("ScreenGui", {
 		Position = UDim2.fromScale(0.5, 0.9),
 	}, {
 		New("TextLabel", {
-			Text = "HI",
+			Text = State,
+            BackgroundColor3 = Color3.fromRGB(128, 95, 95),
 			Position = UDim2.fromScale(0.5, 0.5),
 			ZIndex = 3,
 		}),
@@ -39,4 +41,16 @@ New("ScreenGui", {
 		Color = Color3.fromRGB(103, 196, 246),
 		Position = UDim2.fromScale(0.5, 0.1),
 	}),
+    New("TextButton", {
+        [Framework.Event "Activated"] = function()
+            c+=1
+            State:Set(`Hello {c}`)
+        end,
+        Text = "Test",
+        Position = UDim2.fromScale(0.5, 0.2),
+        ZIndex = 3,
+    }),
 })
+
+task.wait(10)
+State:Set("TEST!!!")

@@ -13,13 +13,16 @@ local Debugger = require(Packages.debugger)
 ]=]
 return function(prop: string)
 	if not Keys["Change"] then
-		Keys["Change"] = function(instance: Instance, callback: (...any) -> ())
-			local Success, Event = pcall(instance.GetPropertyChangedSignal, instance :: any, prop :: any)
-			if not Success or type(callback) ~= "function" then
-				Debugger.Fatal("")
-			end
-			Event:Connect(callback)
-		end
+		Keys["Change"] = {
+			Name = "Change",
+			Apply = function(instance: Instance, callback: (...any) -> ())
+				local Success, Event = pcall(instance.GetPropertyChangedSignal, instance :: any, prop :: any)
+				if not Success or type(callback) ~= "function" then
+					Debugger.Fatal("")
+				end
+				Event:Connect(callback)
+			end,
+		}
 	end
 	return Keys["Change"]
 end

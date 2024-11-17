@@ -15,7 +15,6 @@ export type Spring = Types.Spring
 export type Compute = Types.Compute
 export type Animatable = Types.Animatable
 export type SpringInfo = Types.SpringInfo
-export type DefaultKeys = Types.DefaultKeys
 export type Component<T> = Types.Component<T>
 
 -- Module
@@ -31,8 +30,8 @@ return table.freeze({
 	Value = require(State.Value),
     Compute = require(State.Compute),
 
-	Spring = require(Animation.Spring),
-    Tween = require(Animation.Tween),
+	-- Spring = require(Animation.Spring),
+    -- Tween = require(Animation.Tween),
 
     Event = require(Keys.Event),
     Change = require(Keys.Change),

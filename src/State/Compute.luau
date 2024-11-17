@@ -1,38 +1,21 @@
--- FOLDERS >
-local Aegis = script.Parent.Parent
-local Utility = Aegis.Utility
+-- Variables
+local Root = script.Parent.Parent
+local Debugger = require(Root.Parent.debugger)
+local Utility = require(Root.Utility)
+local Is = require(Root.Is)
+local Types = require(Root.Types)
 
--- DEPENDENCIES >
-local Debugger = require(Utility.Debugger)
-local Utils = require(Utility.Utils)
-local Is = require(Utility.Is)
-
-local Types = require(Aegis.Types)
-
--- VARIABLES >
 local Class = {}
 
--- FUNCTIONS >
---[[
-	### `get(Types.Constructor | any)`
-	Get the runtime value of a constructor or a data type.
+-- Functions
 
-	#### Parameters
-	- **value:** The constructor or data type to get the value of.
+--[=[
+	Gets the current value of a value object for use within the compute.
 
-	#### Returns
-	- `any`
-
-	#### Example
-	```luau
-	local MyState = Aegis.state(1)
-	local ReturnDouble = Aegis.compute(function(get)
-		return get(MyState) * 2 -- get(MyState) returns `2` here.
-	end, { MyState })
-	```
-]]
-local function get(value: Types.Constructor | any)
-	if Is.AegisConstructor(value) then
+	[Learn More](https://luminlabsdev.github.io/ui-framework/api/compute/#use)
+]=]
+local function use(value: Types.Constructor | any)
+	if Is.Constructor(value) then
 		return (value :: Types.Constructor):Get()
 	else
 		return value
@@ -41,7 +24,7 @@ end
 
 local function ListenerFunction(self: Types.Compute)
 	return function()
-		self._result = self._processor(get)
+		self._result = self._processor(use)
 
 		if self._instances ~= nil then
 			for prop, instance in self._instances do
@@ -51,30 +34,16 @@ local function ListenerFunction(self: Types.Compute)
 	end
 end
 
---[[
-	### `Compute:Get()`
-	Returns the runtime value of the compute object.
+--[=[
+	Gets the current value of the compute object.
 
-	#### Returns
-	- `any`
-
-	#### Examples
-	```luau
-	local MyState = Aegis.state(1)
-	local ReturnDouble = Aegis.compute(function(get)
-		return get(MyState) * 2
-	end, { MyState })
-
-	MyState:Set(2)
-
-	print(ReturnDouble:Get()) -- 4
-	```
-]]
+	[Learn More](https://luminlabsdev.github.io/ui-framework/api/compute/#get)
+]=]
 function Class.Get(self: Types.Compute): any
 	return self._result
 end
 
-function Class._bind(self: Types.Compute, prop: string, instance: Instance)
+function Class._Bind(self: Types.Compute, prop: string, instance: Instance)
 	if self._instances == nil then
 		self._instances = {}
 	end
@@ -83,22 +52,11 @@ function Class._bind(self: Types.Compute, prop: string, instance: Instance)
 	(instance :: any)[prop] = self._result
 end
 
---[[
-	### `Compute:Destroy()`
-	Destroys and removes the compute object.
+--[=[
+	Destroys the compute object.
 
-	#### Returns
-	- `nil`
-
-	#### Example
-	```luau
-	local MyCompute = Aegis.compute(function()
-		-- code
-	end)
-
-	MyCompute:Destroy() -- compute object no longer valid.
-	```
-]]
+	[Learn More](https://luminlabsdev.github.io/ui-framework/api/compute/#destroy)
+]=]
 function Class.Destroy(self: Types.Compute): nil
 	if self._dependencies then
 		for dependency, disconnect in self._dependencies do
@@ -107,10 +65,12 @@ function Class.Destroy(self: Types.Compute): nil
 		end
 	end
 
-	Utils.CleanMetatable(self :: any)
+	Utility.CleanMetatable(self :: any)
 
 	return nil
 end
+
+-- Module
 
 --[=[
 	Creates a new compute which is similar to a value but will compute the value on change.
@@ -118,7 +78,7 @@ end
 	[Learn More](https://luminlabsdev.github.io/ui-framework/api/#compute)
 ]=]
 return function(
-	processor: (get: typeof(get)) -> (),
+	processor: (get: typeof(use)) -> (),
 	dependencies: { Types.State | Types.Spring | Types.Constructor }?
 ): Types.Compute
 	local Dependencies = nil :: { [Types.State | Types.Spring | Types.Constructor]: () -> () }?
@@ -127,7 +87,7 @@ return function(
 	self.ConstructorClass = "compute"
 	self._processor = processor
 	self._dependencies = Dependencies
-	self._result = self._processor(get)
+	self._result = self._processor(use)
 	self._instances = {}
 
 	if dependencies then
@@ -139,13 +99,13 @@ return function(
 			} :: {}
 
 			for _, v in dependencies do
-				if Is.AegisConstructor(v :: any) then
-					if (v :: Types.Constructor).ConstructorClass == "state" then
+				if Is.Constructor(v :: any) then
+					if (v :: Types.Constructor)._Type == "state" then
 						(Dependencies :: {})[v] = (v :: Types.State):Listen(ListenerFunction(self))
-					elseif (v :: Types.Constructor).ConstructorClass == "spring" then
+					elseif (v :: Types.Constructor)._Type == "spring" then
 						(Dependencies :: {})[v] = (v :: Types.Spring)._state:Listen(ListenerFunction(self))
 					else
-						Debugger.Warn("ConstructorNotSupported", v.ConstructorClass)
+						Debugger.Warn("ConstructorNotSupported", v._Type)
 					end
 				end
 			end

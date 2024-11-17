@@ -10,10 +10,10 @@ local Studio = settings().Studio
 local Packages = ReplicatedStorage.Packages
 
 -- // Dependencies
-local Aegis = require(Packages.Aegis)
+local Framework = require(Packages["ui-framework"])
 
 -- // Variables
-local StudioTheme = Aegis.state(Studio.Theme)
+local StudioTheme = Framework.Value(Studio.Theme)
 
 -- // Event Listeners
 Studio.ThemeChanged:Connect(function()

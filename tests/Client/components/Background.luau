@@ -5,10 +5,10 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Packages = ReplicatedStorage.Packages
 
 -- DEPENDENCIES >
-local Aegis = require(Packages.Aegis)
+local Framework = require(Packages["ui-framework"])
 
 -- VARIABLES >
-local New = Aegis.new
+local New = Framework.New
 
 type Background = {
 	Color: Color3,
