@@ -48,6 +48,7 @@ New("ScreenGui", {
         end,
         Text = "Test",
         Position = UDim2.fromScale(0.5, 0.2),
+        Size = UDim2.fromOffset(100, 100),
         ZIndex = 3,
     }),
 })
