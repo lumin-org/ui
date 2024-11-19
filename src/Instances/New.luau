@@ -1,10 +1,9 @@
 -- Variables
 local Root = script.Parent.Parent
-local Packages = script.Parent.Parent.Parent.Parent.Packages
-
-local Debugger = require(Packages.debugger)
 local Utility = require(Root.Utility)
 local Types = require(Root.Types)
+
+local Debugger = require(Root.Parent.debugger)
 local Default = require(Root.Instances.Default)
 
 -- Module

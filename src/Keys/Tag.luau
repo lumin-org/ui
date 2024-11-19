@@ -1,6 +1,5 @@
 -- Variables
-local Utility = script.Parent.Utility
-local Keys = require(Utility.Keys)
+local Keys = require(script.Parent.List)
 
 -- Module
 

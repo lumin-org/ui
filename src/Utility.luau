@@ -31,12 +31,12 @@ local function CheckTypeAndCall(expected: any, received: any, interaction: () ->
 	end
 end
 
-local function ApplyConstructorProperty(instance: Instance, prop: string, value: Types.Constructor)
+local function ApplyConstructorProperty(instance: Instance, prop: string, value: Types.Constructor<any>)
 	local Property = (instance :: any)[prop]
 
 	-- Call the _bind method of the Service.
 	CheckTypeAndCall(Property, value:Get(), function()
-		(value :: Types.Constructor):_Bind(prop, instance)
+		(value :: Types.Constructor<any>):_Bind(prop, instance)
 	end)
 end
 

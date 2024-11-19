@@ -1,9 +1,12 @@
 -- Variables
-local Packages = script.Parent.Parent.Parent.Parent.Packages
-local Utility = script.Parent.Utility
-local FindProp = require(Utility.FindProp)
-local Keys = require(Utility.Keys)
-local Debugger = require(Packages.debugger)
+local Root = script.Parent.Parent
+local Keys = require(script.Parent.List)
+local Debugger = require(Root.Parent.debugger)
+
+-- Functions
+local function Find(instance: Instance, property: string)
+    return (instance :: any)[property]
+end
 
 -- Module
 
@@ -17,7 +20,7 @@ return function(event: string)
 		Keys["Event"] = {
 			Name = "Event",
 			Apply = function(instance: Instance, callback: (...any) -> ())
-				local Success, Event = pcall(FindProp, instance :: any, event :: any)
+				local Success, Event = pcall(Find, instance :: any, event :: any)
 				if not Success or type(callback) ~= "function" then
 					Debugger.Fatal("")
 				end

@@ -2,7 +2,7 @@
 local Types = require(script.Parent.Types)
 
 -- Functions
-local function Constructor(item: Types.Constructor)
+local function Constructor(item: Types.Constructor<any>)
 	return if type(item) == "table" and item._Type and item._Bind and item.Get then true else false
 end
 

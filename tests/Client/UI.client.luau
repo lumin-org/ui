@@ -46,6 +46,11 @@ New("ScreenGui", {
             c+=1
             State:Set(`Hello {c}`)
         end,
+
+        [Framework.Change "Name"] = function(new_name: any)
+            print(new_name)
+        end,
+
         Text = "Test",
         Position = UDim2.fromScale(0.5, 0.2),
         Size = UDim2.fromOffset(100, 100),

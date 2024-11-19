@@ -1,5 +1,5 @@
 -- Variables
-local Packages = script.Parent.Parent.Packages
+local Packages = script.Parent
 local Instances = script.Instances
 local Animation = script.Animation
 local State = script.State
@@ -14,7 +14,6 @@ export type State = Types.State
 export type Spring = Types.Spring
 export type Compute = Types.Compute
 export type Animatable = Types.Animatable
-export type SpringInfo = Types.SpringInfo
 export type Component<T> = Types.Component<T>
 
 -- Module
@@ -30,7 +29,7 @@ return table.freeze({
 	Value = require(State.Value),
     Compute = require(State.Compute),
 
-	-- Spring = require(Animation.Spring),
+	Spring = require(Animation.Spring),
     -- Tween = require(Animation.Tween),
 
     Event = require(Keys.Event),

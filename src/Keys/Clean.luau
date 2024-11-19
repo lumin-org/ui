@@ -1,8 +1,7 @@
 -- Variables
-local Packages = script.Parent.Parent.Parent.Parent.Packages
-local Utility = script.Parent.Utility
-local Keys = require(Utility.Keys)
-local Debugger = require(Packages.debugger)
+local Root = script.Parent.Parent
+local Keys = require(script.Parent.List)
+local Debugger = require(Root.Parent.debugger)
 
 -- Module
 

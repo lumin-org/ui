@@ -1,11 +1,10 @@
 -- Variables
 local Root = script.Parent.Parent
-local Packages = script.Parent.Parent.Parent.Parent.Packages
 local Types = require(Root.Types)
 local Utility = require(Root.Utility)
-local Debugger = require(Packages.debugger)
+local Debugger = require(Root.Parent.debugger)
 
-local Class = {} :: Types.StateFunc
+local Class = {}
 
 -- Functions
 
@@ -73,7 +72,7 @@ end
 function Class._Bind(self: Types.State, prop: string, instance: Instance)
 	(instance :: any)[prop] = self._State
 
-	self:Listen(function(newValue)
+	;(self :: any):Listen(function(newValue)
 		(instance :: any)[prop] = newValue
 	end)
 end
@@ -103,11 +102,11 @@ return function(initial: any): Types.State
 		initial = initial or nil
 	end
 
-	local self = setmetatable({} :: Types.StateProps, { __index = Class } :: { __index: Types.StateFunc })
+	local self = setmetatable({}, { __index = Class })
 
 	self._Type = "state"
 	self._State = initial
 	self._Listeners = {}
 
-	return self
+	return self :: any
 end

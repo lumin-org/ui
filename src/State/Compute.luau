@@ -14,9 +14,9 @@ local Class = {}
 
 	[Learn More](https://luminlabsdev.github.io/ui-framework/api/compute/#use)
 ]=]
-local function use(value: Types.Constructor | any)
+local function use(value: Types.Constructor<any> | any)
 	if Is.Constructor(value) then
-		return (value :: Types.Constructor):Get()
+		return (value :: Types.Constructor<any>):Get()
 	else
 		return value
 	end
@@ -24,11 +24,11 @@ end
 
 local function ListenerFunction(self: Types.Compute)
 	return function()
-		self._result = self._processor(use)
+		self._Result = self._Processor(use)
 
-		if self._instances ~= nil then
-			for prop, instance in self._instances do
-				(instance :: any)[prop] = self._result
+		if self._Instances ~= nil then
+			for prop, instance in self._Instances do
+				(instance :: any)[prop] = self._Result
 			end
 		end
 	end
@@ -40,16 +40,16 @@ end
 	[Learn More](https://luminlabsdev.github.io/ui-framework/api/compute/#get)
 ]=]
 function Class.Get(self: Types.Compute): any
-	return self._result
+	return self._Result
 end
 
 function Class._Bind(self: Types.Compute, prop: string, instance: Instance)
-	if self._instances == nil then
-		self._instances = {}
+	if self._Instances == nil then
+		self._Instances = {}
 	end
 
-	(self._instances :: {})[prop] = instance;
-	(instance :: any)[prop] = self._result
+	(self._Instances :: {})[prop] = instance;
+	(instance :: any)[prop] = self._Result
 end
 
 --[=[
@@ -58,10 +58,10 @@ end
 	[Learn More](https://luminlabsdev.github.io/ui-framework/api/compute/#destroy)
 ]=]
 function Class.Destroy(self: Types.Compute): nil
-	if self._dependencies then
-		for dependency, disconnect in self._dependencies do
+	if self._Dependencies then
+		for dependency, disconnect in self._Dependencies do
 			disconnect()
-			self._dependencies[dependency] = nil
+			self._Dependencies[dependency] = nil
 		end
 	end
 
@@ -79,16 +79,16 @@ end
 ]=]
 return function(
 	processor: (get: typeof(use)) -> (),
-	dependencies: { Types.State | Types.Spring | Types.Constructor }?
+	dependencies: { Types.State | Types.Spring | Types.Constructor<any> }?
 ): Types.Compute
-	local Dependencies = nil :: { [Types.State | Types.Spring | Types.Constructor]: () -> () }?
-	local self = setmetatable({} :: Types.ComputeProps, { __index = Class } :: { __index: Types.ComputeFunc })
+	local Dependencies = nil :: { [Types.State | Types.Spring | Types.Constructor<any>]: () -> () }?
+	local self = setmetatable({}, { __index = Class })
 
-	self.ConstructorClass = "compute"
-	self._processor = processor
-	self._dependencies = Dependencies
-	self._result = self._processor(use)
-	self._instances = {}
+	self._Type = "compute"
+	self._Processor = processor
+	self._Dependencies = Dependencies
+	self._Result = self._Processor(use)
+	self._Instances = {}
 
 	if dependencies then
 		local TypeOfDependencies = type(dependencies)
@@ -100,10 +100,10 @@ return function(
 
 			for _, v in dependencies do
 				if Is.Constructor(v :: any) then
-					if (v :: Types.Constructor)._Type == "state" then
-						(Dependencies :: {})[v] = (v :: Types.State):Listen(ListenerFunction(self))
-					elseif (v :: Types.Constructor)._Type == "spring" then
-						(Dependencies :: {})[v] = (v :: Types.Spring)._state:Listen(ListenerFunction(self))
+					if (v :: Types.Constructor<any>)._Type == "state" then
+						(Dependencies :: {})[v] = (v :: any):Listen(ListenerFunction(self :: any))
+					elseif (v :: Types.Constructor<any>)._Type == "spring" then
+						(Dependencies :: {})[v] = (v :: any)._State:Listen(ListenerFunction(self :: any))
 					else
 						Debugger.Warn("ConstructorNotSupported", v._Type)
 					end
@@ -114,5 +114,5 @@ return function(
 		end
 	end
 
-	return self
+	return self :: any
 end

@@ -21,76 +21,60 @@ export type Properties = { [string | Key]: any }
 export type Children = { [string | number]: any }
 
 export type Key = {
-    Name: string,
-    Apply: (instance: Instance, ...any) -> (),
+	Name: string,
+	Apply: (instance: Instance, ...any) -> (),
 }
 
-export type Constructor = {
-    _Bind: (self: any, prop: string, instance: Instance) -> (),
+export type Constructor<T> = {
+	_Bind: (self: T, prop: string, instance: Instance) -> (),
 	_Type: string,
-	Get: (self: any) -> any,
-	Destroy: (self: any) -> (),
+	Get: (self: T) -> any,
+	Destroy: (self: T) -> (),
 }
 
-export type SpringInfo = {
-	State: State,
-	Damping: number?,
-	Frequency: number?,
-}
-
-export type StateFunc = {
-	_init: (self: State, prop: string, instance: Instance) -> (),
-    _Bind: (self: State, prop: string, instance: Instance) -> (),
-	Get: (self: State) -> any,
-	Set: (self: State, value: any) -> State,
-	Listen: (self: State, listener: (new: any, old: any) -> ()) -> () -> (),
-	Destroy: (self: State) -> (),
-}
-
-export type StateProps = {
-	_Type: "state",
-	_State: any,
-	_Listeners: { (newValue: any, oldValue: any) -> () },
-}
-
-export type State = typeof(setmetatable({} :: StateProps, {} :: { __index: StateFunc }))
-
-export type SpringFunc = {
-	_init: (self: Spring, prop: string, instance: Instance) -> (),
-	Get: (self: Spring) -> any,
-	_update: (self: Spring, linearTargetPosition: { number }, delta: number) -> (),
-	Destroy: (self: Spring) -> nil,
-}
-
-export type SpringProps = {
-	ConstructorClass: "spring",
-	_state: State,
-	_damping: number,
-	_frequency: number,
-	_velocity: { number },
-	_currentLinearPosition: { number },
-	_type: {
-		ToLinear: (value: Animatable) -> { number },
-		FromLinear: (value: { number }) -> Animatable,
+export type State = typeof(setmetatable(
+	{} :: {
+		_Type: "state",
+		_State: any,
+		_Listeners: { (newValue: any, oldValue: any) -> () },
 	},
-}
+	{} :: {
+		__index: {
+			Set: (self: State, value: any) -> State,
+			Listen: (self: State, listener: (new: any, old: any) -> ()) -> () -> (),
+		} & Constructor<State>,
+	}
+))
 
-export type Spring = typeof(setmetatable({} :: SpringProps, {} :: { __index: SpringFunc }))
+export type Spring = typeof(setmetatable(
+	{} :: {
+		_Type: "spring",
+		_State: State,
+		_Damping: number,
+		_Frequency: number,
+		_Velocity: { number },
+		_CurrentLinearPosition: { number },
+		_type: {
+			ToLinear: (value: Animatable) -> { number },
+			FromLinear: (value: { number }) -> Animatable,
+		},
+	},
+	{} :: {
+		__index: {
+			_Update: (self: Spring, linearTargetPosition: { number }, delta: number) -> (),
+		} & Constructor<Spring>,
+	}
+))
 
-export type ComputeFunc = {
-	_init: (self: Compute, prop: string, instance: Instance) -> (),
-	Get: (self: Compute) -> any,
-	Destroy: (self: Compute) -> nil,
-}
-
-export type ComputeProps = {
-	ConstructorClass: "compute",
-	_processor: (get: (value: Constructor | any) -> ()) -> (),
-	_dependencies: { [State | Spring | Constructor]: () -> () }?,
-	_result: any,
-	_instances: { [string]: Instance }?,
-}
-
-export type Compute = typeof(setmetatable({} :: ComputeProps, {} :: { __index: ComputeFunc }))
+export type Compute = typeof(setmetatable(
+	{} :: {
+		_Type: "compute",
+		_Processor: (get: (value: Constructor<any> | any) -> ()) -> (),
+		_Dependencies: { [State | Spring | Constructor<any>]: () -> () }?,
+		_Result: any,
+		_Instances: { [string]: Instance }?,
+	},
+	{} :: { __index: Constructor<Compute> }
+))
 
 return {}
