@@ -80,7 +80,7 @@ end
 return function(
 	processor: (get: typeof(use)) -> (),
 	dependencies: { Types.State | Types.Spring | Types.Constructor<any> }?
-): Types.Compute
+): Types.ComputeExport
 	local Dependencies = nil :: { [Types.State | Types.Spring | Types.Constructor<any>]: () -> () }?
 	local self = setmetatable({}, { __index = Class })
 

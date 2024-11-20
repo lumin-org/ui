@@ -47,8 +47,8 @@ function Class._Bind(self: Types.Spring, prop: string, instance: Instance)
 		(instance :: any)[prop] = CurrentValue
 	end
 	self._CurrentLinearPosition = TargetLinearPosition
-
-	;(self._State :: any):Listen(function(newValue)
+;
+	(self._State :: any):Listen(function(newValue)
 		TargetLinearPosition = self._type.ToLinear(newValue)
 
 		if Connection ~= nil then
@@ -176,11 +176,7 @@ end
 
 	[Learn More](https://luminlabsdev.github.io/ui-framework/api/#spring)
 ]=]
-return function(springInfo: {
-	State: Types.State,
-	Damping: number?,
-	Frequency: number?,
-}): Types.Spring
+return function(state: Types.State, damping: number?, frequency: number?): Types.Spring
 	-- Checks
 	if Is.Constructor(springInfo.State :: any) == false then
 		Debugger.Error("TypeMismatch", "Aegis.State", typeof(springInfo.State))

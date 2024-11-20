@@ -32,6 +32,11 @@ export type Constructor<T> = {
 	Destroy: (self: T) -> (),
 }
 
+export type StateExport = {
+	Set: (self: StateExport, value: any) -> State,
+	Listen: (self: StateExport, listener: (new: any, old: any) -> ()) -> () -> (),
+} & Constructor<StateExport>
+
 export type State = typeof(setmetatable(
 	{} :: {
 		_Type: "state",
@@ -39,12 +44,13 @@ export type State = typeof(setmetatable(
 		_Listeners: { (newValue: any, oldValue: any) -> () },
 	},
 	{} :: {
-		__index: {
-			Set: (self: State, value: any) -> State,
-			Listen: (self: State, listener: (new: any, old: any) -> ()) -> () -> (),
-		} & Constructor<State>,
+		__index: StateExport,
 	}
 ))
+
+export type SpringExport = {
+    _Update: (self: SpringExport, linearTargetPosition: { number }, delta: number) -> (),
+} & Constructor<SpringExport>
 
 export type Spring = typeof(setmetatable(
 	{} :: {
@@ -60,11 +66,11 @@ export type Spring = typeof(setmetatable(
 		},
 	},
 	{} :: {
-		__index: {
-			_Update: (self: Spring, linearTargetPosition: { number }, delta: number) -> (),
-		} & Constructor<Spring>,
+		__index: SpringExport,
 	}
 ))
+
+export type ComputeExport = Constructor<ComputeExport>
 
 export type Compute = typeof(setmetatable(
 	{} :: {
@@ -74,7 +80,7 @@ export type Compute = typeof(setmetatable(
 		_Result: any,
 		_Instances: { [string]: Instance }?,
 	},
-	{} :: { __index: Constructor<Compute> }
+	{} :: { __index: ComputeExport }
 ))
 
 return {}

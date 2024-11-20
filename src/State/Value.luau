@@ -94,7 +94,7 @@ end
 
 	[Learn More](https://luminlabsdev.github.io/ui-framework/api/#value)
 ]=]
-return function(initial: any): Types.State
+return function(initial: any): Types.StateExport
 	local Type = type(initial)
 
 	if Type == "table" then
