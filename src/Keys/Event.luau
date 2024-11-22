@@ -19,10 +19,11 @@ return function(event: string)
 	if not Keys["Event"] then
 		Keys["Event"] = {
 			Name = "Event",
+            Connection = nil,
 			Apply = function(instance: Instance, callback: (...any) -> ())
 				local Success, Event = pcall(Find, instance :: any, event :: any)
 				if not Success or type(callback) ~= "function" then
-					Debugger.Fatal("")
+					Debugger.Fatal("InvalidPropOrEvent", event)
 				end
 				Event:Connect(callback)
 			end,

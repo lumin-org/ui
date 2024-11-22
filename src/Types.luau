@@ -60,7 +60,7 @@ export type Spring = typeof(setmetatable(
 		_Frequency: number,
 		_Velocity: { number },
 		_CurrentLinearPosition: { number },
-		_type: {
+		_DataType: {
 			ToLinear: (value: Animatable) -> { number },
 			FromLinear: (value: { number }) -> Animatable,
 		},
@@ -68,6 +68,19 @@ export type Spring = typeof(setmetatable(
 	{} :: {
 		__index: SpringExport,
 	}
+))
+
+export type TweenExport = {
+
+} & Constructor<TweenExport>
+
+export type Tween = typeof(setmetatable(
+    {} :: {
+
+    },
+    {} :: {
+        __index: TweenExport
+    }
 ))
 
 export type ComputeExport = Constructor<ComputeExport>

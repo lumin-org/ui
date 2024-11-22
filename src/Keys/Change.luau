@@ -17,7 +17,7 @@ return function(prop: string)
 			Apply = function(instance: Instance, callback: (changed: any) -> ())
 				local Success, Event = pcall(instance.GetPropertyChangedSignal, instance :: any, prop :: any)
 				if not Success or type(callback) ~= "function" then
-					Debugger.Fatal("")
+					Debugger.Fatal("InvalidPropOrEvent", prop)
 				end
 				Event:Connect(function()
                     callback((instance :: any)[prop])

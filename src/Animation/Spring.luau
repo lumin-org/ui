@@ -40,8 +40,8 @@ function Class._Bind(self: Types.Spring, prop: string, instance: Instance)
 	local Mode = RunService:IsClient() and "Client" or "Server"
 	local Connection: ((number) -> ())?
 
-	local TargetLinearPosition = self._type.ToLinear(self._State:Get())
-	local CurrentValue = self._State:Get()
+	local TargetLinearPosition = self._DataType.ToLinear((self._State :: any):Get())
+	local CurrentValue = (self._State :: any):Get()
 
 	if CurrentValue ~= nil then
 		(instance :: any)[prop] = CurrentValue
@@ -49,7 +49,7 @@ function Class._Bind(self: Types.Spring, prop: string, instance: Instance)
 	self._CurrentLinearPosition = TargetLinearPosition
 ;
 	(self._State :: any):Listen(function(newValue)
-		TargetLinearPosition = self._type.ToLinear(newValue)
+		TargetLinearPosition = self._DataType.ToLinear(newValue)
 
 		if Connection ~= nil then
 			return -- The value changed when the spring was playing; don't create another connection, let the new one play
@@ -59,7 +59,7 @@ function Class._Bind(self: Types.Spring, prop: string, instance: Instance)
 			Connection = Scheduler:Add(Mode, function(delta: number)
 				if self and (self :: any)._Update then
 					(self :: any):_Update(TargetLinearPosition, delta);
-					(instance :: any)[prop] = self._type.FromLinear(self._CurrentLinearPosition)
+					(instance :: any)[prop] = self._DataType.FromLinear(self._CurrentLinearPosition)
 				else
 					if Connection then
 						Scheduler:Remove(Mode, Connection)
@@ -134,36 +134,19 @@ function Class._Update(self: Types.Spring, targetLinearPosition: { number }, del
 end
 
 --[[
-	### `Spring:Get()`
-	Returns the runtime position of the spring object.
+	Gets the end goal of the spring object.
 
-	#### Returns
-	- `Position`
-
-	#### Examples
-	```luau
-	local MyState = Aegis.state(Vector3.new(0, 5, 0))
-	local MySpring = Aegis.spring({ State = MyState })
-	print(MySpring:Get()) -- 0, 5, 0
-	```
+    [Learn More](https://luminlabsdev.github.io/ui-framework/api/spring/#get)
 ]]
 function Class.Get(self: Types.Spring): Types.Animatable
 	-- Return the unpacked format for improved clarity
-	return self._type.FromLinear(self._CurrentLinearPosition)
+	return self._DataType.FromLinear(self._CurrentLinearPosition)
 end
 
 --[[
-	### `Spring:Destroy()`
-	Destroys and removes the spring.
+	Destroys the spring object.
 
-	#### Returns
-	- `nil`
-
-	#### Example
-	```luau
-	local MySpring = Aegis.spring({ ... })
-	MySpring:Destroy() -- spring no longer valid.
-	```
+    [Learn More](https://luminlabsdev.github.io/ui-framework/api/spring/#destroy)
 ]]
 function Class.Destroy(self: Types.Spring): nil
 	(self :: any)._State:Destroy()
@@ -172,34 +155,26 @@ function Class.Destroy(self: Types.Spring): nil
 end
 
 --[=[
-	Creates a new spring.
+	Creates a new spring with a set goal.
 
 	[Learn More](https://luminlabsdev.github.io/ui-framework/api/#spring)
 ]=]
-return function(state: Types.State, damping: number?, frequency: number?): Types.Spring
-	-- Checks
-	if Is.Constructor(springInfo.State :: any) == false then
-		Debugger.Error("TypeMismatch", "Aegis.State", typeof(springInfo.State))
-	end
+return function(goal: Types.State, damping: number?, frequency: number?): Types.SpringExport
+    Debugger.Assert(Is.Constructor(goal :: any), "InvalidType", "State", type(goal))
+	local Type = Storage.AnimatableDataTypes[typeof((goal :: any):Get())]
+    Debugger.Assert(Type, "NotAnimatable", type((goal :: any):Get()))
 
-	local Type = Storage.AnimatableDataTypes[typeof(springInfo.State:Get())]
+	local self = setmetatable({}, { __index = Class })
 
-	if not Type then
-		Debugger.Error("NotAnimatable", typeof(springInfo.State:Get()))
-	end
+	self._Type = "spring"
+	self._Damping = damping or 1
+	self._Frequency = frequency or 1
+	self._State = goal
 
-	local self = setmetatable({} :: Types.SpringProps, { __index = Class } :: { __index: Types.SpringFunc })
-
-	self.ConstructorClass = "spring"
-
-	self._Damping = springInfo.Damping or 1
-	self._Frequency = springInfo.Frequency or 1
-	self._State = springInfo.State
-
-	self._type = Type
-	self._CurrentLinearPosition = self._type.ToLinear(springInfo.State:Get())
+	self._DataType = Type
+	self._CurrentLinearPosition = Type.ToLinear((goal :: any):Get())
 
 	self._Velocity = table.create(#self._CurrentLinearPosition, 0)
 
-	return self
+	return self :: any
 end

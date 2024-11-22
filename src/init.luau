@@ -26,11 +26,11 @@ return table.freeze({
 	New = require(Instances.New),
     Update = require(Instances.Update),
 
-	Value = require(State.Value),
+	State = require(State.State),
     Compute = require(State.Compute),
 
 	Spring = require(Animation.Spring),
-    -- Tween = require(Animation.Tween),
+    Tween = require(Animation.Tween),
 
     Event = require(Keys.Event),
     Change = require(Keys.Change),

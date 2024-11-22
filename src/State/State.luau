@@ -11,7 +11,7 @@ local Class = {}
 --[=[
 	Returns the current value of the object.
 
-	[Learn More](https://luminlabsdev.github.io/ui-framework/api/value/#get)
+	[Learn More](https://luminlabsdev.github.io/ui-framework/api/state/#get)
 ]=]
 function Class.Get(self: Types.State): any
 	return self._State
@@ -20,7 +20,7 @@ end
 --[=[
 	Sets the current value of the object.
 
-	[Learn More](https://luminlabsdev.github.io/ui-framework/api/value/#set)
+	[Learn More](https://luminlabsdev.github.io/ui-framework/api/state/#set)
 ]=]
 function Class.Set(self: Types.State, newValue: any): Types.State
 	local Type = type(newValue)
@@ -51,7 +51,7 @@ end
 --[=[
 	Listens to changes of state within the object.
 
-	[Learn More](https://luminlabsdev.github.io/ui-framework/api/value/#listen)
+	[Learn More](https://luminlabsdev.github.io/ui-framework/api/state/#listen)
 ]=]
 function Class.Listen(self: Types.State, listener: (new: any, old: any) -> ()): () -> ()
 	table.insert(self._Listeners, listener) -- Add a listener
@@ -80,7 +80,7 @@ end
 --[=[
 	Destroys the value object.
 
-	[Learn More](https://luminlabsdev.github.io/ui-framework/api/value/#destroy)
+	[Learn More](https://luminlabsdev.github.io/ui-framework/api/state/#destroy)
 ]=]
 function Class.Destroy(self: Types.State): nil
 	Utility.CleanMetatable(self :: any)
@@ -92,7 +92,7 @@ end
 --[=[
 	Creates a new value/state object that dynamically changes in UI when changed itself.
 
-	[Learn More](https://luminlabsdev.github.io/ui-framework/api/#value)
+	[Learn More](https://luminlabsdev.github.io/ui-framework/api/#state)
 ]=]
 return function(initial: any): Types.StateExport
 	local Type = type(initial)

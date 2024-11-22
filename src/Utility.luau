@@ -25,7 +25,7 @@ local function CheckTypeAndCall(expected: any, received: any, interaction: () ->
 		if expected == nil or received == nil then
 			interaction(...) -- Let the value `nil` to be set to anything
 		else
-			Debugger.Warn("TypeMismatch", typeof(expected), typeof(received))
+			Debugger.Warn("InvalidType", typeof(expected), typeof(received))
 			return
 		end
 	end
