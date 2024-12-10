@@ -12,8 +12,9 @@ local MyComponent = require(script.Parent.components.Background)
 -- VARIABLES >
 local Player = Players.LocalPlayer
 local New = Framework.New
-local State = Framework.Value("Hello")
+local State = Framework.State("Hello")
 local c = 1
+
 -- UI
 New("ScreenGui", {
 	Name = "MenuUI",

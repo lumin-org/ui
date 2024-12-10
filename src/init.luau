@@ -30,7 +30,6 @@ return table.freeze({
     Compute = require(State.Compute),
 
 	Spring = require(Animation.Spring),
-    Tween = require(Animation.Tween),
 
     Event = require(Keys.Event),
     Change = require(Keys.Change),

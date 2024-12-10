@@ -43,13 +43,11 @@ export type State = typeof(setmetatable(
 		_State: any,
 		_Listeners: { (newValue: any, oldValue: any) -> () },
 	},
-	{} :: {
-		__index: StateExport,
-	}
+	{} :: { __index: StateExport }
 ))
 
 export type SpringExport = {
-    _Update: (self: SpringExport, linearTargetPosition: { number }, delta: number) -> (),
+	_Update: (self: SpringExport, linearTargetPosition: { number }, delta: number) -> (),
 } & Constructor<SpringExport>
 
 export type Spring = typeof(setmetatable(
@@ -65,22 +63,16 @@ export type Spring = typeof(setmetatable(
 			FromLinear: (value: { number }) -> Animatable,
 		},
 	},
-	{} :: {
-		__index: SpringExport,
-	}
+	{} :: { __index: SpringExport }
 ))
 
-export type TweenExport = {
-
-} & Constructor<TweenExport>
+export type TweenExport = {} & Constructor<TweenExport>
 
 export type Tween = typeof(setmetatable(
-    {} :: {
-
-    },
-    {} :: {
-        __index: TweenExport
-    }
+	{} :: {
+		_Type: "tween",
+	},
+	{} :: { __index: TweenExport }
 ))
 
 export type ComputeExport = Constructor<ComputeExport>

@@ -22,19 +22,19 @@ end
 
 	[Learn More](https://luminlabsdev.github.io/ui-framework/api/state/#set)
 ]=]
-function Class.Set(self: Types.State, newValue: any): Types.State
+function Class.Set<T>(self: Types.State, newValue: T): T
 	local Type = type(newValue)
 
 	if Type == "table" then
 		Debugger.Warn("RestrictedType", Type)
-		return self
+		return newValue
 	end
 
 	local OldValue = self._State
 
 	-- Normal checks
 	if self._State == newValue then
-		return self
+		return newValue
 	end
 
 	-- Setting the actual value and triggering the listeners
@@ -45,7 +45,7 @@ function Class.Set(self: Types.State, newValue: any): Types.State
 		task.spawn(fn, newValue, OldValue)
     end
 
-	return self
+	return newValue
 end
 
 --[=[
@@ -82,9 +82,8 @@ end
 
 	[Learn More](https://luminlabsdev.github.io/ui-framework/api/state/#destroy)
 ]=]
-function Class.Destroy(self: Types.State): nil
+function Class.Destroy(self: Types.State)
 	Utility.CleanMetatable(self :: any)
-	return nil
 end
 
 -- Module

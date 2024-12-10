@@ -14,6 +14,8 @@ local Utils = require(Root.Utility)
 local Is = require(Root.Is)
 local Types = require(Root.Types)
 
+local Spring = require(script.Parent.Spr)
+
 local Class = {}
 
 local Epsilon = 1e-4
@@ -148,10 +150,9 @@ end
 
     [Learn More](https://luminlabsdev.github.io/ui-framework/api/spring/#destroy)
 ]]
-function Class.Destroy(self: Types.Spring): nil
+function Class.Destroy(self: Types.Spring)
 	(self :: any)._State:Destroy()
 	Utils.CleanMetatable(self :: any)
-	return nil
 end
 
 --[=[
