@@ -1,5 +1,5 @@
 -- Variables
-local Keys = require(script.Parent.List)
+local Keys = require(script.Parent.KeyList)
 
 -- Module
 

@@ -53,26 +53,11 @@ export type SpringExport = {
 export type Spring = typeof(setmetatable(
 	{} :: {
 		_Type: "spring",
-		_State: State,
+		_Goal: StateExport,
 		_Damping: number,
 		_Frequency: number,
-		_Velocity: { number },
-		_CurrentLinearPosition: { number },
-		_DataType: {
-			ToLinear: (value: Animatable) -> { number },
-			FromLinear: (value: { number }) -> Animatable,
-		},
 	},
 	{} :: { __index: SpringExport }
-))
-
-export type TweenExport = {} & Constructor<TweenExport>
-
-export type Tween = typeof(setmetatable(
-	{} :: {
-		_Type: "tween",
-	},
-	{} :: { __index: TweenExport }
 ))
 
 export type ComputeExport = Constructor<ComputeExport>

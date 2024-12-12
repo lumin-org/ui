@@ -1,6 +1,6 @@
 -- Variables
 local Root = script.Parent
-local Debugger = require(Root.Parent.debugger)
+local Debugger = require(Root.Parent.roblox_packages.debugger)
 local Storage = require(Root.Runtime.Storage)
 local Types = require(Root.Types)
 local Is = require(Root.Is)
@@ -35,9 +35,10 @@ local function ApplyConstructorProperty(instance: Instance, prop: string, value:
 	local Property = (instance :: any)[prop]
 
 	-- Call the _bind method of the Service.
-	CheckTypeAndCall(Property, value:Get(), function()
-		(value :: Types.Constructor<any>):_Bind(prop, instance)
-	end)
+    ;(value :: Types.Constructor<any>):_Bind(prop, instance)
+	-- CheckTypeAndCall(Property, value:Get(), function()
+	-- 	(value :: Types.Constructor<any>):_Bind(prop, instance)
+	-- end)
 end
 
 local function ApplyNormalProperty(instance: Instance, prop: string, value: any)

@@ -1,8 +1,8 @@
 -- Variables
 local Root = script.Parent.Parent
-local Keys = require(script.Parent.List)
+local Keys = require(script.Parent.KeyList)
 local Is = require(Root.Is)
-local Debugger = require(Root.Parent.debugger)
+local Debugger = require(Root.Parent.roblox_packages.debugger)
 
 -- Module
 

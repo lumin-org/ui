@@ -1,5 +1,5 @@
 -- Variables
-local Packages = script.Parent
+local Packages = script.Parent.roblox_packages
 local Instances = script.Instances
 local Animation = script.Animation
 local State = script.State

@@ -3,7 +3,7 @@ local Root = script.Parent.Parent
 local Utility = require(Root.Utility)
 local Types = require(Root.Types)
 
-local Debugger = require(Root.Parent.debugger)
+local Debugger = require(Root.Parent.roblox_packages.debugger)
 local Default = require(Root.Instances.Default)
 
 -- Module

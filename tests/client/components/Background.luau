@@ -2,10 +2,10 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 -- FOLDERS >
-local Packages = ReplicatedStorage.Packages
+local Package = ReplicatedStorage["ui-framework"]
 
 -- DEPENDENCIES >
-local Framework = require(Packages["ui-framework"])
+local Framework = require(Package.src)
 
 -- VARIABLES >
 local New = Framework.New

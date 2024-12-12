@@ -1,0 +1,23 @@
+name = "lumin/uiframework"
+version = "0.1.0"
+description = "A lightweight and embeddable UI framework"
+authors = ["2jammers"]
+repository = "https://github.com/luminlabsdev/ui-framework"
+license = "MIT"
+
+[target]
+environment = "roblox"
+
+[indices]
+default = "https://github.com/daimond113/pesde-index"
+
+[scripts]
+roblox_sync_config_generator = ".pesde/scripts/roblox_sync_config_generator.luau"
+sourcemap_generator = ".pesde/scripts/sourcemap_generator.luau"
+
+[dev_dependencies]
+scripts = { name = "pesde/scripts_rojo", version = "^0.1.0", target = "lune" }
+rojo = { name = "pesde/rojo", version = "^7.4.4", target = "lune" }
+
+[dependencies]
+debugger = { name = "lumin/debugger", version = "^0.5.0" }
