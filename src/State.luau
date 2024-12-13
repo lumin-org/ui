@@ -1,7 +1,6 @@
 -- Variables
-local Root = script.Parent.Parent
+local Root = script.Parent
 local Types = require(Root.Types)
-local Utility = require(Root.Utility)
 local Debugger = require(Root.Parent.roblox_packages.debugger)
 
 local Class = {}
@@ -83,7 +82,8 @@ end
 	[Learn More](https://luminlabsdev.github.io/ui-framework/api/state/#destroy)
 ]=]
 function Class.Destroy(self: Types.State)
-	Utility.CleanMetatable(self :: any)
+	table.clear(self :: any)
+	setmetatable(self :: any, nil)
 end
 
 -- Module

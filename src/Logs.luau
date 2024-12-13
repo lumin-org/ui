@@ -2,6 +2,7 @@ return {
     IncompatibleType = "Data type '%s' is incompatible",
     NotAnimatable = "%s is not an animatable object type",
     FailedCreation = "%s could not be created; '%s'",
+    AlreadyExists = "Item '%s' already exists",
 
     InvalidType = "Expected type %s; got '%s'",
     InvalidKey = "Expected valid key type; got '%s'",

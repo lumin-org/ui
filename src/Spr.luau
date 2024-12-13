@@ -637,6 +637,21 @@ local typeMetadata = {
 		end,
 	},
 
+    NumberSequence = {
+		springType = LinearSpring.new,
+
+		toIntermediate = function(value)
+			return {value.Keypoints[1].Value, value.Keypoints[2].Value}
+		end,
+
+		fromIntermediate = function(value)
+			return NumberSequence.new({
+				NumberSequenceKeypoint.new(0, value[1]),
+				NumberSequenceKeypoint.new(1, value[2]),
+			})
+		end,
+	},
+
 	CFrame = {
 		springType = CFrameSpring.new,
 		toIntermediate = error, -- custom (CFrameSpring)

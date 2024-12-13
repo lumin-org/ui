@@ -17,11 +17,16 @@ local Goal = Framework.State(UDim2.fromScale(0.5, 1))
 local Spring = Framework.Spring(Goal :: any, 0.5, 5)
 local c = 1
 
+function e(rizz)
+    
+end
+
 -- UI
 New("ScreenGui", {
 	Name = "MenuUI",
 	IgnoreGuiInset = true,
 	Parent = Player:WaitForChild("PlayerGui"),
+    e(1),
 }, {
 	Background = New("Frame", {
 		AnchorPoint = Vector2.new(0.5, 0.5),
@@ -51,7 +56,7 @@ New("ScreenGui", {
             Goal:Set(UDim2.fromScale(0.5, if c%2 == 0 then 1 else 1.5))
         end,
 
-        [Framework.Change "Name"] = function(new_name: any)
+        [Framework.Changed "Name"] = function(new_name: any)
             print(new_name)
         end,
 
@@ -61,6 +66,7 @@ New("ScreenGui", {
         ZIndex = 3,
     }),
 })
+
 
 task.wait(10)
 State:Set("TEST!!!")

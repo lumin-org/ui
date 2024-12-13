@@ -65,7 +65,8 @@ function Class.Destroy(self: Types.Compute): nil
 		end
 	end
 
-	Utility.CleanMetatable(self :: any)
+	table.clear(self :: any)
+	setmetatable(self :: any, nil)
 
 	return nil
 end

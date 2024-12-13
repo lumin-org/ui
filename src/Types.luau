@@ -15,15 +15,7 @@ export type Animatable =
 	| NumberRange
 	| Rect
 
-export type Component<T> = (props: T) -> Instance
-
-export type Properties = { [string | Key]: any }
-export type Children = { [string | number]: any }
-
-export type Key = {
-	Name: string,
-	Apply: (instance: Instance, ...any) -> (),
-}
+export type Action = (instance: Instance, ...any) -> ()
 
 export type Constructor<T> = {
 	_Bind: (self: T, prop: string, instance: Instance) -> (),
@@ -56,6 +48,7 @@ export type Spring = typeof(setmetatable(
 		_Goal: StateExport,
 		_Damping: number,
 		_Frequency: number,
+        _Animated: Instance,
 	},
 	{} :: { __index: SpringExport }
 ))

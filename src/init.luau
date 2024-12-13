@@ -1,20 +1,14 @@
 -- Variables
 local Packages = script.Parent.roblox_packages
-local Instances = script.Instances
-local Animation = script.Animation
-local State = script.State
-local Keys = script.Keys
-
 local Types = require(script.Types)
 local Debugger = require(Packages.debugger)
 
 -- Types
-export type Key = Types.Key
+export type Action = Types.Action
 export type State = Types.State
 export type Spring = Types.Spring
 export type Compute = Types.Compute
 export type Animatable = Types.Animatable
-export type Component<T> = Types.Component<T>
 
 -- Module
 Debugger.SetMetadata({
@@ -23,16 +17,17 @@ Debugger.SetMetadata({
 })
 
 return table.freeze({
-	New = require(Instances.New),
-    Update = require(Instances.Update),
+	New = require(script.New),
+    Update = require(script.Update),
 
-	State = require(State.State),
-    Compute = require(State.Compute),
+	State = require(script.State),
+    Compute = require(script.Compute),
 
-	Spring = require(Animation.Spring),
+	Spring = require(script.Spring),
 
-    Event = require(Keys.Event),
-    Change = require(Keys.Change),
-    Tag = require(Keys.Tag),
-    Clean = require(Keys.Clean),
+    Action = require(script.Action),
+    Event = require(script.Event),
+    Changed = require(script.Changed),
+    Tags = require(script.Tags),
+    Clean = require(script.Clean),
 })
