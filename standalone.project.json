@@ -1,9 +1,14 @@
 {
-    "name": "standalone",
+    "name": "ui",
     "tree": {
-        "$path": "Packages",
-        "ui-framework": {
-            "$path": "src"
+        "standalone": {
+            "$className": "Folder",
+            "src": {
+                "$path": "src"
+            },
+            "roblox_packages": {
+                "$path": "roblox_packages"
+            }
         }
     }
 }

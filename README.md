@@ -1,4 +1,4 @@
-# UI Framework
+# UI
 
 [![license](https://img.shields.io/github/license/luminlabsdev/framework)](https://github.com/luminlabsdev/ui-framework/blob/main/LICENSE)
 [![release](https://img.shields.io/github/v/release/luminlabsdev/framework)](https://github.com/luminlabsdev/ui-framework/releases/latest)
