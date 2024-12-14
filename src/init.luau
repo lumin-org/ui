@@ -7,7 +7,7 @@ local Debugger = require(Packages.debugger)
 export type Action = Types.Action
 export type State = Types.State
 export type Spring = Types.Spring
-export type Compute = Types.Compute
+export type Computed = Types.Computed
 export type Animatable = Types.Animatable
 
 -- Module
@@ -19,15 +19,12 @@ Debugger.SetMetadata({
 return table.freeze({
 	New = require(script.New),
     Update = require(script.Update),
-
 	State = require(script.State),
-    Compute = require(script.Compute),
-
+    Computed = require(script.Computed),
 	Spring = require(script.Spring),
-
     Action = require(script.Action),
     Event = require(script.Event),
-    Changed = require(script.Changed),
+    Changed = require(script.Change),
     Tags = require(script.Tags),
     Clean = require(script.Clean),
 })

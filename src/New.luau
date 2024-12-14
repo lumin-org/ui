@@ -7,15 +7,24 @@ local Defaults = require(Root.Defaults)
 -- Module
 
 --[=[
-	Creates a new instance or component with the provided children and properties.
+	Clones or creates a new isntance with the provided properties. Default properties are not
+    set on clones.
 
 	[Learn More](https://luminlabsdev.github.io/ui-framework/api/#new)
 ]=]
-return function(class: string, props: { any }?): Instance
-	local Success, New = pcall(Instance.new, class) -- Create the instance wrapped inside pcall
+return function(class: string | Instance, props: { any }?): Instance
+	Debugger.Assert(type(class) == "string" or typeof(class) == "Instance", "FailedCreation", class, "")
+
+	local Success, New
+
+	if type(class) == "string" then
+		Success, New = pcall(Instance.new, class)
+	else
+		Success, New = true, class:Clone()
+	end
 
 	if Success then
-		if Defaults[class] then
+		if type(class) == "string" and Defaults[class] then
 			for prop, value in Defaults[class] do
 				(New :: any)[prop] = value
 			end
@@ -33,7 +42,7 @@ return function(class: string, props: { any }?): Instance
 				New.Parent = (props :: any).Parent
 			end
 		end
-	else -- If it wasn't successful, error it because instance creation has to be complete.
+	else
 		Debugger.Fatal("FailedCreation", class, New)
 	end
 	return New

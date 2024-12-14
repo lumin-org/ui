@@ -2,7 +2,6 @@
 local Root = script.Parent
 local Action = require(Root.Action)
 local Types = require(Root.Types)
-local Is = require(Root.Is)
 local Debugger = require(Root.Parent.roblox_packages.debugger)
 
 -- Module
@@ -17,7 +16,7 @@ return function(values: { any }): Types.Action
 		Debugger.Assert(type(values) == "table", "InvalidType", "table", type(values))
 		instance.Destroying:Once(function()
 			for _, value in values do
-				if Is.Constructor(value) or typeof(value) == "Instance" then
+				if (type(value) == "table" and value._Bind) or typeof(value) == "Instance" then
 					value:Destroy()
 				elseif typeof(value) == "RBXScriptConnection" then
 					value:Disconnect()

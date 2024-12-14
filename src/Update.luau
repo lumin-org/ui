@@ -5,7 +5,7 @@ local Apply = require(Root.Apply)
 -- Module
 
 --[=[
-	Updates an instance, writing to its properties or adding children.
+	Updates an instance, writing to its properties.
 
 	[Learn More](https://luminlabsdev.github.io/ui-framework/api/#update)
 ]=]

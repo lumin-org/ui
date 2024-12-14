@@ -1,10 +1,6 @@
 -- Variables
-local Root = script.Parent.Parent
-local Packages = script.Parent.Parent.Parent.roblox_packages
-
-local Debugger = require(Packages.debugger)
-local Utils = require(Root.Utility)
-local Is = require(Root.Is)
+local Root = script.Parent
+local Debugger = require(Root.Parent.roblox_packages.debugger)
 local Types = require(Root.Types)
 
 local Spr = require(script.Parent.Spr)
@@ -28,7 +24,7 @@ local Animatable = {
 
 function Class._Bind(self: Types.Spring, prop: string, instance: Instance)
 	(instance :: any)[prop] = self._Goal:Get()
-    self._Animated = instance
+    table.insert(self._Instances, instance)
 	self._Goal:Listen(function(new)
 		Spr.target(instance, self._Damping, self._Frequency, {
 			[prop] = new,
@@ -37,12 +33,25 @@ function Class._Bind(self: Types.Spring, prop: string, instance: Instance)
 end
 
 --[[
-	Gets the current value that the spring is moving.
+	Stops the current spring from moving, leaving it at its current position.
+
+    [Learn More](https://luminlabsdev.github.io/ui-framework/api/spring/#stop)
+]]
+function Class.Stop(self: Types.Spring)
+    if self._Instances then
+        for _, instance in self._Instances do
+            Spr.stop(instance)
+        end
+    end
+end
+
+--[[
+	Gets the end goal of the spring.
 
     [Learn More](https://luminlabsdev.github.io/ui-framework/api/spring/#get)
 ]]
 function Class.Get(self: Types.Spring): Types.Animatable
-	return 1
+	return self._Goal:Get()
 end
 
 --[[
@@ -63,14 +72,14 @@ end
 ]=]
 return function(goal: Types.State, damping: number?, frequency: number?): Types.SpringExport
 	Debugger.Assert(table.find(Animatable, typeof((goal :: any):Get())), "NotAnimatable", typeof((goal :: any):Get()))
-	Debugger.Assert(Is.Constructor(goal :: any), "InvalidType", "State", type(goal))
+	Debugger.Assert(type(goal) == "table" and goal._Type == "State", "InvalidType", "State", type(goal))
 
 	local self = setmetatable({}, { __index = Class })
 
-	self._Type = "spring"
+    self._Type = "Spring"
 	self._Damping = damping or 1
 	self._Frequency = frequency or 1
-    self._Animated = nil
+    self._Instances = {}
 	self._Goal = goal
 
 	return self :: any

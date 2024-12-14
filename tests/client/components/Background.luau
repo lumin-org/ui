@@ -12,9 +12,9 @@ local New = Framework.New
 
 type Background = {
 	Color: Color3,
-	Position: UDim2?,
+	Position: any?,
 	Size: UDim2?,
-	[any]: any,
+    Text: any?,
 }
 
 return function(props: Background)
@@ -24,5 +24,12 @@ return function(props: Background)
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Size = props.Size or UDim2.fromScale(0.5, 0.5),
 		ZIndex = 2,
-	}, props.Children)
+
+        New("TextLabel", {
+			Text = props.Text,
+            BackgroundColor3 = Color3.fromRGB(128, 95, 95),
+			Position = UDim2.fromScale(0.5, 0.5),
+			ZIndex = 3,
+		}),
+	})
 end

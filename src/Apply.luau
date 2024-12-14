@@ -14,7 +14,7 @@ return function(instance: Instance, property: any, value: any)
 		end
 	elseif type(property) == "string" then
 		if type(value) == "table" then
-			(value :: Types.Constructor<any>):_Bind(property, instance)
+			(value :: Types.Constructor<any, any>):_Bind(property, instance)
 		else
 			(instance :: any)[property] = value
 		end

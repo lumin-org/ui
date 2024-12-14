@@ -1,69 +1,65 @@
 export type Animatable =
 	boolean
 	| number
-	| BrickColor
 	| CFrame
 	| Vector3
 	| Vector2
 	| UDim2
 	| UDim
 	| Color3
-	| Vector3int16
-	| Vector2int16
 	| ColorSequence
 	| NumberSequence
 	| NumberRange
-	| Rect
 
 export type Action = (instance: Instance, ...any) -> ()
 
-export type Constructor<T> = {
+export type Constructor<T, U> = {
+    _Type: string,
 	_Bind: (self: T, prop: string, instance: Instance) -> (),
-	_Type: string,
-	Get: (self: T) -> any,
+	Get: (self: T) -> U,
 	Destroy: (self: T) -> (),
 }
 
 export type StateExport = {
 	Set: (self: StateExport, value: any) -> State,
 	Listen: (self: StateExport, listener: (new: any, old: any) -> ()) -> () -> (),
-} & Constructor<StateExport>
+} & Constructor<StateExport, any>
 
 export type State = typeof(setmetatable(
 	{} :: {
-		_Type: "state",
-		_State: any,
+        _Type: "State",
+		_Value: any,
 		_Listeners: { (newValue: any, oldValue: any) -> () },
 	},
 	{} :: { __index: StateExport }
 ))
 
 export type SpringExport = {
-	_Update: (self: SpringExport, linearTargetPosition: { number }, delta: number) -> (),
-} & Constructor<SpringExport>
+	Stop: (self: SpringExport) -> (),
+} & Constructor<SpringExport, Animatable>
 
 export type Spring = typeof(setmetatable(
 	{} :: {
-		_Type: "spring",
+        _Type: "Spring",
 		_Goal: StateExport,
 		_Damping: number,
 		_Frequency: number,
-        _Animated: Instance,
+        _Instances: {Instance},
 	},
 	{} :: { __index: SpringExport }
 ))
 
-export type ComputeExport = Constructor<ComputeExport>
+export type ComputedExport = Constructor<ComputedExport, any>
 
-export type Compute = typeof(setmetatable(
+export type Computed = typeof(setmetatable(
 	{} :: {
-		_Type: "compute",
-		_Processor: (get: (value: Constructor<any> | any) -> ()) -> (),
-		_Dependencies: { [State | Spring | Constructor<any>]: () -> () }?,
-		_Result: any,
+        _Type: "Computed",
+		_Processor: (use: (value: State | any) -> ()) -> (),
+		_Value: any,
+        _Dependencies: { State | Spring },
 		_Instances: { [string]: Instance }?,
 	},
-	{} :: { __index: ComputeExport }
+	{} :: { __index: ComputedExport }
 ))
 
 return {}

@@ -13,7 +13,7 @@ local Class = {}
 	[Learn More](https://luminlabsdev.github.io/ui-framework/api/state/#get)
 ]=]
 function Class.Get(self: Types.State): any
-	return self._State
+	return self._Value
 end
 
 --[=[
@@ -22,22 +22,17 @@ end
 	[Learn More](https://luminlabsdev.github.io/ui-framework/api/state/#set)
 ]=]
 function Class.Set<T>(self: Types.State, newValue: T): T
-	local Type = type(newValue)
-
-	if Type == "table" then
-		Debugger.Warn("RestrictedType", Type)
-		return newValue
-	end
-
-	local OldValue = self._State
+    Debugger.Assert(type(newValue) ~= "table", "InvalidType", "any", "table")
+    
+	local OldValue = self._Value
 
 	-- Normal checks
-	if self._State == newValue then
+	if self._Value == newValue then
 		return newValue
 	end
 
 	-- Setting the actual value and triggering the listeners
-	self._State = newValue
+	self._Value = newValue
 
 	-- Loop through the listeners table and call every function each of them have.
 	for _, fn in self._Listeners do
@@ -69,7 +64,7 @@ function Class.Listen(self: Types.State, listener: (new: any, old: any) -> ()): 
 end
 
 function Class._Bind(self: Types.State, prop: string, instance: Instance)
-	(instance :: any)[prop] = self._State
+	(instance :: any)[prop] = self._Value
 
 	;(self :: any):Listen(function(newValue)
 		(instance :: any)[prop] = newValue
@@ -94,17 +89,12 @@ end
 	[Learn More](https://luminlabsdev.github.io/ui-framework/api/#state)
 ]=]
 return function(initial: any): Types.StateExport
-	local Type = type(initial)
-
-	if Type == "table" then
-		Debugger.Warn("RestrictedType", Type)
-		initial = initial or nil
-	end
+    Debugger.Assert(type(initial) ~= "table", "InvalidType", "any", "table")
 
 	local self = setmetatable({}, { __index = Class })
 
-	self._Type = "state"
-	self._State = initial
+    self._Type = "State"
+	self._Value = initial
 	self._Listeners = {}
 
 	return self :: any
