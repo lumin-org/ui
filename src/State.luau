@@ -22,21 +22,21 @@ end
 	[Open Documentation](https://lumin-org.github.io/ui/api/state/#set)
 ]=]
 function Class.Set<T>(self: Types.State, newValue: T): T
-    Debugger.Assert(type(newValue) ~= "table", "InvalidType", "any", "table")
-    
+	Debugger.Assert(type(newValue) ~= "table", "InvalidType", "any", "table")
+
 	local OldValue = self._Value
 
-    -- Don't waste resources is new value is the same as old
+	-- Don't waste resources is new value is the same as old
 	if self._Value == newValue then
 		return newValue
 	end
-    
+
 	self._Value = newValue
 
-    -- Run all listeners when the value is changed
+	-- Run all listeners when the value is changed
 	for _, fn in self._Listeners do
 		task.spawn(fn, newValue, OldValue)
-    end
+	end
 
 	return newValue
 end
@@ -57,8 +57,8 @@ function Class.Listen(self: Types.State, listener: (new: any, old: any) -> ()): 
 end
 
 function Class._Bind(self: Types.State, prop: string, instance: Instance)
-	(instance :: any)[prop] = self._Value -- Set the prop initially to the current value
-	;(self :: any):Listen(function(newValue)
+	(instance :: any)[prop] = self._Value; -- Set the prop initially to the current value
+	(self :: any):Listen(function(newValue)
 		(instance :: any)[prop] = newValue -- Change the prop to the new value when the state is changed
 	end)
 end
@@ -81,11 +81,11 @@ end
 	[Open Documentation](https://lumin-org.github.io/ui/api/#state)
 ]=]
 return function(initial: any): Types.StateExport
-    Debugger.Assert(type(initial) ~= "table", "InvalidType", "any", "table")
+	Debugger.Assert(type(initial) ~= "table", "InvalidType", "any", "table")
 
 	local self = setmetatable({}, { __index = Class })
 
-    self._Type = "State"
+	self._Type = "State"
 	self._Value = initial
 	self._Listeners = {}
 

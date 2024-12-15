@@ -4,14 +4,14 @@
 [![ci](https://img.shields.io/github/actions/workflow/status/lumin-org/ui/release.yml?style=plastic&logo=github&logoColor=FFFFFF&label=ci)](https://github.com/lumin-org/ui/blob/main/.github/workflows/release.yml)
 [![discord](https://img.shields.io/discord/1105688855375511642?logo=discord&logoColor=white&label=chat&color=4d3dff&style=plastic)](https://lumin-org.github.io/to/discord)
 
-A small, fast, and efficient UI framework that has a small learning curve.
+A light, fast, and efficient UI framework that has a small learning curve.
 
 ## Prerequisites
 
 In order to use **lumin/ui** you must have the following dependencies installed:
 
-* [`pesde@v0.5.0-rc.18`](https://github.com/pesde-pkg/pesde)
-* [`rojo@v7.4.4`](https://github.com/rojo-rbx/rojo)
+* [`pesde@v0.5.1+registry.0.1.0^`](https://github.com/pesde-pkg/pesde)
+* [`rojo@v7.4.4^`](https://github.com/rojo-rbx/rojo)
 
 ## Usage
 

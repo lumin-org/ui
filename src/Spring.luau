@@ -1,9 +1,8 @@
 -- Variables
 local Root = script.Parent
 local Debugger = require(Root.Parent.roblox_packages.debugger)
+local Spr = require(Root.Parent.roblox_packages.spr)
 local Types = require(Root.Types)
-
-local Spr = require(script.Parent.Spr)
 
 local Class = {}
 local Animatable = {
@@ -40,7 +39,7 @@ end
 function Class.Stop(self: Types.Spring)
 	if self._Instances then
 		-- Iterate through all instances to make sure if the spring is used on
-        -- multiple objects, they are all stopped
+		-- multiple objects, they are all stopped
 		for _, instance in self._Instances do
 			Spr.stop(instance)
 		end

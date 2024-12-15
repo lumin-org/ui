@@ -5,14 +5,14 @@ local Types = require(Root.Types)
 -- Module
 
 return function(instance: Instance, property: any, value: any)
-    local PropType = type(property)
-    local ValueType = type(value)
+	local PropType = type(property)
+	local ValueType = type(value)
 	if PropType == "number" then -- If the property is a modifier
 		if ValueType == "function" then -- If the value is an action
 			(value :: Types.Action)(instance)
 		else -- If the value is an instance
 			value.Parent = instance
-            value.Name = property
+			value.Name = property
 		end
 	elseif PropType == "string" then -- If the property is a string
 		if ValueType == "table" then -- If the value is a constructor

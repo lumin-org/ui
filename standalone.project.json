@@ -1,9 +1,9 @@
 {
     "name": "ui",
     "tree": {
-        "standalone": {
+        "src": {
             "$className": "Folder",
-            "src": {
+            "init": {
                 "$path": "src"
             },
             "roblox_packages": {

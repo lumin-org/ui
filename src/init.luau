@@ -12,19 +12,19 @@ export type Animatable = Types.Animatable
 
 -- Module
 Debugger.SetMetadata({
-    PackageURL = "https://github.com/lumin-org/ui",
-    PackageName = "UI",
+	PackageURL = "https://github.com/lumin-org/ui",
+	PackageName = "UI",
 })
 
 return table.freeze({
 	New = require(script.New),
-    Update = require(script.Update),
+	Update = require(script.Update),
 	State = require(script.State),
-    Computed = require(script.Computed),
+	Computed = require(script.Computed),
 	Spring = require(script.Spring),
-    Action = require(script.Action).New,
-    Event = require(script.Event),
-    Changed = require(script.Change),
-    Tags = require(script.Tags),
-    Clean = require(script.Clean),
+	Action = require(script.Action).New,
+	Event = require(script.Event),
+	Changed = require(script.Change),
+	Tags = require(script.Tags),
+	Clean = require(script.Clean),
 })

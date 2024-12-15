@@ -7,13 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-
-- Migrates to new github actions and changelog format
-
 ### Added
 
-- Added Rokit as the default package manager
+- Complete rewrite
 
 ## [0.2.3] - 2024-07-25
 
@@ -34,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Fixed infinite error on spring destruction bug ( [#5 by @dazscripts](https://github.com/lumin-dev/Aegis/pull/5) )
+- Fixed infinite error on spring destruction bug ( [#5 by @dazscripts](https://github.com/lumin-org/ui/pull/5) )
 
 ## [0.2.1] - 2024-07-06
 

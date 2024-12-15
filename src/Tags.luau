@@ -11,13 +11,13 @@ local Action = require(Root.Action)
 	[Open Documentation](https://lumin-org.github.io/ui/api/keys/#tag)
 ]=]
 return function(names: string): Types.Action
-    if not Action.List["Tags"] then
-        Action.New("Tags", function(instance: Instance)
-            local TagsList = names:split(" ") -- Split tag list for multiple tags
-            for _, tag in TagsList do
-                instance:AddTag(tag)
-            end
-        end)
-    end
+	if not Action.List["Tags"] then
+		Action.New("Tags", function(instance: Instance)
+			local TagsList = names:split(" ") -- Split tag list for multiple tags
+			for _, tag in TagsList do
+				instance:AddTag(tag)
+			end
+		end)
+	end
 	return Action.List["Tags"]
 end

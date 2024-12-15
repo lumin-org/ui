@@ -17,7 +17,7 @@ return function(class: string)
 		local Success, New = pcall(Instance.new, class)
 
 		if Success then
-            -- Apply default properties
+			-- Apply default properties
 			if Defaults[class] then
 				for prop, value in Defaults[class] do
 					(New :: any)[prop] = value
