@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2024-12-15
+
 ### Added
 
 - Complete rewrite
@@ -115,3 +117,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.1] - 2024-05-27
 
 - Released [Aegis](/)!
+
+[unreleased]: https://github.com/lumin-org/ui/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/lumin-org/ui/compare/494ed6244654f0eb7886177eff2f6c86520cb742...v0.3.0
