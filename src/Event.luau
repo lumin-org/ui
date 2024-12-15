@@ -14,14 +14,17 @@ end
 --[=[
 	Connects a callback to an event on the instance.
 
-	[Learn More](https://luminlabsdev.github.io/ui-framework/api/keys/#event)
+	[Open Documentation](https://lumin-org.github.io/ui/api/keys/#event)
 ]=]
 return function(event: string, callback: (...any) -> ()): Types.Action
-	return Action("Event", function(instance: Instance)
-		local Success, Event = pcall(Find, instance :: any, event :: any)
-		if not Success or type(callback) ~= "function" then
-			Debugger.Fatal("InvalidPropOrEvent", event)
-		end
-		Event:Connect(callback)
-	end)
+    if not Action.List["Event"] then
+        Action.New("Event", function(instance: Instance)
+            local Success, Event = pcall(Find, instance :: any, event :: any) -- Ensure event exists
+            if not Success or type(callback) ~= "function" then
+                Debugger.Fatal("InvalidPropOrEvent", event)
+            end
+            Event:Connect(callback)
+        end)
+    end
+	return Action.List["Event"]
 end

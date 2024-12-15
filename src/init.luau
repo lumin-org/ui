@@ -12,8 +12,8 @@ export type Animatable = Types.Animatable
 
 -- Module
 Debugger.SetMetadata({
-    PackageURL = "https://github.com/luminlabsdev/ui-framework",
-    PackageName = "UI Framework",
+    PackageURL = "https://github.com/lumin-org/ui",
+    PackageName = "UI",
 })
 
 return table.freeze({
@@ -22,7 +22,7 @@ return table.freeze({
 	State = require(script.State),
     Computed = require(script.Computed),
 	Spring = require(script.Spring),
-    Action = require(script.Action),
+    Action = require(script.Action).New,
     Event = require(script.Event),
     Changed = require(script.Change),
     Tags = require(script.Tags),

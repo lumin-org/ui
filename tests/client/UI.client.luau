@@ -20,30 +20,30 @@ local Spring = Framework.Spring(Goal :: any, 0.5, 5)
 local c = 1
 
 -- UI
-New("ScreenGui", {
+New "ScreenGui" {
 	Name = "MenuUI",
 	IgnoreGuiInset = true,
 	Parent = Player:WaitForChild("PlayerGui"),
 
-    New("Frame", {
+    New "Frame" {
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.fromScale(0.5, 0.5),
 		Size = UDim2.fromScale(1, 1),
 		ZIndex = 1,
-	}),
+	},
 
-    MyComponent({
+    MyComponent {
 		Color = Color3.fromRGB(151, 71, 71),
 		Position = Spring,
         Text = State,
-	}),
+	},
 
-	MyComponent({
+	MyComponent {
 		Color = Color3.fromRGB(103, 196, 246),
 		Position = UDim2.fromScale(0.5, 0.1),
-	}),
+	},
 
-    New("TextButton", {
+    New "TextButton" {
         Event("Activated", function()
             c+=1
             State:Set(`Hello {c}`)
@@ -58,8 +58,8 @@ New("ScreenGui", {
         Position = UDim2.fromScale(0.5, 0.2),
         Size = UDim2.fromOffset(100, 100),
         ZIndex = 3,
-    }),
-})
+    },
+}
 
 
 task.wait(10)

@@ -23,9 +23,9 @@ local Animatable = {
 -- Functions
 
 function Class._Bind(self: Types.Spring, prop: string, instance: Instance)
-	(instance :: any)[prop] = self._Goal:Get()
-    table.insert(self._Instances, instance)
-	self._Goal:Listen(function(new)
+	(instance :: any)[prop] = self._Goal:Get() -- Set the prop of the instance to the initial goal
+	table.insert(self._Instances, instance)
+	self._Goal:Listen(function(new) -- When the goal changes, set the target to the new value
 		Spr.target(instance, self._Damping, self._Frequency, {
 			[prop] = new,
 		})
@@ -35,20 +35,22 @@ end
 --[[
 	Stops the current spring from moving, leaving it at its current position.
 
-    [Learn More](https://luminlabsdev.github.io/ui-framework/api/spring/#stop)
+    [Open Documentation](https://lumin-org.github.io/ui/api/spring/#stop)
 ]]
 function Class.Stop(self: Types.Spring)
-    if self._Instances then
-        for _, instance in self._Instances do
-            Spr.stop(instance)
-        end
-    end
+	if self._Instances then
+		-- Iterate through all instances to make sure if the spring is used on
+        -- multiple objects, they are all stopped
+		for _, instance in self._Instances do
+			Spr.stop(instance)
+		end
+	end
 end
 
 --[[
 	Gets the end goal of the spring.
 
-    [Learn More](https://luminlabsdev.github.io/ui-framework/api/spring/#get)
+    [Open Documentation](https://lumin-org.github.io/ui/api/spring/#get)
 ]]
 function Class.Get(self: Types.Spring): Types.Animatable
 	return self._Goal:Get()
@@ -57,7 +59,7 @@ end
 --[[
 	Destroys the spring object.
 
-    [Learn More](https://luminlabsdev.github.io/ui-framework/api/spring/#destroy)
+    [Open Documentation](https://lumin-org.github.io/ui/api/spring/#destroy)
 ]]
 function Class.Destroy(self: Types.Spring)
 	(self :: any)._Goal:Destroy()
@@ -68,7 +70,7 @@ end
 --[=[
 	Creates a new spring with a set goal.
 
-	[Learn More](https://luminlabsdev.github.io/ui-framework/api/#spring)
+	[Open Documentation](https://lumin-org.github.io/ui/api/#spring)
 ]=]
 return function(goal: Types.State, damping: number?, frequency: number?): Types.SpringExport
 	Debugger.Assert(table.find(Animatable, typeof((goal :: any):Get())), "NotAnimatable", typeof((goal :: any):Get()))
@@ -76,10 +78,10 @@ return function(goal: Types.State, damping: number?, frequency: number?): Types.
 
 	local self = setmetatable({}, { __index = Class })
 
-    self._Type = "Spring"
+	self._Type = "Spring"
 	self._Damping = damping or 1
 	self._Frequency = frequency or 1
-    self._Instances = {}
+	self._Instances = {}
 	self._Goal = goal
 
 	return self :: any

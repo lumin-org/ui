@@ -1,18 +1,22 @@
 -- Variables
 local Root = script.Parent
 local Types = require(Root.Types)
-local Actions = {}
+local Actions: {[string]: Types.Action} = {}
 
 -- Functions
 
 --[=[
 	Creates a new action, which allows for custom modifications to instances.
 
-	[Learn More](https://luminlabsdev.github.io/ui-framework/api/#action)
+	[Open Documentation](https://lumin-org.github.io/ui/api/#action)
 ]=]
-return function(name: string, apply: (Instance) -> ()): Types.Action
-    if not Actions[name] then
+local function New(name: string, apply: (Instance) -> ())
+    if not Actions[name] then -- Cache the action so a new one is created each time
         Actions[name] = apply
     end
-    return Actions[name]
 end
+
+return {
+    New = New,
+    List = Actions,
+}

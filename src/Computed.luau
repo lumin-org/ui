@@ -10,7 +10,7 @@ local Class = {}
 --[=[
 	Gets the current value of a value object for use within the compute.
 
-	[Learn More](https://luminlabsdev.github.io/ui-framework/api/computed/#use)
+	[Open Documentation](https://lumin-org.github.io/ui/api/computed/#use)
 ]=]
 local function Use(value: Types.State | any)
 	if type(value) == "table" then
@@ -35,7 +35,7 @@ end
 --[=[
 	Gets the current value of the compute object.
 
-	[Learn More](https://luminlabsdev.github.io/ui-framework/api/computed/#get)
+	[Open Documentation](https://lumin-org.github.io/ui/api/computed/#get)
 ]=]
 function Class.Get(self: Types.Computed): any
 	return self._Value
@@ -53,7 +53,7 @@ end
 --[=[
 	Destroys the compute object.
 
-	[Learn More](https://luminlabsdev.github.io/ui-framework/api/computed/#destroy)
+	[Open Documentation](https://lumin-org.github.io/ui/api/computed/#destroy)
 ]=]
 function Class.Destroy(self: Types.Computed)
 	if self._Dependencies then
@@ -72,7 +72,7 @@ end
 --[=[
 	Creates a new computed value, which changes the final value when a dependency is changed.
 
-	[Learn More](https://luminlabsdev.github.io/ui-framework/api/#computed)
+	[Open Documentation](https://lumin-org.github.io/ui/api/#computed)
 ]=]
 return function(
 	processor: (use: (value: Types.State | any) -> ()) -> (),
