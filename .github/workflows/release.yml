@@ -18,6 +18,8 @@ jobs:
           release-body: ${{ steps.update-changelog.outputs.release-notes }}
         steps:
           - uses: actions/checkout@v4
+            with:
+              ref: main
 
           - name: Update changelog
             id: update-changelog
