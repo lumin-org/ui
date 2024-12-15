@@ -4,6 +4,7 @@ local Types = require(Root.Types)
 local Debugger = require(Root.Parent.roblox_packages.debugger)
 
 local Class = {}
+Class.__index = Class
 
 -- Functions
 
@@ -83,7 +84,7 @@ end
 return function(initial: any): Types.StateExport
 	Debugger.Assert(type(initial) ~= "table", "InvalidType", "any", "table")
 
-	local self = setmetatable({}, { __index = Class })
+	local self = setmetatable({}, Class)
 
 	self._Type = "State"
 	self._Value = initial

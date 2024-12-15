@@ -11,16 +11,13 @@ permissions:
     id-token: write
 
 jobs:
-    bump:
-        name: Bump Versions
+    changelog:
+        name: Changelog
         runs-on: ubuntu-latest
         outputs:
           release-body: ${{ steps.update-changelog.outputs.release-notes }}
         steps:
-          - name: Checkout repository
-            uses: actions/checkout@v4
-            with:
-              ref: 'main'
+          - uses: actions/checkout@v4
 
           - name: Update changelog
             id: update-changelog
@@ -38,31 +35,26 @@ jobs:
     build:
         name: Build
         runs-on: ubuntu-latest
-        needs: bump
+        needs: changelog
         steps:
-          - name: Checkout Repository
-            uses: actions/checkout@v4
+          - uses: actions/checkout@v4
 
           - name: Setup Pesde
             uses: 2jammers/setup-pesde@v0.3.0
             with:
-              cache: 'true'
-              pesde-version: 'v0.5.1+registry.0.1.0'
+              cache: true
 
           - name: Install dependencies
             run: pesde install
 
-          - name: Generate sourcemap
-            run: rojo sourcemap standalone.project.json --output sourcemap.json
-
           - name: Format code
             run: stylua src/
 
-          - name: Build standalone
+          - name: Standalone build
             run: rojo build standalone.project.json --output ./Standalone.rbxm
 
-          - name: Draft release
-            uses: softprops/action-gh-release@v2.2.0
+          - name: Standalone release
+            uses: softprops/action-gh-release@v2.0.9
             with:
               tag_name: ${{ github.ref_name }}
               name: ${{ github.ref_name }}
@@ -70,22 +62,21 @@ jobs:
               generate_release_notes: true
               body: |
                 ## Changelog
-                ${{ needs.bump.outputs.release-body }}
+                ${{ needs.changelog.outputs.release-body }}
               files: |
                 ./Standalone.rbxm
 
     package:
         name: Package
         runs-on: ubuntu-latest
-        needs: bump
+        needs: changelog
         steps:
-        - name: Checkout repository
-          uses: actions/checkout@v4
+        - uses: actions/checkout@v4
 
         - name: Setup Pesde
           uses: 2jammers/setup-pesde@v0.3.0
           with:
-            pesde-version: 'v0.5.1+registry.0.1.0'
+            cache: true
             token: '${{ secrets.PESDE_TOKEN }}'
 
         - name: Publish

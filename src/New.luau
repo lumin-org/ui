@@ -37,7 +37,7 @@ return function(class: string)
 				end
 			end
 		else
-			Debugger.Fatal("FailedCreation", class, New)
+			Debugger.Fatal("InvalidClass", class)
 		end
 
 		return New

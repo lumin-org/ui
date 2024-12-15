@@ -5,6 +5,8 @@ local Spr = require(Root.Parent.roblox_packages.spr)
 local Types = require(Root.Types)
 
 local Class = {}
+Class.__index = Class
+
 local Animatable = {
 	"boolean",
 	"number",
@@ -22,8 +24,8 @@ local Animatable = {
 -- Functions
 
 function Class._Bind(self: Types.Spring, prop: string, instance: Instance)
-	(instance :: any)[prop] = self._Goal:Get() -- Set the prop of the instance to the initial goal
-	table.insert(self._Instances, instance)
+    table.insert(self._Instances, instance)
+	;(instance :: any)[prop] = self._Goal:Get() -- Set the prop of the instance to the initial goal
 	self._Goal:Listen(function(new) -- When the goal changes, set the target to the new value
 		Spr.target(instance, self._Damping, self._Frequency, {
 			[prop] = new,
@@ -75,7 +77,7 @@ return function(goal: Types.State, damping: number?, frequency: number?): Types.
 	Debugger.Assert(table.find(Animatable, typeof((goal :: any):Get())), "NotAnimatable", typeof((goal :: any):Get()))
 	Debugger.Assert(type(goal) == "table" and goal._Type == "State", "InvalidType", "State", type(goal))
 
-	local self = setmetatable({}, { __index = Class })
+	local self = setmetatable({}, Class)
 
 	self._Type = "Spring"
 	self._Damping = damping or 1

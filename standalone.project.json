@@ -3,13 +3,10 @@
     "tree": {
         "$className": "Folder",
         "src": {
-            "$className": "Folder",
-            "init": {
-                "$path": "src"
-            },
-            "roblox_packages": {
-                "$path": "roblox_packages"
-            }
+            "$path": "src"
+        },
+        "roblox_packages": {
+            "$path": "roblox_packages"
         }
     }
 }

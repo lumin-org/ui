@@ -1,6 +1,6 @@
 name = "lumin/ui"
-version = "0.3.0-rc1"
-description = "A small, fast, and efficient UI framework that has a small learning curve"
+version = "0.3.0-rc2"
+description = "A light, fast, and efficient UI framework that has a small learning curve"
 authors = ["2jammers"]
 repository = "https://github.com/lumin-org/ui"
 license = "MIT"

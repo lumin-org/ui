@@ -1,10 +1,10 @@
 {
 	"emitLegacyScripts": false,
-	"name": "ui-framework",
+	"name": "ui",
 	"tree": {
 		"$className": "DataModel",
 		"ReplicatedStorage": {
-			"ui-framework": {
+			"ui": {
 				"$className": "Folder",
 				"src": {
 					"$path": "src"
@@ -14,13 +14,7 @@
                 }
 			},
 			"tests": {
-                "$className": "Folder",
-                "Client": {
-				    "$path": "tests/client"
-                },
-                "Server": {
-                    "$path": "tests/server"
-                }
+                "$path": "tests"
 			}
 		}
 	}

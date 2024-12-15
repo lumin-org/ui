@@ -10,8 +10,8 @@ A light, fast, and efficient UI framework that has a small learning curve.
 
 In order to use **lumin/ui** you must have the following dependencies installed:
 
-* [`pesde@v0.5.1+registry.0.1.0^`](https://github.com/pesde-pkg/pesde)
-* [`rojo@v7.4.4^`](https://github.com/rojo-rbx/rojo)
+* [`pesde@^0.5.1`](https://github.com/pesde-pkg/pesde)
+* [`rojo@^7.4.4`](https://github.com/rojo-rbx/rojo)
 
 ## Usage
 
@@ -34,8 +34,7 @@ New "ScreenGui" {
         AnchorPoint = Vector2.new(0.5, 0.5),
         Position = UDim2.fromScale(0.5, 0.5),
         Size = UDim2.fromOffset(100, 100),
-        ZIndex = 1,
-
+        ZIndex = 1,small
         Event("Activated", function()
             print("Button clicked!")
         end)

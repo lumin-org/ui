@@ -2,13 +2,13 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 -- FOLDERS >
-local Package = ReplicatedStorage["ui-framework"]
+local Package = ReplicatedStorage.ui
 
 -- DEPENDENCIES >
-local Framework = require(Package.src)
+local UI = require(Package.src)
 
 -- VARIABLES >
-local New = Framework.New
+local New = UI.New
 
 type Background = {
 	Color: Color3,

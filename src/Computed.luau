@@ -4,6 +4,7 @@ local Types = require(Root.Types)
 local Debugger = require(Root.Parent.roblox_packages.debugger)
 
 local Class = {}
+Class.__index = Class
 
 -- Functions
 
@@ -22,7 +23,7 @@ end
 
 local function Listener(self: Types.Computed)
 	return function()
-		self._Value = self._Processor(Use)
+		self._Value = self._Processor(Use) -- Set the value of the computed to the processed value
 
 		if self._Instances ~= nil then
 			for prop, instance in self._Instances do
@@ -42,27 +43,16 @@ function Class.Get(self: Types.Computed): any
 end
 
 function Class._Bind(self: Types.Computed, prop: string, instance: Instance)
-	if self._Instances == nil then
-		self._Instances = {}
-	end
-
 	(self._Instances :: {})[prop] = instance;
 	(instance :: any)[prop] = self._Value
 end
 
 --[=[
-	Destroys the compute object.
+	Destroys the compute object, but not the state dependencies.
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/computed/#destroy)
 ]=]
 function Class.Destroy(self: Types.Computed)
-	if self._Dependencies then
-		for dependency: any, disconnect: any in self._Dependencies do
-			disconnect()
-			self._Dependencies[dependency] = nil
-		end
-	end
-
 	table.clear(self :: any)
 	setmetatable(self :: any, nil)
 end
@@ -78,7 +68,7 @@ return function(
 	processor: (use: (value: Types.State | any) -> ()) -> (),
 	dependencies: { Types.State | Types.Spring }?
 ): Types.ComputedExport
-	local self = setmetatable({}, { __index = Class })
+	local self = setmetatable({}, Class)
 
 	self._Type = "Computed"
 	self._Processor = processor
