@@ -1,6 +1,7 @@
 {
     "name": "ui",
     "tree": {
+        "$className": "Folder",
         "src": {
             "$className": "Folder",
             "init": {
