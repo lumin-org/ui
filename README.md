@@ -28,16 +28,16 @@ local Event = UI.Event
 New "ScreenGui" {
     Name = "SampleGUI",
     IgnoreGuiInset = true,
-    Parent = Player:WaitForChild("PlayerGui")
+    Parent = Player:WaitForChild("PlayerGui"),
 
     New "TextButton" {
         AnchorPoint = Vector2.new(0.5, 0.5),
         Position = UDim2.fromScale(0.5, 0.5),
         Size = UDim2.fromOffset(100, 100),
-        ZIndex = 1,small
+        ZIndex = 1,
         Event("Activated", function()
             print("Button clicked!")
-        end)
+        end),
     }
 }
 ```
