@@ -1,5 +1,6 @@
 -- Variables
 local Root = script.Parent
+local Types = require(Root.Types)
 local Apply = require(Root.Apply)
 local Debugger = require(Root.Parent.roblox_packages.debugger)
 local Defaults = require(Root.Defaults)
@@ -11,7 +12,7 @@ local Defaults = require(Root.Defaults)
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/#new)
 ]=]
-return function(class: string)
+return (function(class: string)
 	Debugger.Assert(type(class) == "string", "InvalidType", class, "invalid")
 	return function(props: { any }): Instance
 		local Success, New = pcall(Instance.new, class)
@@ -42,4 +43,4 @@ return function(class: string)
 
 		return New
 	end
-end
+end) :: Types.NewInstance

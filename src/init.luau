@@ -22,7 +22,7 @@ return table.freeze({
 	State = require(script.State),
 	Computed = require(script.Computed),
 	Spring = require(script.Spring),
-	Action = require(script.Action).New,
+	Action = require(script.Action),
 	Event = require(script.Event),
 	Changed = require(script.Change),
 	Tags = require(script.Tags),
