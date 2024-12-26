@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0-rc4] - 2024-12-26
+
 ### Added
 
 - Offers improved cleanup
@@ -144,7 +146,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Released [Aegis](/)!
 
-[unreleased]: https://github.com/lumin-org/ui/compare/v0.3.0-rc3...HEAD
+[unreleased]: https://github.com/lumin-org/ui/compare/v0.3.0-rc4...HEAD
+[0.3.0-rc4]: https://github.com/lumin-org/ui/compare/v0.3.0-rc3...v0.3.0-rc4
 [0.3.0-rc3]: https://github.com/lumin-org/ui/compare/v0.3.0-rc2...v0.3.0-rc3
 [0.3.0-rc2]: https://github.com/lumin-org/ui/compare/v0.3.0-rc1...v0.3.0-rc2
 [0.3.0-rc1]: https://github.com/lumin-org/ui/compare/494ed6244654f0eb7886177eff2f6c86520cb742...v0.3.0-rc1
