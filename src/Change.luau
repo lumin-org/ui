@@ -7,7 +7,8 @@ local Debugger = require(Root.Parent.roblox_packages.debugger)
 -- Module
 
 --[=[
-	Connects a callback to a certain property change event, and supplies the changed prop as an arg.
+	Allows you to observe changes of properties within an object, and supplies the value of
+    the changed property as a callback argument.
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/actions/#change)
 ]=]

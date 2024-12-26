@@ -7,7 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Offers improved cleanup
+
 ## [0.3.0-rc3] - 2024-12-24
+
+### Fixed
+
+- Fixes not being able to create multiple actions of the same type under an object
+
+### Removed
+
+- Removes action caching as it has no practical use
 
 ## [0.3.0-rc2] - 2024-12-15
 
