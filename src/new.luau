@@ -1,9 +1,9 @@
 -- Variables
 local Root = script.Parent
-local Types = require(Root.Types)
-local Apply = require(Root.Apply)
+local Types = require(Root.types)
+local Apply = require(Root.apply)
 local Debugger = require(Root.Parent.roblox_packages.debugger)
-local Defaults = require(Root.Defaults)
+local Defaults = require(Root.defaults)
 
 -- Module
 

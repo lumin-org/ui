@@ -2,7 +2,7 @@
 local Root = script.Parent
 local Debugger = require(Root.Parent.roblox_packages.debugger)
 local Spr = require(Root.Parent.roblox_packages.spr)
-local Types = require(Root.Types)
+local Types = require(Root.types)
 
 local Class = {}
 Class.__index = Class

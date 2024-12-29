@@ -1,6 +1,6 @@
 -- Variables
 local Root = script.Parent
-local Types = require(Root.Types)
+local Types = require(Root.types)
 local Debugger = require(Root.Parent.roblox_packages.debugger)
 
 local Class = {}

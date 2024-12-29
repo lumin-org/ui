@@ -1,6 +1,6 @@
 -- Variables
 local Root = script.Parent
-local Types = require(Root.Types)
+local Types = require(Root.types)
 
 -- Functions
 
@@ -12,3 +12,4 @@ local Types = require(Root.Types)
 return function(apply: (Instance) -> ()): Types.Action
     return apply
 end
+

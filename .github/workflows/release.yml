@@ -49,9 +49,6 @@ jobs:
           - name: Install dependencies
             run: pesde install
 
-          - name: Format code
-            run: stylua src/
-
           - name: Standalone build
             run: rojo build standalone.project.json --output ./Standalone.rbxm
 

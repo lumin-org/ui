@@ -1,6 +1,6 @@
 -- Variables
 local Root = script.Parent
-local Apply = require(Root.Apply)
+local Apply = require(Root.apply)
 
 -- Module
 
