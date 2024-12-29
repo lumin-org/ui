@@ -1,13 +1,7 @@
--- SERVICES >
+-- Variables
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
--- FOLDERS >
 local Package = ReplicatedStorage.ui
-
--- DEPENDENCIES >
 local UI = require(Package.src)
-
--- VARIABLES >
 local New = UI.New
 
 type Background = {

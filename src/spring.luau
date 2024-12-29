@@ -24,8 +24,8 @@ local Animatable = {
 -- Functions
 
 function Class._Bind(self: Types.Spring, prop: string, instance: Instance)
-    table.insert(self._Instances, instance)
-	;(instance :: any)[prop] = self._Goal:Get() -- Set the prop of the instance to the initial goal
+	table.insert(self._Instances, instance);
+	(instance :: any)[prop] = self._Goal:Get() -- Set the prop of the instance to the initial goal
 	self._Goal:Listen(function(new) -- When the goal changes, set the target to the new value
 		Spr.target(instance, self._Damping, self._Frequency, {
 			[prop] = new,

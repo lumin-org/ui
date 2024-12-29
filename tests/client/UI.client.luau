@@ -62,7 +62,7 @@ New "ScreenGui" {
             print("Entered for this one...")
         end),
 
-        Changed("Name", function(new: any)
+        Changed("Name", function(new: string)
             print(new)
         end),
 

@@ -10,6 +10,5 @@ local Types = require(Root.types)
 	[Open Documentation](https://lumin-org.github.io/ui/api/#action)
 ]=]
 return function(apply: (Instance) -> ()): Types.Action
-    return apply
+	return apply
 end
-
