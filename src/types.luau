@@ -14,7 +14,7 @@ export type Animatable =
 export type Action = (instance: Instance, ...any) -> ()
 export type New<T, U> = (T) -> ({ any }) -> U
 export type NewInstance =
-	    & New<"Folder", Folder>
+	& New<"Folder", Folder>
 	& New<"BillboardGui", BillboardGui>
 	& New<"CanvasGroup", CanvasGroup>
 	& New<"Frame", Frame>
@@ -56,7 +56,6 @@ export type StateExport = {
 
 export type State = typeof(setmetatable(
 	{} :: {
-		_Type: "State",
 		_Value: any,
 		_Listeners: { (newValue: any, oldValue: any) -> () },
 	},
@@ -69,7 +68,6 @@ export type SpringExport = {
 
 export type Spring = typeof(setmetatable(
 	{} :: {
-		_Type: "Spring",
 		_Goal: StateExport,
 		_Damping: number,
 		_Frequency: number,
@@ -82,8 +80,7 @@ export type ComputedExport = Constructor<ComputedExport, any>
 
 export type Computed = typeof(setmetatable(
 	{} :: {
-		_Type: "Computed",
-		_Processor: (use: (value: State | any) -> ()) -> (),
+		_Processor: () -> (),
 		_Value: any,
 		_Dependencies: { State | Spring },
 		_Instances: { [string]: Instance }?,

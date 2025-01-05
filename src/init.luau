@@ -13,17 +13,15 @@ export type Animatable = Types.Animatable
 
 -- Module
 Debugger.SetMetadata(Logs, {
-	URL = "https://github.com/lumin-org/ui",
+	URL = "https://lumin-org.github.io/ui/error/#",
 	Name = "UI",
 })
 
 return table.freeze({
-	version = { major = 0, minor = 3, patch = 0 },
-
 	New = require(script.new),
 	Update = require(script.update),
 	State = require(script.state),
-	Computed = require(script.computed),
+	Compute = require(script.compute),
 	Spring = require(script.spring),
 	Cleanup = require(script.cleanup),
 	Action = require(script.action),

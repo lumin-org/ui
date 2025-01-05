@@ -16,12 +16,15 @@ end
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/keys/#event)
 ]=]
-return function(event: string, callback: (...any) -> ()): Types.Action
+return function(event: string, callback: (...any) -> (), scope: {any}?): Types.Action
 	return Action(function(instance: Instance)
 		local Success, Event = pcall(Find, instance :: any, event :: any) -- Ensure event exists
 		if not Success or type(callback) ~= "function" then
 			Debugger.Fatal("InvalidPropOrEvent", event)
 		end
-		Event:Connect(callback)
+		local ToAdd = Event:Connect(callback)
+        if scope then
+            table.insert(scope, ToAdd)
+        end
 	end)
 end

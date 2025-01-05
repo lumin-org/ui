@@ -8,22 +8,9 @@ Class.__index = Class
 
 -- Functions
 
---[=[
-	Gets the current value of a value object for use within the compute.
-
-	[Open Documentation](https://lumin-org.github.io/ui/api/computed/#use)
-]=]
-local function Use(value: Types.State | any)
-	if type(value) == "table" then
-		return value:Get()
-	else
-		return value
-	end
-end
-
 local function Listener(self: Types.Computed)
 	return function()
-		self._Value = self._Processor(Use) -- Set the value of the computed to the processed value
+		self._Value = self._Processor() -- Set the value of the computed to the processed value
 
 		if self._Instances ~= nil then
 			for prop, instance in self._Instances do
@@ -64,15 +51,11 @@ end
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/#computed)
 ]=]
-return function(
-	processor: (use: (value: Types.State | any) -> ()) -> (),
-	dependencies: { Types.State | Types.Spring }?
-): Types.ComputedExport
+return function(processor: () -> (), dependencies: { Types.State | Types.Spring }?): Types.ComputedExport
 	local self = setmetatable({}, Class)
 
-	self._Type = "Computed"
 	self._Processor = processor
-	self._Value = processor(Use)
+	self._Value = processor()
 	self._Instances = {}
 	self._Dependencies = nil
 
@@ -82,13 +65,9 @@ return function(
 		self._Dependencies = {} :: any
 		for _, dependency in dependencies do
 			if type(dependency) == "table" then
-				if dependency._Type == "Spring" then
-					(self._Dependencies :: any)[dependency] = (dependency :: any)._Goal:Listen(Listener(self :: any))
-				elseif dependency._Type == "State" then
-					(self._Dependencies :: any)[dependency] = (dependency :: any):Listen(Listener(self :: any))
-				else
-					Debugger.Fatal("InvalidType", "state or spring", type(dependency))
-				end
+				(self._Dependencies :: any)[dependency] = (dependency :: any):Listen(Listener(self :: any))
+            else
+                Debugger.Fatal("InvalidType", "state", type(dependency))
 			end
 		end
 	end

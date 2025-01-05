@@ -86,7 +86,6 @@ return function(initial: any): Types.StateExport
 
 	local self = setmetatable({}, Class)
 
-	self._Type = "State"
 	self._Value = initial
 	self._Listeners = {}
 

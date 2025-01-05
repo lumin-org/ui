@@ -75,11 +75,10 @@ end
 ]=]
 return function(goal: Types.State, damping: number?, frequency: number?): Types.SpringExport
 	Debugger.Assert(table.find(Animatable, typeof((goal :: any):Get())), "NotAnimatable", typeof((goal :: any):Get()))
-	Debugger.Assert(type(goal) == "table" and goal._Type == "State", "InvalidType", "State", type(goal))
+	Debugger.Assert(type(goal) == "table" and goal._Listeners, "InvalidType", "State", type(goal))
 
 	local self = setmetatable({}, Class)
 
-	self._Type = "Spring"
 	self._Damping = damping or 1
 	self._Frequency = frequency or 1
 	self._Instances = {}
