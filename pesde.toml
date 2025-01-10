@@ -29,5 +29,5 @@ rojo = { name = "pesde/rojo", version = "^7.4.4", target = "lune" }
 stylua = { name = "pesde/stylua", version = "^2.0.1", target = "lune" }
 
 [dependencies]
-debugger = { name = "lumin/debugger", version = "^0.7.0" }
+debugger = { name = "lumin/debugger", version = "^1.0.0" }
 spr = { name = "2jammers/spr", version = "^2.1.0" }

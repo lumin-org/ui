@@ -12,7 +12,8 @@ export type Computed = Types.Computed
 export type Animatable = Types.Animatable
 
 -- Module
-Debugger.SetMetadata(Logs, {
+Debugger.set({
+    Logs = Logs,
 	URL = "https://lumin-org.github.io/ui/error/#",
 	Name = "UI",
 })

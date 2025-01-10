@@ -20,7 +20,7 @@ return function(event: string, callback: (...any) -> (), scope: {any}?): Types.A
 	return Action(function(instance: Instance)
 		local Success, Event = pcall(Find, instance :: any, event :: any) -- Ensure event exists
 		if not Success or type(callback) ~= "function" then
-			Debugger.Fatal("InvalidPropOrEvent", event)
+			Debugger.fatal("InvalidPropOrEvent", event)
 		end
 		local ToAdd = Event:Connect(callback)
         if scope then

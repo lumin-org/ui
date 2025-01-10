@@ -16,7 +16,7 @@ return function<T>(prop: string, callback: (changed: T) -> (), scope: {any}?): T
 	return Action(function(instance)
 		local Success, Event = pcall(instance.GetPropertyChangedSignal, instance :: any, prop :: any) -- Ensure prop exists
 		if not Success or type(callback) ~= "function" then
-			Debugger.Fatal("InvalidPropOrEvent", prop)
+			Debugger.fatal("InvalidPropOrEvent", prop)
 		end
 		local ToAdd = Event:Connect(function()
 			callback((instance :: any)[prop]) -- Pass new value through callback

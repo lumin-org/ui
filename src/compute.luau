@@ -61,13 +61,13 @@ return function(processor: () -> (), dependencies: { Types.State | Types.Spring 
 
 	if dependencies then
 		local Type = type(dependencies)
-		Debugger.Assert(Type == "table", "InvalidType", "table", Type)
+		Debugger.assert(Type == "table", "InvalidType", "table", Type)
 		self._Dependencies = {} :: any
 		for _, dependency in dependencies do
 			if type(dependency) == "table" then
 				(self._Dependencies :: any)[dependency] = (dependency :: any):Listen(Listener(self :: any))
             else
-                Debugger.Fatal("InvalidType", "state", type(dependency))
+                Debugger.fatal("InvalidType", "state", type(dependency))
 			end
 		end
 	end

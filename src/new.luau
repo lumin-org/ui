@@ -14,7 +14,7 @@ local Defaults = require(Root.defaults)
 ]=]
 return (
 	function(class: string)
-		Debugger.Assert(type(class) == "string", "InvalidType", class, "invalid")
+		Debugger.assert(type(class) == "string", "InvalidType", class, "invalid")
 		return function(props: { any }): Instance
 			local Success, New = pcall(Instance.new, class)
 
@@ -43,7 +43,7 @@ return (
 					end
 				end
 			else
-				Debugger.Fatal("InvalidClass", class)
+				Debugger.fatal("InvalidClass", class)
 			end
 
 			return New

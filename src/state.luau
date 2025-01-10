@@ -23,7 +23,7 @@ end
 	[Open Documentation](https://lumin-org.github.io/ui/api/state/#set)
 ]=]
 function Class.Set<T>(self: Types.State, newValue: T): T
-	Debugger.Assert(type(newValue) ~= "table", "InvalidType", "any", "table")
+	Debugger.assert(type(newValue) ~= "table", "InvalidType", "any", "table")
 
 	local OldValue = self._Value
 
@@ -82,7 +82,7 @@ end
 	[Open Documentation](https://lumin-org.github.io/ui/api/#state)
 ]=]
 return function(initial: any): Types.StateExport
-	Debugger.Assert(type(initial) ~= "table", "InvalidType", "any", "table")
+	Debugger.assert(type(initial) ~= "table", "InvalidType", "any", "table")
 
 	local self = setmetatable({}, Class)
 
