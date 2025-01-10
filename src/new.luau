@@ -28,7 +28,7 @@ return (
 
 				if props then
 					for prop, value in props :: any do
-						if prop == "Parent" or "Name" then
+						if prop == "Parent" or prop == "Name" then
 							continue
 						end
 						Apply(New, prop, value)
