@@ -28,11 +28,15 @@ return (
 
 				if props then
 					for prop, value in props :: any do
-						if prop == "Parent" then
+						if prop == "Parent" or "Name" then
 							continue
 						end
 						Apply(New, prop, value)
 					end
+
+                    if (props :: any).Name then
+                        New.Name = (props :: any).Name
+                    end
 
 					if (props :: any).Parent then
 						New.Parent = (props :: any).Parent
