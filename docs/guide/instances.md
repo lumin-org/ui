@@ -56,4 +56,4 @@ This will give our `TextLabel` a bit of styling by applying a smaller corner rad
 
 ## Defaults
 
-The default properties on Roblox aren't ideal for most cases. These are outdated and change very obscure styles in the UI which are often overlooked. To combat this, default properties are applied every time a new instance is created. You can view them [here.]()
+The default properties on Roblox aren't ideal for most cases. These are outdated and change very obscure styles in the UI which are often overlooked. To combat this, default properties are applied every time a new instance is created. You can view them [here.](https://github.com/lumin-org/ui/blob/main/src/defaults.luau)
