@@ -1,39 +1,20 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
-
-title: Aegis
+pageClass: home
+next:
+  text: 'Introduction'
+  link: '/tut/crash-course/1-introduction'
 
 hero:
-  name: Aegis
-  tagline: A simple strictly typed UI framework made specifically for Roblox.
-  image:
-    src: /logo.svg
-    alt: Logo
+  text: "LuminUI"
+  tagline: A simple UI framework for Roblox.
   actions:
     - theme: brand
-      text: What is Aegis?
-      link: /guide/what-is-aegis
-    - theme: alt
-      text: Quickstart
-      link: /guide/getting-started
-    - theme: alt
-      text: Informative
-      link: /informative/common-mistakes
+      text: Guides
+      link: /guide/instances.md
     - theme: alt
       text: API Reference
-      link: /api/
+      link: /api/reactivity-core
 
-features:
-  - icon: ⚡
-    title: Performant
-    details: Designed to be efficient without extra load on the memory
-
-  - icon: ✔
-    title: Strict typing
-    details: Enforces strict typing to enhance reliability and catch errors easily
-
-  - icon: 🛠
-    title: Customizable
-    details: Offers customizable options to modify to your likings
 ---
