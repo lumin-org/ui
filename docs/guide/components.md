@@ -42,8 +42,8 @@ local Main = New "ScreenGui" {
 		Color = Color3.fromRGB(24, 24, 24),
         Label = New "TextLabel" {
 			Text = "Welcome!"
-		}
-	}
+		},
+	},
 }
 ```
 :::

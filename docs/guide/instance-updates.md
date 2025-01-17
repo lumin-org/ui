@@ -12,14 +12,14 @@ local New = UI.New
 local Update = UI.Update
 
 local Element = New "TextLabel" {
-    Parent = ...
-    Text = "This is a textlabel"
+    Parent = ...,
+    Text = "This is a textlabel",
 }
 
 print(Element.Text) --> This is a textlabel
 
 Update(Element) {
-    Text = "This is a textlabel... kind of!"
+    Text = "This is a textlabel... kind of!",
 }
 
 print(Element.Text) --> This is a textlabel... kind of!

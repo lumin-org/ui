@@ -25,8 +25,6 @@ end
 function Class.Set<T>(self: Types.State, newValue: T): T
 	Debugger.assert(type(newValue) ~= "table", "InvalidType", "any", "table")
 
-	local OldValue = self._Value
-
 	-- Don't waste resources is new value is the same as old
 	if self._Value == newValue then
 		return newValue
@@ -36,7 +34,7 @@ function Class.Set<T>(self: Types.State, newValue: T): T
 
 	-- Run all listeners when the value is changed
 	for _, fn in self._Listeners do
-		task.spawn(fn, newValue, OldValue)
+		task.spawn(fn, newValue)
 	end
 
 	return newValue
@@ -47,7 +45,7 @@ end
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/state/#listen)
 ]=]
-function Class.Listen(self: Types.State, listener: (new: any, old: any) -> ()): () -> ()
+function Class.Listen(self: Types.State, listener: (new: any) -> ()): () -> ()
 	table.insert(self._Listeners, listener) -- Add listener
 	return function() -- Disconnect the listener
 		local Listener = table.find(self._Listeners, listener)

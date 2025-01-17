@@ -6,8 +6,8 @@ Creating new instances is a very straightforward process. UI provides a `New` fu
 local UI = require(path.to.UI)
 
 local Element = UI.New("TextLabel")({
-    Parent = ...
-    Text = "This is a textlabel"
+    Parent = ...,
+    Text = "This is a textlabel",
 })
 
 print(Element.Text) --> This is a textlabel
@@ -25,8 +25,8 @@ The syntax in the first example doesn't look too great... and this can be solved
 ...
 local New = UI.New
 local Element = New "TextLabel" {
-    Parent = ...
-    Text = "This is a textlabel"
+    Parent = ...,
+    Text = "This is a textlabel",
 }
 ```
 
@@ -44,11 +44,11 @@ The way children are passed into the object hierarchy is a bit different compare
 
 ```luau
 local Element = New "TextLabel" {
-    Parent = ...
-    Text = "This is a textlabel"
+    Parent = ...,
+    Text = "This is a textlabel",
     New "UICorner" {
         CornerRadius = UDim.new(10, 0)
-    }
+    },
 }
 ```
 

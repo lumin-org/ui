@@ -12,10 +12,10 @@ local Event = UI.Event
 local New = UI.New
 
 New "TextButton" {
-    Parent = ...
+    Parent = ...,
     Event("Activated", function()
         print("Button clicked!")
-    end)
+    end),
 }
 ```
 
@@ -25,10 +25,10 @@ If you need to clean up the event before the instance is destroyed, you can use 
 ...
 local Connections = {}
 New "TextButton" {
-    Parent = ...
+    Parent = ...,
     Event("Activated", function()
         print("Button clicked!")
-    end, Connections)
+    end, Connections),
 }
 
 task.wait(10) -- After 10 seconds, make the button no longer clickable

@@ -73,14 +73,14 @@ end
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/#spring)
 ]=]
-return function(goal: Types.State, damping: number?, frequency: number?): Types.SpringExport
+return function(goal: Types.State, damping: number?, speed: number?): Types.SpringExport
 	Debugger.assert(table.find(Animatable, typeof((goal :: any):Get())), "NotAnimatable", typeof((goal :: any):Get()))
 	Debugger.assert(type(goal) == "table" and goal._Listeners, "InvalidType", "State", type(goal))
 
 	local self = setmetatable({}, Class)
 
 	self._Damping = damping or 1
-	self._Frequency = frequency or 1
+	self._Frequency = speed or 1
 	self._Instances = {}
 	self._Goal = goal
 

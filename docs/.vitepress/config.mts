@@ -38,20 +38,38 @@ function nav(): DefaultTheme.NavItem[] {
 function guide(): DefaultTheme.SidebarItem[] {
 	return [
 		{
-			text: 'Guides',
+			text: 'Elements',
 			collapsed: false,
 			items: [
 				{ text: 'Instances', link: 'instances' },
-				{ text: 'Instance Updates', link: 'instance-updates' },
+				{ text: 'Updates', link: 'instance-updates' },
 				{ text: 'Components', link: 'components' },
+			]
+		},
+        {
+			text: 'Actions',
+			collapsed: false,
+			items: [
 				{ text: 'Actions', link: 'actions' },
                 { text: 'Events', link: 'events' },
                 { text: 'Change Events', link: 'change-events' },
                 { text: 'Tags', link: 'tags' },
                 { text: 'Cleanup', link: 'cleanup' },
-				{ text: 'States', link: 'states' },
+			]
+		},
+        {
+			text: 'State',
+			collapsed: false,
+			items: [
+                { text: 'States', link: 'states' },
 				{ text: 'Computed States', link: 'computed-states' },
-				{ text: 'Springs', link: 'springs' },
+			]
+		},
+        {
+			text: 'Animation',
+			collapsed: false,
+			items: [
+                { text: 'Springs', link: 'springs' },
 			]
 		},
 	]

@@ -12,8 +12,8 @@ local Tags = UI.Tags
 local New = UI.New
 
 New "TextButton" {
-    Parent = ...
-    Tags("OneTag")
+    Parent = ...,
+    Tags("OneTag"),
 }
 ```
 
@@ -22,8 +22,8 @@ If you need multiple, however, you can apply a space between each tag entry:
 ```luau
 ...
 New "TextButton" {
-    Parent = ...
-    Tags("OneTag TwoTag ThreeTag FourTag")
+    Parent = ...,
+    Tags("OneTag TwoTag ThreeTag FourTag"),
 }
 ```
 

@@ -13,17 +13,17 @@ local New = UI.New
 local Update = UI.Update
 
 local ToChange = New "TextLabel" {
-    Parent = ...
+    Parent = ...,
     Text = "Old text",
     Changed("Text", function(new)
         print(`The text changed! New: {new}`)
-    end)
+    end),
 }
 
 task.wait(5)
 
 Update(ToChange) {
-    Text = "New text"
+    Text = "New text",
 }
 
 --> The text changed! New: New text
@@ -35,11 +35,11 @@ If you need to clean up the event before the instance is destroyed, you can use 
 ...
 local Connections = {}
 local ToChange = New "TextLabel" {
-    Parent = ...
+    Parent = ...,
     Text = "Old text",
     Changed("Text", function(new)
         print(`The text changed! New: {new}`)
-    end, Connections)
+    end, Connections),
 }
 Connections[1]:Disconnect()
 ...

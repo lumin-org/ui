@@ -51,24 +51,21 @@ end
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/#computed)
 ]=]
-return function(processor: () -> (), dependencies: { Types.State | Types.Spring }?): Types.ComputedExport
+return function(processor: () -> (), dependencies: { Types.State }): Types.ComputedExport
+	Debugger.assert(type(dependencies) == "table", "InvalidType", "table", type(dependencies))
+
 	local self = setmetatable({}, Class)
 
 	self._Processor = processor
 	self._Value = processor()
 	self._Instances = {}
-	self._Dependencies = nil
-
-	if dependencies then
-		local Type = type(dependencies)
-		Debugger.assert(Type == "table", "InvalidType", "table", Type)
-		self._Dependencies = {} :: any
-		for _, dependency in dependencies do
-			if type(dependency) == "table" then
-				(self._Dependencies :: any)[dependency] = (dependency :: any):Listen(Listener(self :: any))
-            else
-                Debugger.fatal("InvalidType", "state", type(dependency))
-			end
+	self._Dependencies = {} :: any
+    
+	for _, dependency in dependencies do
+		if type(dependency) == "table" and dependency._Listeners then
+			(self._Dependencies :: any)[dependency] = (dependency :: any):Listen(Listener(self :: any))
+		else
+			Debugger.fatal("InvalidType", "state", type(dependency))
 		end
 	end
 
