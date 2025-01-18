@@ -23,7 +23,7 @@ end
 --[=[
 	Gets the current value of the compute object.
 
-	[Open Documentation](https://lumin-org.github.io/ui/api/computed/#get)
+	[Open Documentation](https://lumin-org.github.io/ui/api/compute/#get)
 ]=]
 function Class.Get(self: Types.Computed): any
 	return self._Value
@@ -37,7 +37,7 @@ end
 --[=[
 	Destroys the compute object, but not the state dependencies.
 
-	[Open Documentation](https://lumin-org.github.io/ui/api/computed/#destroy)
+	[Open Documentation](https://lumin-org.github.io/ui/api/compute/#destroy)
 ]=]
 function Class.Destroy(self: Types.Computed)
 	table.clear(self :: any)
@@ -49,7 +49,7 @@ end
 --[=[
 	Creates a new computed value, which changes the final value when a dependency is changed.
 
-	[Open Documentation](https://lumin-org.github.io/ui/api/#computed)
+	[Open Documentation](https://lumin-org.github.io/ui/api/#compute)
 ]=]
 return function(processor: () -> (), dependencies: { Types.State }): Types.ComputedExport
 	Debugger.assert(type(dependencies) == "table", "InvalidType", "table", type(dependencies))

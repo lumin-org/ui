@@ -14,7 +14,7 @@ end
 --[=[
 	Connects a callback to an event on the instance.
 
-	[Open Documentation](https://lumin-org.github.io/ui/api/keys/#event)
+	[Open Documentation](https://lumin-org.github.io/ui/api/#event)
 ]=]
 return function(event: string, callback: (...any) -> (), scope: {any}?): Types.Action
 	return Action(function(instance: Instance)

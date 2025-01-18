@@ -8,7 +8,7 @@ local Action = require(Root.action)
 --[=[
 	Adds a tag (or multiple) with the provided name to the instance.
 
-	[Open Documentation](https://lumin-org.github.io/ui/api/keys/#tag)
+	[Open Documentation](https://lumin-org.github.io/ui/api/#tags)
 ]=]
 return function(names: string): Types.Action
 	return Action(function(instance: Instance)

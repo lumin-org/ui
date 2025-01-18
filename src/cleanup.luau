@@ -21,7 +21,7 @@ end
 --[=[
 	Cleans up the provided items as soon as the parent instance is destroyed.
 
-	[Open Documentation](https://lumin-org.github.io/ui/api/keys/#clean)
+	[Open Documentation](https://lumin-org.github.io/ui/api/#cleanup)
 ]=]
 return function(clean: { Instance } | Instance): Types.Action
 	return Action(function(instance)

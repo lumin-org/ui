@@ -10,7 +10,7 @@ local Debugger = require(Root.Parent.roblox_packages.debugger)
 	Allows you to observe changes of properties within an object, and supplies the value of
     the changed property as a callback argument.
 
-	[Open Documentation](https://lumin-org.github.io/ui/api/actions/#change)
+	[Open Documentation](https://lumin-org.github.io/ui/api/#changed)
 ]=]
 return function<T>(prop: string, callback: (changed: T) -> (), scope: {any}?): Types.Action
 	return Action(function(instance)

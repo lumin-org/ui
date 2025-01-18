@@ -4,7 +4,7 @@
 [![ci](https://img.shields.io/github/actions/workflow/status/lumin-org/ui/release.yml?style=plastic&logo=github&logoColor=FFFFFF&label=ci)](https://github.com/lumin-org/ui/blob/main/.github/workflows/release.yml)
 [![discord](https://img.shields.io/discord/1105688855375511642?logo=discord&logoColor=white&label=chat&color=4d3dff&style=plastic)](https://lumin-org.github.io/to/discord)
 
-A light, fast, and efficient UI framework that has a small learning curve.
+An unrivaled UI framework for Roblox. 
 
 ## Prerequisites
 
