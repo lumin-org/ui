@@ -61,7 +61,7 @@ Updates an instance, writing to its properties.
   The processor function to run when dependencies are changed
 
 - **dependencies:** [`{ State }`](state.md)\
-  The dependencies that computed state relies on
+  The dependencies that the computed state relies on
 
 **Returns**
 

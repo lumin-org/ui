@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Completely revamped docs
+- Error help section
+
+### Fixed
+
+- Even more performance fixes
+- Fixed incorrect doc links within code
+- Fixed incorrect types in some areas
+
 ## [0.3.0-rc6] - 2025-01-10
 
 ### Fixed
@@ -160,4 +171,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.3.0-rc4]: https://github.com/lumin-org/ui/compare/v0.3.0-rc3...v0.3.0-rc4
 [0.3.0-rc3]: https://github.com/lumin-org/ui/compare/v0.3.0-rc2...v0.3.0-rc3
 [0.3.0-rc2]: https://github.com/lumin-org/ui/compare/v0.3.0-rc1...v0.3.0-rc2
-[0.3.0-rc1]: https://github.com/lumin-org/ui/compare/494ed6244654f0eb7886177eff2f6c86520cb742...v0.3.0-rc1
+[0.3.0-rc1]: https://github.com/lumin-org/ui/compare/v0.2.3...v0.3.0-rc1
+[0.2.3]: https://github.com/lumin-org/ui/compare/v0.2.2...v0.2.3
+[0.2.2]: https://github.com/lumin-org/ui/compare/v0.2.1...v0.2.2
+[0.2.1]: https://github.com/lumin-org/ui/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/lumin-org/ui/compare/v0.1.0...v2.0.0
+[0.1.0]: https://github.com/lumin-org/ui/compare/v0.0.3...v1.0.0
+[0.0.3]: https://github.com/lumin-org/ui/compare/v0.0.2...v0.0.3
+[0.0.2]: https://github.com/lumin-org/ui/compare/v0.0.1...v0.0.2
+[0.0.1]: https://github.com/lumin-org/ui/compare/f19ed29fbf876a82f24ba644d3804ffad0d2b6dc...v0.0.1

@@ -35,10 +35,11 @@ local UI = require(path.to.UI)
 local Component = require(path.to.component)
 local New = UI.New
 
-local Main = New "ScreenGui" {
+New "ScreenGui" {
 	IgnoreGuiInset = true,
 	Parent = Player:WaitForChild("PlayerGui"),
-    Background = BackgroundComponent {
+
+    Component {
 		Color = Color3.fromRGB(24, 24, 24),
         Label = New "TextLabel" {
 			Text = "Welcome!"

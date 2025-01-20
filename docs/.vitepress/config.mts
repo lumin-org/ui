@@ -72,6 +72,17 @@ function guide(): DefaultTheme.SidebarItem[] {
                 { text: 'Springs', link: 'springs' },
             ]
         },
+        {
+            text: 'Errors',
+            collapsed: false,
+            items: [
+                { text: 'Not Animatable', link: 'errors#notanimatable' },
+                { text: 'Invalid Type', link: 'errors#invalidtype' },
+                { text: 'Invalid Class', link: 'errors#invalidclass' },
+                { text: 'Invalid Prop or Event', link: 'errors#invalidproporevent' },
+                { text: 'Cleanup Not Allowed', link: 'errors#cleanupnotallowed' },
+            ]
+        },
     ]
 }
 
