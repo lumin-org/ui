@@ -42,6 +42,6 @@ New "ScreenGui" {
 }
 ```
 
-# License
+## License
 
 This project is licensed under the [MIT](https://github.com/lumin-org/ui/blob/main/LICENSE) license
