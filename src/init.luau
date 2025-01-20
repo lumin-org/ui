@@ -8,13 +8,13 @@ local Debugger = require(Packages.debugger)
 export type Action = Types.Action
 export type State = Types.State
 export type Spring = Types.Spring
-export type Computed = Types.Computed
+export type Compute = Types.Compute
 export type Animatable = Types.Animatable
 
 -- Module
 Debugger.set({
     Logs = Logs,
-	URL = "https://lumin-org.github.io/ui/error/#",
+	URL = "https://lumin-org.github.io/ui/guide/errors#",
 	Name = "UI",
 })
 

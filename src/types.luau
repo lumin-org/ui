@@ -42,16 +42,17 @@ export type NewInstance =
 	& New<"ViewportFrame", ViewportFrame>
 	& New<string, Instance & any>
 
+-- constructor class
 export type Constructor<T, U> = {
-	_Type: string,
 	_Bind: (self: T, prop: string, instance: Instance) -> (),
 	Get: (self: T) -> U,
 	Destroy: (self: T) -> (),
 }
 
+-- states
 export type StateExport = {
-	Set: (self: StateExport, value: any) -> State,
-	Listen: (self: StateExport, listener: (new: any, old: any) -> ()) -> () -> (),
+	Set: <T>(self: StateExport, value: T) -> T,
+	Listen: (self: StateExport, listener: (new: any) -> ()) -> () -> (),
 } & Constructor<StateExport, any>
 
 export type State = typeof(setmetatable(
@@ -62,6 +63,7 @@ export type State = typeof(setmetatable(
 	{} :: { __index: StateExport }
 ))
 
+-- springs
 export type SpringExport = {
 	Stop: (self: SpringExport) -> (),
 } & Constructor<SpringExport, Animatable>
@@ -70,22 +72,23 @@ export type Spring = typeof(setmetatable(
 	{} :: {
 		_Goal: StateExport,
 		_Damping: number,
-		_Frequency: number,
+		_Speed: number,
 		_Instances: { Instance },
 	},
 	{} :: { __index: SpringExport }
 ))
 
-export type ComputedExport = Constructor<ComputedExport, any>
+-- computes
+export type ComputeExport = Constructor<ComputeExport, any>
 
-export type Computed = typeof(setmetatable(
+export type Compute = typeof(setmetatable(
 	{} :: {
 		_Processor: () -> (),
 		_Value: any,
-		_Dependencies: { State | Spring },
+		_Dependencies: { State },
 		_Instances: { [string]: Instance }?,
 	},
-	{} :: { __index: ComputedExport }
+	{} :: { __index: ComputeExport }
 ))
 
 return {}

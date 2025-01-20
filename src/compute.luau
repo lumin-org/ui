@@ -8,9 +8,9 @@ Class.__index = Class
 
 -- Functions
 
-local function Listener(self: Types.Computed)
+local function Listener(self: Types.Compute)
 	return function()
-		self._Value = self._Processor() -- Set the value of the computed to the processed value
+		self._Value = self._Processor() -- Set the value of the computed state to the new processed value
 
 		if self._Instances ~= nil then
 			for prop, instance in self._Instances do
@@ -25,11 +25,11 @@ end
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/compute/#get)
 ]=]
-function Class.Get(self: Types.Computed): any
+function Class.Get(self: Types.Compute): any
 	return self._Value
 end
 
-function Class._Bind(self: Types.Computed, prop: string, instance: Instance)
+function Class._Bind(self: Types.Compute, prop: string, instance: Instance)
 	(self._Instances :: {})[prop] = instance;
 	(instance :: any)[prop] = self._Value
 end
@@ -39,7 +39,7 @@ end
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/compute/#destroy)
 ]=]
-function Class.Destroy(self: Types.Computed)
+function Class.Destroy(self: Types.Compute)
 	table.clear(self :: any)
 	setmetatable(self :: any, nil)
 end
@@ -51,9 +51,7 @@ end
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/#compute)
 ]=]
-return function(processor: () -> (), dependencies: { Types.State }): Types.ComputedExport
-	Debugger.assert(type(dependencies) == "table", "InvalidType", "table", type(dependencies))
-
+return function(processor: () -> (), dependencies: { Types.StateExport }?): Types.ComputeExport
 	local self = setmetatable({}, Class)
 
 	self._Processor = processor
@@ -61,13 +59,16 @@ return function(processor: () -> (), dependencies: { Types.State }): Types.Compu
 	self._Instances = {}
 	self._Dependencies = {} :: any
     
-	for _, dependency in dependencies do
-		if type(dependency) == "table" and dependency._Listeners then
-			(self._Dependencies :: any)[dependency] = (dependency :: any):Listen(Listener(self :: any))
-		else
-			Debugger.fatal("InvalidType", "state", type(dependency))
-		end
-	end
+    if dependencies then
+        Debugger.assert(type(dependencies) == "table", "InvalidType", "table", type(dependencies))
+        for _, dependency in dependencies do
+            if type(dependency) == "table" and (dependency :: any)._Listeners then
+                (self._Dependencies :: any)[dependency] = (dependency :: any):Listen(Listener(self :: any))
+            else
+                Debugger.fatal("InvalidType", "state", type(dependency))
+            end
+        end
+    end
 
 	return self :: any
 end

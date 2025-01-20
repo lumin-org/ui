@@ -8,6 +8,13 @@ Class.__index = Class
 
 -- Functions
 
+function Class._Bind(self: Types.State, prop: string, instance: Instance)
+	(instance :: any)[prop] = self._Value; -- Set the prop initially to the current value
+	(self :: any):Listen(function(newValue)
+		(instance :: any)[prop] = newValue -- Change the prop to the new value when the state is changed
+	end)
+end
+
 --[=[
 	Returns the current value of the object.
 
@@ -25,7 +32,7 @@ end
 function Class.Set<T>(self: Types.State, newValue: T): T
 	Debugger.assert(type(newValue) ~= "table", "InvalidType", "any", "table")
 
-	-- Don't waste resources is new value is the same as old
+	-- Don't waste resources if new value is the same as old
 	if self._Value == newValue then
 		return newValue
 	end
@@ -53,13 +60,6 @@ function Class.Listen(self: Types.State, listener: (new: any) -> ()): () -> ()
 			table.remove(self._Listeners, Listener)
 		end
 	end
-end
-
-function Class._Bind(self: Types.State, prop: string, instance: Instance)
-	(instance :: any)[prop] = self._Value; -- Set the prop initially to the current value
-	(self :: any):Listen(function(newValue)
-		(instance :: any)[prop] = newValue -- Change the prop to the new value when the state is changed
-	end)
 end
 
 --[=[

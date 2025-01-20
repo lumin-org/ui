@@ -16,6 +16,11 @@ local Goal = UI.State(UDim2.fromScale(0.5, 1))
 local Spring = UI.Spring(Goal :: any, 0.5, 5)
 local c = 1
 
+local ComputedState = UI.State(10)
+local Computed = UI.Compute(function()
+    return ComputedState:Get() * 3
+end, {ComputedState})
+
 -- UI
 New "ScreenGui" {
 	Name = "MenuUI",
@@ -45,7 +50,7 @@ New "ScreenGui" {
             print("Entered for this other one...")
         end),
 
-        Text = "This other one",
+        Text = Computed,
         Position = UDim2.fromScale(0.2, 0.2),
         Size = UDim2.fromOffset(100, 100),
         ZIndex = 3,
@@ -75,3 +80,8 @@ New "ScreenGui" {
 
 task.wait(10)
 State:Set("TEST!!!")
+
+while true do
+    task.wait(0.1)
+    ComputedState:Set(ComputedState:Get() + math.random(1, 10))
+end

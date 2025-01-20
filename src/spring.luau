@@ -27,7 +27,7 @@ function Class._Bind(self: Types.Spring, prop: string, instance: Instance)
 	table.insert(self._Instances, instance);
 	(instance :: any)[prop] = self._Goal:Get() -- Set the prop of the instance to the initial goal
 	self._Goal:Listen(function(new) -- When the goal changes, set the target to the new value
-		Spr.target(instance, self._Damping, self._Frequency, {
+		Spr.target(instance, self._Damping, self._Speed, {
 			[prop] = new,
 		})
 	end)
@@ -73,14 +73,14 @@ end
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/#spring)
 ]=]
-return function(goal: Types.State, damping: number?, speed: number?): Types.SpringExport
+return function(goal: Types.StateExport, damping: number?, speed: number?): Types.SpringExport
 	Debugger.assert(table.find(Animatable, typeof((goal :: any):Get())), "NotAnimatable", typeof((goal :: any):Get()))
-	Debugger.assert(type(goal) == "table" and goal._Listeners, "InvalidType", "State", type(goal))
+	Debugger.assert(type(goal) == "table" and (goal :: any)._Listeners, "InvalidType", "State", type(goal))
 
 	local self = setmetatable({}, Class)
 
 	self._Damping = damping or 1
-	self._Frequency = speed or 1
+	self._Speed = speed or 1
 	self._Instances = {}
 	self._Goal = goal
 
