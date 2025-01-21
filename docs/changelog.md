@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2025-01-21
+
 ### Added
 
 - `ForEach` action
@@ -181,7 +183,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Released [Aegis](/)!
 
-[unreleased]: https://github.com/lumin-org/ui/compare/v0.3.0...HEAD
+[unreleased]: https://github.com/lumin-org/ui/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/lumin-org/ui/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/lumin-org/ui/compare/v0.3.0-rc6...v0.3.0
 [0.3.0-rc6]: https://github.com/lumin-org/ui/compare/v0.3.0-rc5...v0.3.0-rc6
 [0.3.0-rc5]: https://github.com/lumin-org/ui/compare/v0.3.0-rc4...v0.3.0-rc5
