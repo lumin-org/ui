@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `ForEach` action
+
+### Fixed
+
+- Invalid name setting in `Update`
+- Invalid type for actions
+- Issues within docs
+
+### Removed
+
+- Removed the `Action` function in favor of a different method
+
 ## [0.3.0] - 2025-01-20
 
 ### Added

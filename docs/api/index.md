@@ -99,22 +99,7 @@ Cleans up the provided items as soon as the parent instance is destroyed.
 
 **Returns**
 
-- `(instance: Instance) -> ()`
-
----
-
-### `Action`
-
-Creates a new action, which allows for custom modifications to instances.
-
-**Parameters**
-
-- **apply:** `(...any) -> ()`\
-  The action to create, this is what is returned
-
-**Returns**
-
-- `(...any) -> ()`
+- `Action`
 
 ---
 
@@ -135,7 +120,7 @@ Connects a callback to an event on the instance.
 
 **Returns**
 
-- `(instance: Instance) -> ()`
+- `Action`
 
 ---
 
@@ -157,7 +142,7 @@ the changed property as a callback argument.
 
 **Returns**
 
-- `(instance: Instance) -> ()`
+- `Action`
 
 ---
 
@@ -172,6 +157,24 @@ Adds a tag (or multiple) with the provided name to the instance.
 
 **Returns**
 
-- `(instance: Instance) -> ()`
+- `Action`
+
+---
+
+### `ForEach`
+
+Runs a loop within your code to efficiently create instances or other.
+
+**Parameters**
+
+- **table:** `{ [T]: U }`\
+  The table to iterate through
+
+- **iterator:** `(index: T, value: U) -> (Instance?)`
+  The iterator to run on each occurance in the table
+
+**Returns**
+
+- `Action`
 
 

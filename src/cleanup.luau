@@ -1,6 +1,5 @@
 -- Variables
 local Root = script.Parent
-local Action = require(Root.action)
 local Types = require(Root.types)
 local Debugger = require(Root.Parent.roblox_packages.debugger)
 
@@ -24,7 +23,7 @@ end
 	[Open Documentation](https://lumin-org.github.io/ui/api/#cleanup)
 ]=]
 return function(clean: { Instance } | Instance): Types.Action
-	return Action(function(instance)
+	return function(instance)
 		instance.Destroying:Once(function()
 			if type(clean) == "table" then
 				for _, instance in clean do
@@ -34,5 +33,5 @@ return function(clean: { Instance } | Instance): Types.Action
 			end
 			Helper(clean)
 		end)
-	end)
+	end
 end

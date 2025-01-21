@@ -25,8 +25,8 @@ return table.freeze({
 	Compute = require(script.compute),
 	Spring = require(script.spring),
 	Cleanup = require(script.cleanup),
-	Action = require(script.action),
 	Event = require(script.event),
 	Changed = require(script.changed),
 	Tags = require(script.tags),
+    ForEach = require(script.foreach)
 })

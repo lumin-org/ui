@@ -55,6 +55,7 @@ function guide(): DefaultTheme.SidebarItem[] {
                 { text: 'Change Events', link: 'change-events' },
                 { text: 'Tags', link: 'tags' },
                 { text: 'Cleanup', link: 'cleanup' },
+                { text: 'For Each', link: 'for-each'},
             ]
         },
         {

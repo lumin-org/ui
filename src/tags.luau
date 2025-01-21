@@ -1,7 +1,6 @@
 -- Variables
 local Root = script.Parent
 local Types = require(Root.types)
-local Action = require(Root.action)
 
 -- Module
 
@@ -11,10 +10,10 @@ local Action = require(Root.action)
 	[Open Documentation](https://lumin-org.github.io/ui/api/#tags)
 ]=]
 return function(names: string): Types.Action
-	return Action(function(instance: Instance)
+	return function(instance: Instance)
 		local TagsList = names:split(" ") -- Split tag list for multiple tags
 		for _, tag in TagsList do
 			instance:AddTag(tag)
 		end
-	end)
+	end
 end

@@ -11,7 +11,7 @@ export type Animatable =
 	| NumberSequence
 	| NumberRange
 
-export type Action = (instance: Instance, ...any) -> ()
+export type Action = (instance: Instance) -> ()
 export type New<T, U> = (T) -> ({ any }) -> U
 export type NewInstance =
 	& New<"Folder", Folder>

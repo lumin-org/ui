@@ -1,7 +1,6 @@
 -- Variables
 local Root = script.Parent
 local Types = require(Root.types)
-local Action = require(Root.action)
 local Debugger = require(Root.Parent.roblox_packages.debugger)
 
 -- Functions
@@ -17,7 +16,7 @@ end
 	[Open Documentation](https://lumin-org.github.io/ui/api/#event)
 ]=]
 return function(event: string, callback: (...any) -> (), scope: {any}?): Types.Action
-	return Action(function(instance: Instance)
+	return function(instance: Instance)
 		local Success, Event = pcall(Find, instance :: any, event :: any) -- Ensure event exists
 		if not Success or type(callback) ~= "function" then
 			Debugger.fatal("InvalidPropOrEvent", event)
@@ -26,5 +25,5 @@ return function(event: string, callback: (...any) -> (), scope: {any}?): Types.A
         if scope then
             table.insert(scope, ToAdd)
         end
-	end)
+	end
 end

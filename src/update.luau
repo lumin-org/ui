@@ -12,7 +12,7 @@ local Apply = require(Root.apply)
 return function(instance: Instance)
 	return function(props: { any }): Instance
 		for prop, value in props :: any do
-			if prop == "Parent" then
+			if prop == "Parent" or prop == "Name" then
 				continue
 			end
 			Apply(instance, prop, value)
@@ -21,6 +21,10 @@ return function(instance: Instance)
 		if (props :: any).Parent then
 			instance.Parent = (props :: any).Parent
 		end
+
+        if (props :: any).Name then
+            instance.Name = (props :: any).Name
+        end
 
 		return instance
 	end
