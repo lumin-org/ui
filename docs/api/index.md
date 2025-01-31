@@ -22,6 +22,21 @@ Creates a new instance with the provided properties.
 
 ---
 
+### `View`
+
+Creates a new view (ScreenGui) for your elements. This acts a shortcut and cleaner method for creation of a ScreenGui.
+
+**Parameters**
+
+- **props:** `{ any }`\
+  Properties to be applied to the instance
+
+**Returns**
+
+- `ScreenGui`
+
+---
+
 ### `Update`
 
 Updates an instance, writing to its properties.
