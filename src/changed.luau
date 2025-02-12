@@ -1,7 +1,6 @@
 -- Variables
-local Root = script.Parent
-local Types = require(Root.types)
-local Debugger = require(Root.Parent.roblox_packages.debugger)
+local Types = require("./types")
+local Debugger = require("../roblox_packages/debugger")
 
 -- Module
 
@@ -11,7 +10,7 @@ local Debugger = require(Root.Parent.roblox_packages.debugger)
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/#changed)
 ]=]
-return function<T>(prop: string, callback: (changed: T) -> (), scope: {any}?): Types.Action
+return function<T>(prop: string, callback: (changed: T) -> (), scope: { any }?): Types.Action
 	return function(instance)
 		local Success, Event = pcall(instance.GetPropertyChangedSignal, instance :: any, prop :: any) -- Ensure prop exists
 		if not Success or type(callback) ~= "function" then
@@ -20,8 +19,8 @@ return function<T>(prop: string, callback: (changed: T) -> (), scope: {any}?): T
 		local ToAdd = Event:Connect(function()
 			callback((instance :: any)[prop]) -- Pass new value through callback
 		end)
-        if scope then
-            table.insert(scope, ToAdd)
-        end
+		if scope then
+			table.insert(scope, ToAdd)
+		end
 	end
 end

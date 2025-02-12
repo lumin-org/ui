@@ -1,9 +1,8 @@
 -- Variables
-local Root = script.Parent
-local Types = require(Root.types)
-local Apply = require(Root.apply)
-local Debugger = require(Root.Parent.roblox_packages.debugger)
-local Defaults = require(Root.defaults)
+local Types = require("./types")
+local Debugger = require("../roblox_packages/debugger")
+local Apply = require("./apply")
+local Defaults = require("./defaults")
 
 -- Module
 
@@ -15,7 +14,7 @@ local Defaults = require(Root.defaults)
 return (
 	function(class: string)
 		Debugger.assert(type(class) == "string", "InvalidType", class, "invalid")
-		return function(props: { any }): Instance
+		return function(props: Types.Properties): Instance
 			local Success, New = pcall(Instance.new, class)
 
 			if Success then
@@ -26,22 +25,7 @@ return (
 					end
 				end
 
-				if props then
-					for prop, value in props :: any do
-						if prop == "Parent" or prop == "Name" then
-							continue
-						end
-						Apply(New, prop, value)
-					end
-
-                    if (props :: any).Name then
-                        New.Name = (props :: any).Name
-                    end
-
-					if (props :: any).Parent then
-						New.Parent = (props :: any).Parent
-					end
-				end
+				Apply(New, props)
 			else
 				Debugger.fatal("InvalidClass", class)
 			end

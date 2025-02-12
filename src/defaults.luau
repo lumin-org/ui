@@ -1,5 +1,3 @@
--- Stores default properties for common items
--- Forked from Fusion 0.3
 return {
 	ScreenGui = {
 		ResetOnSpawn = false,
@@ -15,7 +13,6 @@ return {
 	SurfaceGui = {
 		ResetOnSpawn = false,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-
 		SizingMode = Enum.SurfaceGuiSizingMode.PixelsPerStud,
 		PixelsPerStud = 50,
 	},
@@ -103,35 +100,29 @@ return {
 		BorderSizePixel = 0,
 	},
 
+	UIListLayout = {
+		SortOrder = Enum.SortOrder.LayoutOrder,
+	},
+
+	UIGridLayout = {
+		SortOrder = Enum.SortOrder.LayoutOrder,
+	},
+
+	UITableLayout = {
+		SortOrder = Enum.SortOrder.LayoutOrder,
+	},
+
+	UIPageLayout = {
+		SortOrder = Enum.SortOrder.LayoutOrder,
+	},
+
 	SpawnLocation = {
 		Duration = 0,
 	},
 
-	BoxHandleAdornment = {
-		ZIndex = 0,
-	},
-	ConeHandleAdornment = {
-		ZIndex = 0,
-	},
-	CylinderHandleAdornment = {
-		ZIndex = 0,
-	},
-	ImageHandleAdornment = {
-		ZIndex = 0,
-	},
-	LineHandleAdornment = {
-		ZIndex = 0,
-	},
-	SphereHandleAdornment = {
-		ZIndex = 0,
-	},
-	WireframeHandleAdornment = {
-		ZIndex = 0,
-	},
-
 	Part = {
 		Anchored = true,
-		Size = Vector3.one,
+		Size = vector.one,
 		FrontSurface = Enum.SurfaceType.Smooth,
 		BackSurface = Enum.SurfaceType.Smooth,
 		LeftSurface = Enum.SurfaceType.Smooth,
@@ -142,7 +133,7 @@ return {
 
 	TrussPart = {
 		Anchored = true,
-		Size = Vector3.one * 2,
+		Size = vector.one * 2,
 		FrontSurface = Enum.SurfaceType.Smooth,
 		BackSurface = Enum.SurfaceType.Smooth,
 		LeftSurface = Enum.SurfaceType.Smooth,
@@ -153,7 +144,7 @@ return {
 
 	MeshPart = {
 		Anchored = true,
-		Size = Vector3.one,
+		Size = vector.one,
 		FrontSurface = Enum.SurfaceType.Smooth,
 		BackSurface = Enum.SurfaceType.Smooth,
 		LeftSurface = Enum.SurfaceType.Smooth,
@@ -164,7 +155,7 @@ return {
 
 	CornerWedgePart = {
 		Anchored = true,
-		Size = Vector3.one,
+		Size = vector.one,
 		FrontSurface = Enum.SurfaceType.Smooth,
 		BackSurface = Enum.SurfaceType.Smooth,
 		LeftSurface = Enum.SurfaceType.Smooth,
@@ -175,7 +166,7 @@ return {
 
 	VehicleSeat = {
 		Anchored = true,
-		Size = Vector3.one,
+		Size = vector.one,
 		FrontSurface = Enum.SurfaceType.Smooth,
 		BackSurface = Enum.SurfaceType.Smooth,
 		LeftSurface = Enum.SurfaceType.Smooth,

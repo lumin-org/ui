@@ -1,9 +1,8 @@
 -- Variables
+local New = require("./new")
+
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
-
-local Root = script.Parent
-local New = require(Root.new)
 
 -- Module
 
@@ -14,15 +13,15 @@ local New = require(Root.new)
 	[Open Documentation](https://lumin-org.github.io/ui/api/#view)
 ]=]
 return function(props: { any }): ScreenGui
-    local Props = {
-        Name = "Root",
-        IgnoreGuiInset = false,
-        Parent = Player:WaitForChild("PlayerGui"),
-    }
+	local Props = {
+		Name = "Root",
+		IgnoreGuiInset = false,
+		Parent = Player:WaitForChild("PlayerGui"),
+	}
 
-    for name, value in props do
-        Props[name] = value
-    end
+	for name, value in props do
+		Props[name] = value
+	end
 
-	return New("ScreenGui")(Props)
+	return New("ScreenGui")(Props :: any)
 end

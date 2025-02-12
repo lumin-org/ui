@@ -1,19 +1,18 @@
 -- Variables
-local Packages = script.Parent.roblox_packages
 local Types = require(script.types)
 local Logs = require(script.logs)
-local Debugger = require(Packages.debugger)
+local Debugger = require("../roblox_packages/debugger")
 
 -- Types
 export type Action = Types.Action
-export type State = Types.State
+export type State<T> = Types.State<T>
 export type Spring = Types.Spring
-export type Compute = Types.Compute
+export type Compute<T> = Types.Compute<T>
 export type Animatable = Types.Animatable
 
 -- Module
 Debugger.set({
-    Logs = Logs,
+	Logs = Logs,
 	URL = "https://lumin-org.github.io/ui/guide/errors#",
 	Name = "UI",
 })
@@ -28,5 +27,5 @@ return table.freeze({
 	Event = require(script.event),
 	Changed = require(script.changed),
 	Tags = require(script.tags),
-    ForEach = require(script.foreach)
+	ForEach = require(script.foreach),
 })

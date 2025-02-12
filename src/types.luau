@@ -1,5 +1,5 @@
 export type Animatable =
-	boolean
+	| boolean
 	| number
 	| CFrame
 	| Vector3
@@ -11,8 +11,12 @@ export type Animatable =
 	| NumberSequence
 	| NumberRange
 
+-- Properties
+export type Properties = { [string | Action]: Child | any }
 export type Action = (instance: Instance) -> ()
-export type New<T, U> = (T) -> ({ any }) -> U
+export type Child = Instance
+
+export type New<T, U> = (T) -> (Properties) -> U
 export type NewInstance =
 	& New<"Folder", Folder>
 	& New<"BillboardGui", BillboardGui>
@@ -42,53 +46,25 @@ export type NewInstance =
 	& New<"ViewportFrame", ViewportFrame>
 	& New<string, Instance & any>
 
--- constructor class
+-- Base Constructor
 export type Constructor<T, U> = {
 	_Bind: (self: T, prop: string, instance: Instance) -> (),
 	Get: (self: T) -> U,
 	Destroy: (self: T) -> (),
-}
+} & { [any]: any }
 
--- states
-export type StateExport = {
-	Set: <T>(self: StateExport, value: T) -> T,
-	Listen: (self: StateExport, listener: (new: any) -> ()) -> () -> (),
-} & Constructor<StateExport, any>
+-- State
+export type State<U> = {
+	Set: <T>(self: State<U>, value: T) -> T,
+	Listen: (self: State<U>, listener: (new: U) -> ()) -> () -> (),
+} & Constructor<State<U>, U>
 
-export type State = typeof(setmetatable(
-	{} :: {
-		_Value: any,
-		_Listeners: { (newValue: any, oldValue: any) -> () },
-	},
-	{} :: { __index: StateExport }
-))
+-- Spring
+export type Spring = {
+	Stop: (self: Spring) -> (),
+} & Constructor<Spring, Animatable>
 
--- springs
-export type SpringExport = {
-	Stop: (self: SpringExport) -> (),
-} & Constructor<SpringExport, Animatable>
-
-export type Spring = typeof(setmetatable(
-	{} :: {
-		_Goal: StateExport,
-		_Damping: number,
-		_Speed: number,
-		_Instances: { Instance },
-	},
-	{} :: { __index: SpringExport }
-))
-
--- computes
-export type ComputeExport = Constructor<ComputeExport, any>
-
-export type Compute = typeof(setmetatable(
-	{} :: {
-		_Processor: () -> (),
-		_Value: any,
-		_Dependencies: { State },
-		_Instances: { [string]: Instance }?,
-	},
-	{} :: { __index: ComputeExport }
-))
+-- Compute
+export type Compute<U> = Constructor<Compute<U>, U>
 
 return {}

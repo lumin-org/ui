@@ -1,14 +1,13 @@
 -- Variables
-local Root = script.Parent
-local Types = require(Root.types)
-local Debugger = require(Root.Parent.roblox_packages.debugger)
+local Types = require("./types")
+local Debugger = require("../roblox_packages/debugger")
 
 local Class = {}
 Class.__index = Class
 
 -- Functions
 
-function Class._Bind(self: Types.State, prop: string, instance: Instance)
+function Class._Bind(self: Types.State<any>, prop: string, instance: Instance)
 	(instance :: any)[prop] = self._Value; -- Set the prop initially to the current value
 	(self :: any):Listen(function(newValue)
 		(instance :: any)[prop] = newValue -- Change the prop to the new value when the state is changed
@@ -20,7 +19,7 @@ end
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/state/#get)
 ]=]
-function Class.Get(self: Types.State): any
+function Class.Get(self: Types.State<any>): any
 	return self._Value
 end
 
@@ -29,7 +28,7 @@ end
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/state/#set)
 ]=]
-function Class.Set<T>(self: Types.State, newValue: T): T
+function Class.Set<T>(self: Types.State<any>, newValue: T): T
 	Debugger.assert(type(newValue) ~= "table", "InvalidType", "any", "table")
 
 	-- Don't waste resources if new value is the same as old
@@ -52,7 +51,7 @@ end
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/state/#listen)
 ]=]
-function Class.Listen(self: Types.State, listener: (new: any) -> ()): () -> ()
+function Class.Listen(self: Types.State<any>, listener: (new: any) -> ()): () -> ()
 	table.insert(self._Listeners, listener) -- Add listener
 	return function() -- Disconnect the listener
 		local Listener = table.find(self._Listeners, listener)
@@ -67,7 +66,7 @@ end
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/state/#destroy)
 ]=]
-function Class.Destroy(self: Types.State)
+function Class.Destroy(self: Types.State<any>)
 	table.clear(self :: any)
 	setmetatable(self :: any, nil)
 end
@@ -79,7 +78,7 @@ end
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/#state)
 ]=]
-return function(initial: any): Types.StateExport
+return function(initial: any): Types.State<any>
 	Debugger.assert(type(initial) ~= "table", "InvalidType", "any", "table")
 
 	local self = setmetatable({}, Class)

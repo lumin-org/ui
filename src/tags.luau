@@ -1,6 +1,5 @@
 -- Variables
-local Root = script.Parent
-local Types = require(Root.types)
+local Types = require("./types")
 
 -- Module
 

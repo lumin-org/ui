@@ -1,4 +1,5 @@
 import { defineConfig, type DefaultTheme } from 'vitepress'
+import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 
 export default defineConfig({
     head: [["link", { rel: "icon", href: "/ui/favicon.ico" }]],
@@ -8,6 +9,11 @@ export default defineConfig({
     description: 'A simple UI framework for Roblox',
     lastUpdated: true,
     lang: 'en-us',
+    markdown: {
+        config(md) {
+            md.use(tabsMarkdownPlugin)
+        }
+    },
     themeConfig: {
         nav: nav(),
         sidebar: {
@@ -37,6 +43,14 @@ function nav(): DefaultTheme.NavItem[] {
 
 function guide(): DefaultTheme.SidebarItem[] {
     return [
+        {
+            text: 'Getting Started',
+            collapsed: false,
+            items: [
+                { text: 'Benefits', link: 'benefits' },
+                { text: 'Installation', link: 'installation' },
+            ]
+        },
         {
             text: 'Elements',
             collapsed: false,

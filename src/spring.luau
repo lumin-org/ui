@@ -1,8 +1,7 @@
 -- Variables
-local Root = script.Parent
-local Debugger = require(Root.Parent.roblox_packages.debugger)
-local Spr = require(Root.Parent.roblox_packages.spr)
-local Types = require(Root.types)
+local Types = require("./types")
+local Debugger = require("../roblox_packages/debugger")
+local Spr = require("../roblox_packages/spr")
 
 local Class = {}
 Class.__index = Class
@@ -73,7 +72,7 @@ end
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/#spring)
 ]=]
-return function(goal: Types.StateExport, damping: number?, speed: number?): Types.SpringExport
+return function(goal: Types.State<any>, damping: number?, speed: number?): Types.Spring
 	Debugger.assert(table.find(Animatable, typeof((goal :: any):Get())), "NotAnimatable", typeof((goal :: any):Get()))
 	Debugger.assert(type(goal) == "table" and (goal :: any)._Listeners, "InvalidType", "State", type(goal))
 
