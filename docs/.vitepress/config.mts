@@ -47,7 +47,6 @@ function guide(): DefaultTheme.SidebarItem[] {
             text: 'Getting Started',
             collapsed: false,
             items: [
-                { text: 'Benefits', link: 'benefits' },
                 { text: 'Installation', link: 'installation' },
             ]
         },

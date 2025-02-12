@@ -28,6 +28,24 @@ jobs:
               tag: ${{ github.ref_name }}
               changelogPath: 'docs/changelog.md'
 
+          - name: Get normal version
+            id: get-version
+            run: |
+               VERSION=${{ github.ref_name }}
+               VERSION=${VERSION#v}
+               echo "VERSION=$VERSION" >> $GITHUB_ENV
+               echo "::set-output name=VERSION::$VERSION"
+
+
+          - name: Bump package versions
+            uses: lumin-org/key-editor@v0.2.0
+            with:
+              key: 'version'
+              content: ${{ steps.get-version.outputs.VERSION }}
+              files: |
+                pesde.toml
+                package.json
+
           - name: Commit and push
             uses: EndBug/add-and-commit@v9
             with:
