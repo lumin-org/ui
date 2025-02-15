@@ -40,6 +40,8 @@ jobs:
         needs: changelog
         steps:
           - uses: actions/checkout@v4
+            with:
+              ref: main
 
           - name: Setup Pesde
             uses: lumin-org/setup-pesde@v0.4.0
@@ -72,6 +74,8 @@ jobs:
         needs: changelog
         steps:
         - uses: actions/checkout@v4
+          with:
+            ref: main
 
         - id: get-version
           uses: battila7/get-version-action@v2
@@ -112,6 +116,8 @@ jobs:
         needs: [build, package, changelog]
         steps:
         - uses: actions/checkout@v4
+          with:
+            ref: main
 
         - name: Send notification
           uses: appleboy/discord-action@master
