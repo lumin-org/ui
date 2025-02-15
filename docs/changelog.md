@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Introduce newer github workflows
+- New `View` API to easily create `ScreenGuis`
+- Future roblox-ts support
+- New testing workflows (on hold)
+
+### Fixed
+
+- Ensure instances returned in `ForEach` are actually instances
+
+### Changed
+
+- Improved, and more readable types
+- Use string requires (NOT init)
+
 ## [0.4.0] - 2025-01-21
 
 ### Added

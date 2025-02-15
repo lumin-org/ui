@@ -61,6 +61,7 @@ export type State<U> = {
 
 -- Spring
 export type Spring = {
+    Set: (self: Spring, value: Animatable) -> Animatable,
 	Stop: (self: Spring) -> (),
 } & Constructor<Spring, Animatable>
 

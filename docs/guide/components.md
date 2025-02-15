@@ -34,10 +34,10 @@ end
 local UI = require(path.to.UI)
 local Component = require(path.to.component)
 local New = UI.New
+local View = UI.View
 
-New "ScreenGui" {
+View {
 	IgnoreGuiInset = true,
-	Parent = Player:WaitForChild("PlayerGui"),
 
     Component {
 		Color = Color3.fromRGB(24, 24, 24),

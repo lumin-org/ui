@@ -10,13 +10,10 @@ export type Spring = Types.Spring
 export type Compute<T> = Types.Compute<T>
 export type Animatable = Types.Animatable
 
--- Module
-Debugger.set({
-	Logs = Logs,
-	URL = "https://lumin-org.github.io/ui/guide/errors#",
-	Name = "UI",
-})
+-- Debugger
+Debugger.set("UI", Logs)
 
+-- Module
 return table.freeze({
 	New = require(script.new),
 	Update = require(script.update),

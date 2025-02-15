@@ -1,5 +1,6 @@
 -- Variables
 local Types = require("./types")
+local State = require("./state")
 local Debugger = require("../roblox_packages/debugger")
 local Spr = require("../roblox_packages/spr")
 
@@ -48,6 +49,15 @@ function Class.Stop(self: Types.Spring)
 end
 
 --[[
+	Sets the end goal of the spring.
+
+    [Open Documentation](https://lumin-org.github.io/ui/api/spring/#set)
+]]
+function Class.Set(self: Types.Spring, value: Types.Animatable): Types.Animatable
+    return self._Goal:Set(value)
+end
+
+--[[
 	Gets the end goal of the spring.
 
     [Open Documentation](https://lumin-org.github.io/ui/api/spring/#get)
@@ -72,11 +82,11 @@ end
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/#spring)
 ]=]
-return function(goal: Types.State<any>, damping: number?, speed: number?): Types.Spring
+return function(goal: Types.Animatable, damping: number?, speed: number?): Types.Spring
 	Debugger.assert(table.find(Animatable, typeof((goal :: any):Get())), "NotAnimatable", typeof((goal :: any):Get()))
-	Debugger.assert(type(goal) == "table" and (goal :: any)._Listeners, "InvalidType", "State", type(goal))
 
 	local self = setmetatable({}, Class)
+    goal = (State(goal) :: any)
 
 	self._Damping = damping or 1
 	self._Speed = speed or 1

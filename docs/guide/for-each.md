@@ -21,7 +21,7 @@ local DonationAmounts = {
 
 New "Frame" {
     Parent = ...,
-    Pairs(DonationAmounts, function(index, value)
+    ForEach(DonationAmounts, function(index, value)
         return New "TextButton" {
             Text = `{index}: {value}`
             ...
@@ -30,4 +30,4 @@ New "Frame" {
 }
 ```
 
-In the end, we get a frame that has 5 different buttons for each donation amount.
+In the end, we get a frame that has 5 different buttons for each donation amount. Returning an instance when using `ForEach` results in it being parented to the instance the action is used on.

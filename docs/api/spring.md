@@ -10,7 +10,22 @@ Gets the goal that was provided to the spring in the beginning.
 
 **Returns**
 
-- `any`
+- `Animatable`
+
+---
+
+### `Set`
+
+Sets the goal of the spring and scaling or moving it
+
+**Parameters**
+
+- **value:** `Animatable`\
+  The value to set the goal to
+
+**Returns**
+
+- `Animatable`
 
 ---
   

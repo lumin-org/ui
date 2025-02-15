@@ -33,7 +33,7 @@ local Element = New "TextLabel" {
 ```luau [No Properties]
 ...
 local New = UI.New
-local Element = New "TextLabel" -- Default props only
+local Element = New "TextLabel" {} -- Default props only
 ```
 :::
 

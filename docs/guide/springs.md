@@ -4,23 +4,21 @@ UI provides a very powerful spring library, that gives you the option to spring 
 
 ## Usage
 
-Springs take a damping and speed property. These both control the behavior of the spring, and this example we'll use **underdamping** with a speed `2` to give it that classic spring effect:
+Springs take a damping and speed property. extThese both control the behavior of the spring, and this example we'll use **underdamping** with a speed `2` to give it that classic spring effect:
 
 ```luau
 local UI = require(path.to.UI)
 local New = UI.New
-local State = UI.State
 local Spring = UI.Spring
 
-local SpringState = State(UDim2.fromScale(0, 0.5))
-local Spring = Spring(SpringState, 0.5, 2)
+local Spring = Spring(UDim2.fromScale(0, 0.5), 0.5, 2)
 
 New "Frame" {
     Parent = ...,
     Position = Spring,
 }
 
-SpringState:Set(UDim2.fromScale(0, 0.75))
+Spring:Set(UDim2.fromScale(0, 0.75))
 ```
 
 The way speed and damping works is covered in more detail in the next sections.

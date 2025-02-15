@@ -11,7 +11,7 @@ An unrivaled UI framework for Roblox.
 
 In order to use **lumin/ui** you must have the following dependencies installed:
 
-* [`pesde@^0.5.1`](https://github.com/pesde-pkg/pesde)
+* [`pesde@^0.6.0-rc7`](https://github.com/pesde-pkg/pesde)
 * [`rojo@^7.4.4`](https://github.com/rojo-rbx/rojo)
 
 ## Usage
@@ -24,6 +24,7 @@ local Player = PlayerService.LocalPlayer
 
 local UI = require(path.to.UI)
 local New = UI.New
+local View = UI.View
 local Event = UI.Event
 
 View {

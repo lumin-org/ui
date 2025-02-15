@@ -17,24 +17,10 @@ local Element = New "TextLabel" {
     Parent = ...,
     Text = ElementState,
     
-    Cleanup(ElementState),
-})
+    Cleanup({ElementState}),
+}
 
 task.wait(5)
 Element:Destroy()
 print(ElementState) --> nil
-```
-
-If you want to cleanup multiple values, you can use a table instead of a single value:
-
-```luau
-...
-local ElementState1 = State("Hi 1")
-local ElementState2 = State("Hi 2")
-local Element = New "TextLabel" {
-    Parent = ...,
-    Text = ElementState,
-    
-    Cleanup({ElementState1, ElementState2}),
-})
 ```

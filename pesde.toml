@@ -1,6 +1,6 @@
 name = "lumin/ui"
 version = "0.4.0"
-description = "An unrivaled UI framework for Robloxy"
+description = "An unrivaled UI framework for Roblox"
 authors = ["jmesrje"]
 repository = "https://github.com/lumin-org/ui"
 license = "MIT"
@@ -8,7 +8,7 @@ includes = [
   "pesde.toml",
   "README.md",
   "LICENSE",
-  "src",
+  "src/**/*",
 ]
 
 [target]
@@ -29,5 +29,5 @@ rojo = { name = "pesde/rojo", version = "^7.4.4", target = "lune" }
 stylua = { name = "pesde/stylua", version = "^2.0.1", target = "lune" }
 
 [dependencies]
-debugger = { name = "lumin/debugger", version = "^1.0.0" }
+debugger = { name = "lumin/debugger", version = "^1.0.2" }
 spr = { name = "2jammers/spr", version = "^2.1.0" }

@@ -28,28 +28,10 @@ jobs:
               tag: ${{ github.ref_name }}
               changelogPath: 'docs/changelog.md'
 
-          - name: Get normal version
-            id: get-version
-            run: |
-               VERSION=${{ github.ref_name }}
-               VERSION=${VERSION#v}
-               echo "VERSION=$VERSION" >> $GITHUB_ENV
-               echo "::set-output name=VERSION::$VERSION"
-
-
-          - name: Bump package versions
-            uses: lumin-org/key-editor@v0.2.0
-            with:
-              key: 'version'
-              content: ${{ steps.get-version.outputs.VERSION }}
-              files: |
-                pesde.toml
-                package.json
-
           - name: Commit and push
             uses: EndBug/add-and-commit@v9
             with:
-              message: Bump version to ${{ github.ref_name }}
+              message: Bump changelog to ${{ github.ref_name }}
               default_author: github_actions
 
     build:
@@ -60,15 +42,16 @@ jobs:
           - uses: actions/checkout@v4
 
           - name: Setup Pesde
-            uses: lumin-org/setup-pesde@v0.3.2
+            uses: lumin-org/setup-pesde@v0.4.0
             with:
+              version: 'v0.6.0-rc.7+registry.0.2.0-rc.2'
               cache: true
 
           - name: Install dependencies
             run: pesde install
 
           - name: Standalone build
-            run: rojo build standalone.project.json --output ./Standalone.rbxm
+            run: rojo build standalone.project.json --output ./standalone.rbxm
 
           - name: Standalone release
             uses: softprops/action-gh-release@v2.0.9
@@ -81,7 +64,7 @@ jobs:
                 ## Changelog
                 ${{ needs.changelog.outputs.release-body }}
               files: |
-                ./Standalone.rbxm
+                ./standalone.rbxm
 
     package:
         name: Package
@@ -90,13 +73,39 @@ jobs:
         steps:
         - uses: actions/checkout@v4
 
-        - name: Setup Pesde
-          uses: lumin-org/setup-pesde@v0.3.2
+        - name: Get normal version
+          id: get-version
+          run: |
+            VERSION=${{ github.ref_name }}
+            VERSION=${VERSION#v}
+            echo "VERSION=$VERSION" >> $GITHUB_ENV
+            echo "::set-output name=VERSION::$VERSION"
+
+        - name: Bump package versions
+          uses: lumin-org/key-editor@v0.2.1
           with:
+            key: 'version'
+            content: ${{ steps.get-version.outputs.VERSION }}
+            files: |
+              pesde.toml
+
+        - name: Setup Pesde
+          uses: lumin-org/setup-pesde@v0.4.0
+          with:
+            version: 'v0.6.0-rc.7+registry.0.2.0-rc.2'
             cache: true
             token: '${{ secrets.PESDE_TOKEN }}'
 
-        - name: Publish
+        - name: Install dependencies
           run: |
             pesde install
+
+        - name: Publish packages
+          run: |
             pesde publish -y
+
+        - name: Commit and push
+          uses: EndBug/add-and-commit@v9
+          with:
+            message: Bump version to ${{ github.ref_name }}
+            default_author: github_actions
