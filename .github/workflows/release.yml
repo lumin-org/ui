@@ -44,7 +44,7 @@ jobs:
           - name: Setup Pesde
             uses: lumin-org/setup-pesde@v0.4.0
             with:
-              version: 'v0.6.0-rc.7+registry.0.2.0-rc.2'
+              version: 'v0.6.0-rc.7+registry.0.2.0-rc.3'
               cache: true
 
           - name: Install dependencies
@@ -87,7 +87,7 @@ jobs:
         - name: Setup Pesde
           uses: lumin-org/setup-pesde@v0.4.0
           with:
-            version: 'v0.6.0-rc.7+registry.0.2.0-rc.2'
+            version: 'v0.6.0-rc.7+registry.0.2.0-rc.3'
             cache: true
             token: '${{ secrets.PESDE_TOKEN }}'
 
