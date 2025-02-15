@@ -83,7 +83,7 @@ end
 	[Open Documentation](https://lumin-org.github.io/ui/api/#spring)
 ]=]
 return function(goal: Types.Animatable, damping: number?, speed: number?): Types.Spring
-	Debugger.assert(table.find(Animatable, typeof((goal :: any):Get())), "NotAnimatable", typeof((goal :: any):Get()))
+	Debugger.assert(table.find(Animatable, typeof(goal)), "NotAnimatable", typeof(goal))
 
 	local self = setmetatable({}, Class)
     goal = (State(goal) :: any)

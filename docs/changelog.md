@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Introduce newer github workflows
 - New `View` API to easily create `ScreenGuis`
 - Future roblox-ts support
-- New testing workflows (on hold)
+- New testing workflows
 
 ### Fixed
 
