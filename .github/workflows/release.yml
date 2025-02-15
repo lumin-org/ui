@@ -112,7 +112,7 @@ jobs:
         steps:
         - uses: actions/checkout@v4
 
-        - name: send custom message with args
+        - name: Send notification
           uses: appleboy/discord-action@master
           with:
             webhook_id: ${{ secrets.WEBHOOK_ID }}
