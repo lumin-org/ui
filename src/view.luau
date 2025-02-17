@@ -1,27 +1,34 @@
 -- Variables
+local Types = require("./types")
+local Debugger = require("../roblox_packages/debugger")
 local New = require("./new")
 
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 
+local AllowedNames = { "Screen", "Billboard", "Surface" }
+
 -- Module
 
 --[=[
-	Creates a new view (ScreenGui) for your elements. This acts a shortcut and
-    cleaner method for creation of a ScreenGui.
+	Creates a new view for your elements.
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/#view)
 ]=]
-return function(props: { any }): ScreenGui
-	local Props = {
-		Name = "Root",
-		IgnoreGuiInset = false,
-		Parent = Player:WaitForChild("PlayerGui"),
-	}
+return function(props: Types.Properties): Types.View
+	props.Name = props.Name or "Root"
 
-	for name, value in props do
-		Props[name] = value
+	local Type = "ScreenGui"
+
+	if props.Type then
+		Debugger.assert(table.find(AllowedNames, props.Type :: any), "ViewInvalidType", props.Type)
+		Type = `{props.Type}Gui`
+		props.Type = nil
 	end
 
-	return New("ScreenGui")(Props :: any)
+	if Type == "ScreenGui" and not props.Parent then
+		props.Parent = Player:WaitForChild("PlayerGui")
+	end
+
+	return New(Type)(props :: any)
 end

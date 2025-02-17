@@ -17,9 +17,11 @@ end
 return function(event: string, callback: (...any) -> (), scope: { any }?): Types.Action
 	return function(instance: Instance)
 		local Success, Event = pcall(Find, instance :: any, event :: any) -- Ensure event exists
-		if not Success or type(callback) ~= "function" then
-			Debugger.fatal("InvalidPropOrEvent", event)
-		end
+        local ArgType = type(callback)
+        
+        Debugger.assert(Success, "InvalidEvent", event)
+        Debugger.assert(ArgType == "function", "InvalidType", "function", ArgType)
+
 		local ToAdd = Event:Connect(callback)
 		if scope then
 			table.insert(scope, ToAdd)

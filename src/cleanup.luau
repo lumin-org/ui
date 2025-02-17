@@ -10,7 +10,7 @@ local function Helper(instance: any)
 	elseif instance.Disconnect then
 		instance:Disconnect()
 	else
-		Debugger.fatal("CleanupNotAllowed")
+		Debugger.fatal("CleanupCannotClean")
 	end
 end
 

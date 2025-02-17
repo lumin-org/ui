@@ -12,7 +12,7 @@ export type Animatable =
 	| NumberRange
 
 -- Properties
-export type Properties = { [string | Action]: Child | any }
+export type Properties = { [string | Action | number]: Child | any }
 export type Action = (instance: Instance) -> ()
 export type Child = Instance
 
@@ -45,6 +45,9 @@ export type NewInstance =
 	& New<"VideoFrame", VideoFrame>
 	& New<"ViewportFrame", ViewportFrame>
 	& New<string, Instance & any>
+
+-- View
+export type View = ScreenGui & BillboardGui & SurfaceGui
 
 -- Base Constructor
 export type Constructor<T, U> = {

@@ -55,6 +55,7 @@ function guide(): DefaultTheme.SidebarItem[] {
             collapsed: false,
             items: [
                 { text: 'Instances', link: 'instances' },
+                { text: 'Views', link: 'views' },
                 { text: 'Updates', link: 'instance-updates' },
                 { text: 'Components', link: 'components' },
             ]

@@ -13,9 +13,11 @@ local Debugger = require("../roblox_packages/debugger")
 return function<T>(prop: string, callback: (changed: T) -> (), scope: { any }?): Types.Action
 	return function(instance)
 		local Success, Event = pcall(instance.GetPropertyChangedSignal, instance :: any, prop :: any) -- Ensure prop exists
-		if not Success or type(callback) ~= "function" then
-			Debugger.fatal("InvalidPropOrEvent", prop)
-		end
+		local ArgType = type(callback)
+        
+        Debugger.assert(Success, "InvalidProp", prop)
+        Debugger.assert(ArgType == "function", "InvalidType", "function", ArgType)
+
 		local ToAdd = Event:Connect(function()
 			callback((instance :: any)[prop]) -- Pass new value through callback
 		end)
