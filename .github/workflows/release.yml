@@ -69,7 +69,7 @@ jobs:
                 ./standalone.rbxm
 
     package:
-        name: Package
+        name: Packages
         runs-on: ubuntu-latest
         needs: changelog
         steps:

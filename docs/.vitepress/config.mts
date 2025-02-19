@@ -35,7 +35,7 @@ export default defineConfig({
 
 function nav(): DefaultTheme.NavItem[] {
     return [
-        { text: 'Guide', link: '/guide/instances' },
+        { text: 'Guide', link: '/guide/installation' },
         { text: 'API', link: '/api/' },
         { text: 'Changelog', link: '/changelog' }
     ]
@@ -89,13 +89,20 @@ function guide(): DefaultTheme.SidebarItem[] {
         },
         {
             text: 'Errors',
-            collapsed: false,
+            collapsed: true,
             items: [
-                { text: 'Not Animatable', link: 'errors#notanimatable' },
+                { text: 'Invalid Damping', link: 'errors#springinvaliddamping' },
+                { text: 'Invalid Speed', link: 'errors#springinvalidspeed' },
+                { text: 'Not Animatable', link: 'errors#springnotanimatable' },
                 { text: 'Invalid Type', link: 'errors#invalidtype' },
                 { text: 'Invalid Class', link: 'errors#invalidclass' },
-                { text: 'Invalid Prop or Event', link: 'errors#invalidproporevent' },
-                { text: 'Cleanup Not Allowed', link: 'errors#cleanupnotallowed' },
+                { text: 'Invalid Prop', link: 'errors#invalidprop' },
+                { text: 'Invalid Event', link: 'errors#invalidevent' },
+                { text: 'Cannot Clean', link: 'errors#cleanupcannotclean' },
+                { text: 'ForEach Invalid Return', link: 'errors#foreachinvalidreturn' },
+                { text: 'View Invalid Type', link: 'errors#viewinvalidtype' },
+                { text: 'Invalid Key Type', link: 'errors#applyinvalidkeytype' },
+                { text: 'Invalid Prop Type', link: 'errors#applyinvalidproptype' },
             ]
         },
     ]
