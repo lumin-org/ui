@@ -1,6 +1,5 @@
 -- Variables
 local Types = require("./types")
-local Debugger = require("../roblox_packages/debugger")
 
 local Class = {}
 Class.__index = Class
@@ -8,10 +7,12 @@ Class.__index = Class
 -- Functions
 
 function Class._Bind(self: Types.State<any>, prop: string, instance: Instance)
-	(instance :: any)[prop] = self._Value; -- Set the prop initially to the current value
-	(self :: any):Listen(function(newValue)
-		(instance :: any)[prop] = newValue -- Change the prop to the new value when the state is changed
-	end)
+	if type(self._Value) ~= "table" then
+		(instance :: any)[prop] = self._Value; -- Set the prop initially to the current value
+		(self :: any):Listen(function(newValue)
+			(instance :: any)[prop] = newValue -- Change the prop to the new value when the state is changed
+		end)
+	end
 end
 
 --[=[
@@ -29,10 +30,8 @@ end
 	[Open Documentation](https://lumin-org.github.io/ui/api/state/#set)
 ]=]
 function Class.Set<T>(self: Types.State<any>, newValue: T): T
-	Debugger.assert(type(newValue) ~= "table", "InvalidType", "any", "table")
-
 	-- Don't waste resources if new value is the same as old
-	if self._Value == newValue then
+	if self._Value == newValue and type(newValue) ~= "table" then
 		return newValue
 	end
 
@@ -79,12 +78,11 @@ end
 	[Open Documentation](https://lumin-org.github.io/ui/api/#state)
 ]=]
 return function(initial: any): Types.State<any>
-	Debugger.assert(type(initial) ~= "table", "InvalidType", "any", "table")
-
 	local self = setmetatable({}, Class)
 
 	self._Value = initial
 	self._Listeners = {}
+	self._Type = "State"
 
 	return self :: any
 end

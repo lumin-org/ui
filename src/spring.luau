@@ -101,6 +101,7 @@ return function(goal: Types.Animatable, damping: number?, speed: number?): Types
 	self._Speed = speed or 1
 	self._Instances = {}
 	self._Goal = goal
+    self._Type = "Spring"
 
 	return self :: any
 end

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Ability to pass tables to state values
+- Ability to pass states to `ForEach` actions
+
 ## [0.4.2] - 2025-02-17
 
 ### Added

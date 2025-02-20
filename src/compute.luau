@@ -1,6 +1,7 @@
 -- Variables
 local Types = require("./types")
 local Debugger = require("../roblox_packages/debugger")
+local Is = require("./is")
 
 local Class = {}
 Class.__index = Class
@@ -57,11 +58,12 @@ return function(processor: () -> (), dependencies: { Types.State<any> }?): Types
 	self._Value = processor()
 	self._Instances = {}
 	self._Dependencies = {} :: any
+    self._Type = "Compute"
 
 	if dependencies then
 		Debugger.assert(type(dependencies) == "table", "InvalidType", "table", type(dependencies))
 		for _, dependency in dependencies do
-			if type(dependency) == "table" and (dependency :: any)._Listeners then
+			if Is(dependency) == "State" then
 				(self._Dependencies :: any)[dependency] = (dependency :: any):Listen(Listener(self :: any))
 			else
 				Debugger.fatal("InvalidType", "state", type(dependency))
