@@ -14,9 +14,9 @@ return function<T>(prop: string, callback: (changed: T) -> (), scope: { any }?):
 	return function(instance)
 		local Success, Event = pcall(instance.GetPropertyChangedSignal, instance :: any, prop :: any) -- Ensure prop exists
 		local ArgType = type(callback)
-        
-        Debugger.assert(Success, "InvalidProp", prop)
-        Debugger.assert(ArgType == "function", "InvalidType", "function", ArgType)
+
+		Debugger.assert(Success, "InvalidProp", prop)
+		Debugger.assert(ArgType == "function", "InvalidType", "function", ArgType)
 
 		local ToAdd = Event:Connect(function()
 			callback((instance :: any)[prop]) -- Pass new value through callback

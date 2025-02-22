@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added ability to pass states & computes to Springs, along with a regular value
+- `Listen` to compute
+
 ## [0.4.3] - 2025-02-20
 
 ### Added

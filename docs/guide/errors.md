@@ -10,6 +10,10 @@ The spring has invalid damping, and must be greater than or equal to 0. Anything
 
 The spring has an invalid speed, and must be greater than or equal to 0. Anything under this will produce unwanted effects.
 
+## `SpringCannotSetCompute`
+
+You passed a compute to your spring, and computes cannot be set manually. This means you cannot use `Spring.Set` and must rely on your compute changing its state.
+
 ## `SpringNotAnimatable`
 
 The object in the state you're trying to use with the spring is not animatable. The list of supported types is:

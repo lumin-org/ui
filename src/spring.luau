@@ -3,6 +3,7 @@ local Types = require("./types")
 local State = require("./state")
 local Debugger = require("../roblox_packages/debugger")
 local Spr = require("../roblox_packages/spr")
+local Is = require("./is")
 
 local Class = {}
 Class.__index = Class
@@ -54,8 +55,9 @@ end
     [Open Documentation](https://lumin-org.github.io/ui/api/spring/#set)
 ]]
 function Class.Set(self: Types.Spring, value: Types.Animatable): Types.Animatable
-    Debugger.assert(table.find(Animatable, typeof(value)), "SpringNotAnimatable", typeof(value))
-    return self._Goal:Set(value)
+	Debugger.assert(table.find(Animatable, typeof(value)), "SpringNotAnimatable", typeof(value))
+	Debugger.assert(Is(self._Goal) ~= "Compute", "SpringCannotSetCompute")
+	return self._Goal:Set(value)
 end
 
 --[[
@@ -83,25 +85,37 @@ end
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/#spring)
 ]=]
-return function(goal: Types.Animatable, damping: number?, speed: number?): Types.Spring
-	Debugger.assert(table.find(Animatable, typeof(goal)), "SpringNotAnimatable", typeof(goal))
-    
-    if damping then
-        Debugger.assert(damping >= 0, "SpringInvalidDamping", damping)
-    end
-    
-    if speed then
-        Debugger.assert(speed >= 0, "SpringInvalidSpeed", speed)
-    end
+return function(
+	goal: Types.Animatable | Types.State<Types.Animatable> | Types.Compute<Types.Animatable>,
+	damping: number?,
+	speed: number?
+): Types.Spring
+	if damping then
+		Debugger.assert(damping >= 0, "SpringInvalidDamping", damping)
+	end
+
+	if speed then
+		Debugger.assert(speed >= 0, "SpringInvalidSpeed", speed)
+	end
+
+	local GoalType = Is(goal)
+	if GoalType ~= "State" and GoalType ~= "Compute" then
+		goal = State(goal) :: any
+	end
+
+	Debugger.assert(
+		table.find(Animatable, typeof((goal :: any):Get())),
+		"SpringNotAnimatable",
+		typeof((goal :: any):Get())
+	)
 
 	local self = setmetatable({}, Class)
-    goal = (State(goal) :: any)
 
 	self._Damping = damping or 1
 	self._Speed = speed or 1
 	self._Instances = {}
 	self._Goal = goal
-    self._Type = "Spring"
+	self._Type = "Spring"
 
 	return self :: any
 end

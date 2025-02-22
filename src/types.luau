@@ -64,11 +64,13 @@ export type State<U> = {
 
 -- Spring
 export type Spring = {
-    Set: (self: Spring, value: Animatable) -> Animatable,
+	Set: (self: Spring, value: Animatable) -> Animatable,
 	Stop: (self: Spring) -> (),
 } & Constructor<Spring, Animatable>
 
 -- Compute
-export type Compute<U> = Constructor<Compute<U>, U>
+export type Compute<U> = {
+    Listen: (self: State<U>, listener: (new: U) -> ()) -> () -> (),
+} & Constructor<Compute<U>, U>
 
 return {}

@@ -17,7 +17,17 @@ local function Listener(self: Types.Compute<any>)
 				(instance :: any)[prop] = self._Value
 			end
 		end
+
+		-- Run all listeners when the value is changed
+		for _, fn in self._Listeners do
+			task.spawn(fn, self._Value)
+		end
 	end
+end
+
+function Class._Bind(self: Types.Compute<any>, prop: string, instance: Instance)
+	(self._Instances :: {})[prop] = instance;
+	(instance :: any)[prop] = self._Value
 end
 
 --[=[
@@ -29,9 +39,19 @@ function Class.Get(self: Types.Compute<any>): any
 	return self._Value
 end
 
-function Class._Bind(self: Types.Compute<any>, prop: string, instance: Instance)
-	(self._Instances :: {})[prop] = instance;
-	(instance :: any)[prop] = self._Value
+--[=[
+	Listens to changes of state within the object.
+
+	[Open Documentation](https://lumin-org.github.io/ui/api/compute/#listen)
+]=]
+function Class.Listen(self: Types.Compute<any>, listener: (new: any) -> ()): () -> ()
+	table.insert(self._Listeners, listener) -- Add listener
+	return function() -- Disconnect the listener
+		local Listener = table.find(self._Listeners, listener)
+		if Listener then
+			table.remove(self._Listeners, Listener)
+		end
+	end
 end
 
 --[=[
@@ -56,9 +76,10 @@ return function(processor: () -> (), dependencies: { Types.State<any> }?): Types
 
 	self._Processor = processor
 	self._Value = processor()
+	self._Listeners = {}
 	self._Instances = {}
 	self._Dependencies = {} :: any
-    self._Type = "Compute"
+	self._Type = "Compute"
 
 	if dependencies then
 		Debugger.assert(type(dependencies) == "table", "InvalidType", "table", type(dependencies))

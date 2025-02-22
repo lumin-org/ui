@@ -5,15 +5,15 @@ local Is = require("./is")
 
 -- Functions
 
-local function Iterate<T, U>(iterator: (index: T, value: U) -> Instance?, tbl: {[T]: U}, instance: Instance)
-    for index, value in tbl do
-        local NewInstance = iterator(index, value)
-        if NewInstance then
-            local NewInstanceType = typeof(NewInstance)
-            Debugger.assert(NewInstanceType == "Instance", "ForEachInvalidReturn", NewInstanceType)
-            NewInstance.Parent = instance
-        end
-    end
+local function Iterate<T, U>(iterator: (index: T, value: U) -> Instance?, tbl: { [T]: U }, instance: Instance)
+	for index, value in tbl do
+		local NewInstance = iterator(index, value)
+		if NewInstance then
+			local NewInstanceType = typeof(NewInstance)
+			Debugger.assert(NewInstanceType == "Instance", "ForEachInvalidReturn", NewInstanceType)
+			NewInstance.Parent = instance
+		end
+	end
 end
 
 -- Module
@@ -26,14 +26,14 @@ end
 ]=]
 return function<T, U>(table: { [T]: U } | Types.State<{ [T]: U }>, iterator: (index: T, value: U) -> Instance?): Types.Action
 	return function(instance: Instance)
-		if Is(table) == "State" then 
+		if Is(table) == "State" then
 			local table = table :: Types.State<{ [T]: U }>
-            Iterate(iterator, table:Get(), instance)
+			Iterate(iterator, table:Get(), instance)
 			table:Listen(function(new) -- Re-run iterator if table changes
 				Iterate(iterator, new, instance)
 			end)
-            return
+			return
 		end
-        Iterate(iterator, table, instance)
+		Iterate(iterator, table, instance)
 	end
 end

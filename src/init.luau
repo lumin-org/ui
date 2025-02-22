@@ -17,7 +17,7 @@ export type Animatable = Types.Animatable
 -- Module
 return table.freeze({
 	New = require(script.new),
-    View = require(script.view),
+	View = require(script.view),
 	Update = require(script.update),
 	State = require(script.state),
 	Compute = require(script.compute),
