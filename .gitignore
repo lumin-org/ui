@@ -3,7 +3,6 @@
 roblox_packages
 lune_packages
 luau_packages
-pesde.lock
 
 # Vite
 node_modules
@@ -15,5 +14,5 @@ sourcemap.json
 # Rbxts
 out
 
-# Code
-.vscode
+# Rewrite
+swift_concept

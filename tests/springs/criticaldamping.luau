@@ -5,8 +5,10 @@ local TEST_NAME = "CRITICAL-DAMPING-TEST"
 
 local New = UI.New
 local Spring = UI.Spring
+local State = UI.State
 
-local SizeSpring = Spring(UDim2.fromOffset(100, 100), 1, 1)
+local SizeSpringState = State(UDim2.fromOffset(100, 100))
+local SizeSpring = Spring(SizeSpringState :: any, 1, 1)
 
 local Frame = New "Frame" {
     Size = SizeSpring,
@@ -14,7 +16,7 @@ local Frame = New "Frame" {
 
 print(`{TEST_NAME}:`, Frame.Size)
 
-SizeSpring:Set(UDim2.fromOffset(50, 50))
+SizeSpringState(UDim2.fromOffset(50, 50))
 
 task.wait(1)
 

@@ -21,7 +21,9 @@ return function(instance: Instance, props: { [any]: any })
 			end
 		elseif PropType == "string" then -- If the property is a string
 			if ValueType == "table" then -- If the value is a constructor
-				(value :: Types.Constructor<any, any>):_Bind(property, instance)
+				(value :: Types.Constructor<any>):_Bind(property, instance)
+			elseif ValueType == "function" then -- If the value is a function
+				(instance :: any)[property] = value()
 			else -- If the value is anything else, it is the value of a property
 				(instance :: any)[property] = value
 			end

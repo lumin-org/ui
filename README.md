@@ -5,7 +5,7 @@
 [![build](https://img.shields.io/github/actions/workflow/status/lumin-org/ui/release.yml?style=plastic&logo=github&logoColor=FFFFFF&label=build)](https://github.com/lumin-org/ui/blob/main/.github/workflows/release.yml)
 [![discord](https://img.shields.io/discord/1105688855375511642?logo=discord&logoColor=white&label=chat&color=4d3dff&style=plastic)](https://lumin-org.github.io/to/discord)
 
-A simple and declarative UI framework
+A simple and declarative UI framework, inspired by Vide & Fusion
 
 ## Prerequisites
 

@@ -1,0 +1,145 @@
+name = "lumin/ui"
+version = "0.4.4"
+target = "roblox"
+
+[graph."2jammers/spr@2.1.0 roblox"]
+direct = ["spr", { name = "2jammers/spr", version = "^2.1.0", index = "default" }, "standard"]
+resolved_ty = "standard"
+
+[graph."2jammers/spr@2.1.0 roblox".pkg_ref]
+ref_ty = "pesde"
+index_url = "https://github.com/daimond113/pesde-index"
+
+[graph."2jammers/spr@2.1.0 roblox".pkg_ref.dependencies]
+rojo = [{ name = "pesde/rojo", version = "^7.4.4", index = "https://github.com/daimond113/pesde-index", target = "lune" }, "dev"]
+scripts = [{ name = "pesde/scripts_rojo", version = "^0.1.0", index = "https://github.com/daimond113/pesde-index", target = "lune" }, "dev"]
+
+[graph."jiwonz/dirs@0.1.2 lune"]
+resolved_ty = "standard"
+
+[graph."jiwonz/dirs@0.1.2 lune".dependencies]
+"jiwonz/pathfs@0.1.0 lune" = "pathfs"
+
+[graph."jiwonz/dirs@0.1.2 lune".pkg_ref]
+ref_ty = "pesde"
+index_url = "https://github.com/daimond113/pesde-index"
+
+[graph."jiwonz/dirs@0.1.2 lune".pkg_ref.dependencies]
+pathfs = [{ name = "jiwonz/pathfs", version = "^0.1.0", index = "https://github.com/daimond113/pesde-index" }, "standard"]
+
+[graph."jiwonz/pathfs@0.1.0 lune"]
+resolved_ty = "standard"
+
+[graph."jiwonz/pathfs@0.1.0 lune".pkg_ref]
+ref_ty = "pesde"
+index_url = "https://github.com/daimond113/pesde-index"
+
+[graph."lukadev_0/option@1.2.0 lune"]
+resolved_ty = "standard"
+
+[graph."lukadev_0/option@1.2.0 lune".pkg_ref]
+ref_ty = "pesde"
+index_url = "https://github.com/daimond113/pesde-index"
+
+[graph."lukadev_0/result@1.2.0 lune"]
+resolved_ty = "standard"
+
+[graph."lukadev_0/result@1.2.0 lune".pkg_ref]
+ref_ty = "pesde"
+index_url = "https://github.com/daimond113/pesde-index"
+
+[graph."lumin/debugger@1.0.3 roblox"]
+direct = ["debugger", { name = "lumin/debugger", version = "^1.0.3", index = "default" }, "standard"]
+resolved_ty = "standard"
+
+[graph."lumin/debugger@1.0.3 roblox".pkg_ref]
+ref_ty = "pesde"
+index_url = "https://github.com/daimond113/pesde-index"
+
+[graph."lumin/debugger@1.0.3 roblox".pkg_ref.dependencies]
+rojo = [{ name = "pesde/rojo", version = "^7.4.4", index = "https://github.com/daimond113/pesde-index", target = "lune" }, "dev"]
+scripts = [{ name = "pesde/scripts_rojo", version = "^0.1.0", index = "https://github.com/daimond113/pesde-index", target = "lune" }, "dev"]
+
+[graph."pesde/rojo@7.4.4 lune"]
+direct = ["rojo", { name = "pesde/rojo", version = "^7.4.4", index = "default", target = "lune" }, "dev"]
+resolved_ty = "dev"
+
+[graph."pesde/rojo@7.4.4 lune".dependencies]
+"lukadev_0/option@1.2.0 lune" = "option"
+"lukadev_0/result@1.2.0 lune" = "result"
+"pesde/toolchainlib@0.1.7 lune" = "core"
+
+[graph."pesde/rojo@7.4.4 lune".pkg_ref]
+ref_ty = "pesde"
+index_url = "https://github.com/daimond113/pesde-index"
+
+[graph."pesde/rojo@7.4.4 lune".pkg_ref.dependencies]
+core = [{ name = "pesde/toolchainlib", version = "^0.1.1", index = "https://github.com/daimond113/pesde-index", target = "lune" }, "standard"]
+option = [{ name = "lukadev_0/option", version = "^1.2.0", index = "https://github.com/daimond113/pesde-index" }, "standard"]
+result = [{ name = "lukadev_0/result", version = "^1.2.0", index = "https://github.com/daimond113/pesde-index" }, "standard"]
+
+[graph."pesde/scripts_core@0.0.1 lune"]
+resolved_ty = "standard"
+
+[graph."pesde/scripts_core@0.0.1 lune".pkg_ref]
+ref_ty = "pesde"
+index_url = "https://github.com/pesde-pkg/index"
+
+[graph."pesde/scripts_core@0.0.1 lune".pkg_ref.dependencies]
+frktest = [{ name = "itsfrank/frktest", version = "^0.0.2", index = "https://github.com/pesde-pkg/index" }, "dev"]
+luau-lsp = [{ name = "pesde/luau_lsp", version = "^1.36.0", index = "https://github.com/pesde-pkg/index" }, "dev"]
+pathfs = [{ name = "jiwonz/pathfs", version = "^0.1.0", index = "https://github.com/pesde-pkg/index" }, "dev"]
+stylua = [{ name = "pesde/stylua", version = "^2.0.1", index = "https://github.com/pesde-pkg/index" }, "dev"]
+
+[graph."pesde/scripts_rojo@0.1.0 lune"]
+direct = ["scripts", { name = "pesde/scripts_rojo", version = "^0.1.0", index = "default", target = "lune" }, "dev"]
+resolved_ty = "dev"
+
+[graph."pesde/scripts_rojo@0.1.0 lune".dependencies]
+"pesde/rojo@7.4.4 lune" = "rojo"
+"pesde/scripts_core@0.0.1 lune" = "core"
+
+[graph."pesde/scripts_rojo@0.1.0 lune".pkg_ref]
+ref_ty = "pesde"
+index_url = "https://github.com/daimond113/pesde-index"
+
+[graph."pesde/scripts_rojo@0.1.0 lune".pkg_ref.dependencies]
+core = [{ name = "pesde/scripts_core", version = "^0.0.1", index = "https://github.com/pesde-pkg/index", target = "lune" }, "standard"]
+rojo = [{ name = "pesde/rojo", version = "^7.4.4", index = "https://github.com/pesde-pkg/index" }, "peer"]
+
+[graph."pesde/stylua@2.0.2 lune"]
+direct = ["stylua", { name = "pesde/stylua", version = "^2.0.1", index = "default", target = "lune" }, "dev"]
+resolved_ty = "dev"
+
+[graph."pesde/stylua@2.0.2 lune".dependencies]
+"lukadev_0/option@1.2.0 lune" = "option"
+"lukadev_0/result@1.2.0 lune" = "result"
+"pesde/toolchainlib@0.1.7 lune" = "core"
+
+[graph."pesde/stylua@2.0.2 lune".pkg_ref]
+ref_ty = "pesde"
+index_url = "https://github.com/daimond113/pesde-index"
+
+[graph."pesde/stylua@2.0.2 lune".pkg_ref.dependencies]
+core = [{ name = "pesde/toolchainlib", version = "^0.1.3", index = "https://github.com/daimond113/pesde-index", target = "lune" }, "standard"]
+option = [{ name = "lukadev_0/option", version = "^1.2.0", index = "https://github.com/daimond113/pesde-index" }, "standard"]
+result = [{ name = "lukadev_0/result", version = "^1.2.0", index = "https://github.com/daimond113/pesde-index" }, "standard"]
+
+[graph."pesde/toolchainlib@0.1.7 lune"]
+resolved_ty = "standard"
+
+[graph."pesde/toolchainlib@0.1.7 lune".dependencies]
+"jiwonz/dirs@0.1.2 lune" = "dirs"
+"jiwonz/pathfs@0.1.0 lune" = "pathfs"
+"lukadev_0/option@1.2.0 lune" = "option"
+"lukadev_0/result@1.2.0 lune" = "result"
+
+[graph."pesde/toolchainlib@0.1.7 lune".pkg_ref]
+ref_ty = "pesde"
+index_url = "https://github.com/daimond113/pesde-index"
+
+[graph."pesde/toolchainlib@0.1.7 lune".pkg_ref.dependencies]
+dirs = [{ name = "jiwonz/dirs", version = "^0.1.1", index = "https://github.com/daimond113/pesde-index" }, "standard"]
+option = [{ name = "lukadev_0/option", version = "^1.2.0", index = "https://github.com/daimond113/pesde-index" }, "peer"]
+pathfs = [{ name = "jiwonz/pathfs", version = "^0.1.0", index = "https://github.com/daimond113/pesde-index" }, "standard"]
+result = [{ name = "lukadev_0/result", version = "^1.2.0", index = "https://github.com/daimond113/pesde-index" }, "peer"]

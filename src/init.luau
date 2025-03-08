@@ -5,7 +5,7 @@ local Debugger = require(script.Parent.roblox_packages.debugger)
 local URL = "https://lumin-org.github.io/ui/errors/"
 
 -- Debugger
-Debugger.set("UI", Logs, URL)
+Debugger.set("UI", Logs :: any, URL)
 
 -- Types
 export type Action = Types.Action

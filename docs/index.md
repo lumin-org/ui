@@ -5,7 +5,7 @@ pageClass: home
 
 hero:
   text: "LuminUI"
-  tagline: An unrivaled UI framework for Roblox
+  tagline: A simple and declarative UI framework, inspired by Vide & Fusion
   actions:
     - theme: brand
       text: Guides

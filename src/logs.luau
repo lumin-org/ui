@@ -3,7 +3,7 @@ return {
 	SpringInvalidDamping = "Spring damping must be greater than or equal to zero; got '%.2f'",
 	SpringInvalidSpeed = "Spring speed must be greater than or equal to zero; got '%.2f'",
 	SpringNotAnimatable = "Expected animatable type; got '%s'",
-	SpringCannotSetCompute = "Cannot set the value of a passed computed goal manually",
+	SpringNotUsed = "Cannot stop a spring that is not being used by any instances",
 
 	-- Invalid
 	InvalidType = "Expected type %s; got '%s'",

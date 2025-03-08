@@ -1,15 +1,10 @@
 name = "lumin/ui"
 version = "0.4.4"
-description = "A simple and declarative UI framework"
+description = "A simple and declarative UI framework, inspired by Vide & Fusion"
 authors = ["jmesrje"]
 repository = "https://github.com/lumin-org/ui"
 license = "MIT"
-includes = [
-  "pesde.toml",
-  "README.md",
-  "LICENSE",
-  "src/**/*",
-]
+includes = ["pesde.toml", "README.md", "LICENSE", "src/**/*"]
 
 [target]
 environment = "roblox"
@@ -17,7 +12,7 @@ lib = "src/init.luau"
 build_files = ["src"]
 
 [indices]
-default = "https://github.com/daimond113/pesde-index"
+default = "https://github.com/pesde-pkg/index"
 
 [scripts]
 roblox_sync_config_generator = ".pesde/scripts/roblox_sync_config_generator.luau"

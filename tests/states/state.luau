@@ -1,18 +1,14 @@
 -- Variables
 local Packages = script.Parent.Parent.Parent
 local UI = require(Packages.ui.src)
-local TEST_NAME = "COMPUTE-TEST"
+local TEST_NAME = "STATE-TEST"
 
-local Compute = UI.Compute
 local State = UI.State
+local TestState: UI.State<string> = State("Initial")
 
-local TestState = State(100)
-local TestCompute = Compute(function()
-    return TestState:Get() * 2
-end, {TestState})
-
-print(`{TEST_NAME}:`, TestCompute:Get(), ": should: 200")
-TestState:Set(200)
-print(`{TEST_NAME}:`, TestCompute:Get(), ": should: 400")
+print(`{TEST_NAME}:`, TestState())
+TestState("Different")
+print(`{TEST_NAME}:`, TestState(), "Default")
+print(`{TEST_NAME}:`, TestState("Really Different"), "Default")
 
 return {}

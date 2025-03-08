@@ -26,11 +26,11 @@ New "Frame" {
 }
 
 task.wait(3)
-State:Set({"Text 5", "Text 6"})
+State({"Text 5", "Text 6"})
 task.wait(0.5)
-State:Set({"Text 7", "Text 8"})
+State({"Text 7", "Text 8"})
 task.wait(0.5)
-State:Set({"Text 9", "Text 10"})
+State({"Text 9", "Text 10"})
 task.wait(0.5)
 
 return {}

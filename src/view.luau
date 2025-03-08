@@ -15,7 +15,7 @@ local AllowedNames = { "Screen", "Billboard", "Surface" }
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/#view)
 ]=]
-return function(props: Types.Properties): Types.View
+return function(props: {[any]: any}): Types.View
 	props.Name = props.Name or "Root"
 
 	local Type = "ScreenGui"
@@ -30,5 +30,5 @@ return function(props: Types.Properties): Types.View
 		props.Parent = Player:WaitForChild("PlayerGui")
 	end
 
-	return New(Type)(props :: any)
+	return New(Type)(props :: any) :: any
 end

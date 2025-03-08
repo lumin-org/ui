@@ -1,0 +1,22 @@
+{
+  "lsp": {
+    "luau-lsp": {
+      "settings": {
+        "luau-lsp": {
+          "sourcemap": {
+            "rojoProjectFile": "test.project.json"
+          }
+        },
+        "ext": {
+          "roblox": {
+            "enabled": true,
+            "security_level": "plugin"
+          },
+          "fflags": {
+            "enable_new_solver": true
+          }
+        }
+      }
+    }
+  }
+}
