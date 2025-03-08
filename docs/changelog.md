@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0-rc1] - 2025-03-08
+
 ## [0.4.4] - 2025-02-22
 
 ### Added
@@ -222,7 +224,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Released [Aegis](/)!
 
-[unreleased]: https://github.com/lumin-org/ui/compare/v0.4.4...HEAD
+[unreleased]: https://github.com/lumin-org/ui/compare/v0.5.0-rc1...HEAD
+[0.5.0-rc1]: https://github.com/lumin-org/ui/compare/v0.4.4...v0.5.0-rc1
 [0.4.4]: https://github.com/lumin-org/ui/compare/v0.4.3...v0.4.4
 [0.4.3]: https://github.com/lumin-org/ui/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/lumin-org/ui/compare/v0.4.1...v0.4.2
