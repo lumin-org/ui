@@ -1,5 +1,5 @@
 name = "lumin/ui"
-version = "0.4.4"
+version = "0.5.0-rc1"
 description = "A simple and declarative UI framework, inspired by Vide & Fusion"
 authors = ["jmesrje"]
 repository = "https://github.com/lumin-org/ui"
