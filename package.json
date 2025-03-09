@@ -1,6 +1,6 @@
 {
     "name": "@rbxts/lumin-ui",
-    "version": "0.5.0-rc1",
+    "version": "0.5.0-rc2",
     "main": "out/init.luau",
     "typings": "out/index.d.ts",
     "license": "MIT",
