@@ -2,6 +2,7 @@
 local Types = require("./types")
 local Debugger = require("../roblox_packages/debugger")
 local Is = require("./is")
+local Spawn = require("./spawn")
 
 local Class = {}
 Class.__index = Class
@@ -70,7 +71,7 @@ return function<T>(processor: () -> T, dependencies: { Types.State<any> }): Type
 					self._Value = self._Processor()
 					-- Run all listeners when the value is changed
 					for _, func in self._Listeners :: { (changed: any) -> () } do
-						task.spawn(func, self._Value)
+						Spawn(func, self._Value)
 					end
 				end)
 			else

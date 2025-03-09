@@ -1,5 +1,6 @@
 -- Variables
 local Types = require("./types")
+local Spawn = require("./spawn")
 
 local Class = {}
 Class.__index = Class
@@ -17,7 +18,7 @@ Class.__call = function<T>(self, ...: T): T
 
 		-- Run all listeners when the value is changed
 		for _, func in self._Listeners :: { (changed: any) -> () } do
-			task.spawn(func, Value)
+			Spawn(func, Value)
 		end
 	end
 
