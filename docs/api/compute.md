@@ -4,20 +4,25 @@ The [`Compute`](/guide/computed-states.md) class
 
 ## Methods
 
-### `Get`
+### `Listen`
 
-Gets the current value of the compute object.
+Listens to changes of state within the object.
+
+**Parameters**
+
+- **listener:** `(changed: any) -> ()`\
+  The callback to run when changes of state are made
 
 **Returns**
 
-- `any`
+- `() -> ()`
 
 ---
 
 ### `Destroy`
 
-Destroys the compute object, but not the state dependencies.
+Destroys the state object.
 
 **Returns**
 
-- `any`
+- `void`

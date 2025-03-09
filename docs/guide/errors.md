@@ -10,9 +10,9 @@ The spring has invalid damping, and must be greater than or equal to 0. Anything
 
 The spring has an invalid speed, and must be greater than or equal to 0. Anything under this will produce unwanted effects.
 
-## `SpringCannotSetCompute`
+## `SpringNotUsed`
 
-You passed a compute to your spring, and computes cannot be set manually. This means you cannot use `Spring.Set` and must rely on your compute changing its state.
+You cannot stop a spring that has never been used.
 
 ## `SpringNotAnimatable`
 

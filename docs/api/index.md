@@ -13,7 +13,7 @@ Creates a new instance with the provided properties.
 - **class:** `string`\
   The class name of the instance to be created
 
-- **props:** `{ any }`\
+- **props:** `{ [any]: any }`\
   Properties to be applied to the instance
 
 **Returns**
@@ -28,7 +28,7 @@ Creates a new view (ScreenGui) for your elements. This acts a shortcut and clean
 
 **Parameters**
 
-- **props:** `{ any }`\
+- **props:** `{ [any]: any }`\
   Properties to be applied to the instance
 
 **Returns**
@@ -46,7 +46,7 @@ Updates an instance, writing to its properties.
 - **instance:** `Instance`\
   The instance that should be updated
 
-- **props:** `{ any }`\
+- **props:** `{ [any]: any }`\
   Properties to be applied to the instance
 
 **Returns**
@@ -72,7 +72,7 @@ Updates an instance, writing to its properties.
 
 **Parameters**
 
-- **processor:** `() -> ()`\
+- **processor:** `() -> (any)`\
   The processor function to run when dependencies are changed
 
 - **dependencies:** [`{ State }`](state.md)\
@@ -93,7 +93,7 @@ Updates an instance, writing to its properties.
 
 - **damping:** `number` <Badge type="warning" text="OPTIONAL" />\
   The damping of the spring
-  
+
 - **speed:** `number` <Badge type="warning" text="OPTIONAL" />\
   The speed of the spring
 
@@ -191,5 +191,3 @@ Runs a loop within your code to efficiently create instances or other.
 **Returns**
 
 - `Action`
-
-

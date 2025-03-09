@@ -10,18 +10,24 @@ Springs take a damping and speed property. extThese both control the behavior of
 local UI = require(path.to.UI)
 local New = UI.New
 local Spring = UI.Spring
+local State = UI.State
 
-local Spring = Spring(UDim2.fromScale(0, 0.5), 0.5, 2)
+local SpringState = State(UDim2.fromScale(0, 0.5))
+local Spring = Spring(SpringState, 0.5, 2)
 
 New "Frame" {
     Parent = ...,
+    Size = UDim2.fromOffset(100, 100),
+    AnchorPoint = Vector2.new(0.5, 0.5),
     Position = Spring,
 }
 
-Spring:Set(UDim2.fromScale(0, 0.75))
+SpringState(UDim2.fromScale(0, 0.75))
 ```
 
-The way speed and damping works is covered in more detail in the next sections.
+The way speed and damping works is covered in more detail in the next sections. Here's a preview of the output that the above code would result in:
+
+<video src="../public/videos/spring-preview.mp4" controls loop></video>
 
 ## Damping
 
@@ -46,4 +52,3 @@ Overdamping will cause the spring to move extremely slow as it gets closer to it
 ## Speed
 
 The speed will dictate how fast the spring progresses. For example, a speed such as `1` will make the spring reach its end goal almost immeadietly. Meanwhile, a speed like `20` will make the progression a lot more slower.
-

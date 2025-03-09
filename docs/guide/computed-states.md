@@ -14,16 +14,12 @@ local State = UI.State
 
 local Dependency = State(100)
 local ComputedValue = Compute(function()
-    return Dependency:Get() * 3
+    return Dependency() * 3
 end, {Dependency})
 
 print(ComputedValue) --> 300
-Dependency:Set(200)
+Dependency(200)
 print(ComputedValue) --> 600
 ```
-
-::: info
-Unlike libraries such as Fusion, UI chose a dependency-based approach so developers can better see what their computed value is using.
-:::
 
 You can also computeds for other cases, but they are pretty much useless without states being present.
