@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0-rc3] - 2025-03-11
+
 ### Added
 
 - Revamped state system. Computes, states, and springs now have the same interface are all regarded as states.
@@ -234,7 +236,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Released [Aegis](/)!
 
-[unreleased]: https://github.com/lumin-org/ui/compare/v0.5.0-rc2...HEAD
+[unreleased]: https://github.com/lumin-org/ui/compare/v0.5.0-rc3...HEAD
+[0.5.0-rc3]: https://github.com/lumin-org/ui/compare/v0.5.0-rc2...v0.5.0-rc3
 [0.5.0-rc2]: https://github.com/lumin-org/ui/compare/v0.5.0-rc1...v0.5.0-rc2
 [0.5.0-rc1]: https://github.com/lumin-org/ui/compare/v0.4.4...v0.5.0-rc1
 [0.4.4]: https://github.com/lumin-org/ui/compare/v0.4.3...v0.4.4
