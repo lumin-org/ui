@@ -11,32 +11,19 @@ local Is = require("./is")
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/#foreach)
 ]=]
-return function<T, U>(table: { [T]: U } | Types.State<{ [T]: U }>, iterator: (index: T, value: U) -> Instance?): Types.Action
+return function<T, U>(
+	tbl: Types.State<{ [T]: U }> | Types.Compute<{ [T]: U }>,
+	iterator: (index: T, value: U) -> Instance?
+): Types.Action
 	return function(instance: Instance)
-		local TableToIterate = table
-		local TableType = Is(table)
-		Debugger.assert(TableType == "table" or TableType == "State", "InvalidType", "table", TableType)
+		local StateType = Is(tbl)
+		Debugger.assert(StateType == "State", "InvalidType", "state", StateType)
+		local ValueType = Is((tbl :: any)())
+		Debugger.assert(ValueType == "table", "InvalidType", "table", ValueType)
 
-		if TableType == "State" then
-			-- Get value of State, if it is one
-			TableToIterate = (table :: any)();
-			(table :: any):Listen(function(changed: { [T]: U })
-				for index, value in changed do
-					local NewInstance = iterator(index, value)
-					if NewInstance then
-						local NewInstanceType = typeof(NewInstance)
-						Debugger.assert(NewInstanceType == "Instance", "ForEachInvalidReturn", NewInstanceType)
-						NewInstance.Parent = instance
-					end
-				end
-			end)
-		end
-
-		for index, value in TableToIterate do
+		for index, value in tbl do
 			local NewInstance = iterator(index, value)
 			if NewInstance then
-				local NewInstanceType = typeof(NewInstance)
-				Debugger.assert(NewInstanceType == "Instance", "ForEachInvalidReturn", NewInstanceType)
 				NewInstance.Parent = instance
 			end
 		end

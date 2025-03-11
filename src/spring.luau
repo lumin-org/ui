@@ -1,13 +1,12 @@
 -- Variables
 local Types = require("./types")
 local Debugger = require("../roblox_packages/debugger")
-local Spr = require("../roblox_packages/spr")
 local Is = require("./is")
 
 local Class = {}
 Class.__index = Class
 Class.__call = function(self)
-	return self._Value -- Get goal
+	return self._Value
 end
 
 local Animatable = {
@@ -25,33 +24,6 @@ local Animatable = {
 }
 
 -- Functions
-
-function Class._Bind(self: Types.Spring, prop: string, instance: Instance)
-	table.insert((self :: any)._Instances :: { Instance }, instance);
-	(instance :: any)[prop] = (self :: any)._Value(); -- Set the prop of the instance to the initial goal
-	(self :: any)._Value:Listen(function(new) -- When the goal changes, set the target to the new value
-		Spr.target(instance, (self :: any)._Damping, (self :: any)._Speed, {
-			[prop] = new,
-		})
-	end)
-end
-
---[[
-	Stops the current spring from moving, leaving it at its current position.
-
-    [Open Documentation](https://lumin-org.github.io/ui/api/spring/#stop)
-]]
-function Class.Stop(self: Types.Spring)
-	if (self :: any)._Instances then
-		-- Iterate through all instances to make sure if the spring is used on
-		-- multiple objects, they are all stopped
-		for _, instance in self._Instances do
-			Spr.stop(instance)
-		end
-		return
-	end
-	Debugger.fatal("SpringNotUsed")
-end
 
 --[[
 	Destroys the spring object.
@@ -82,18 +54,31 @@ return function(
 		Debugger.assert(speed >= 0, "SpringInvalidSpeed", speed)
 	end
 
-	local GoalType = Is(goal)
-	local GoalValueType = Is((goal :: any)())
-	Debugger.assert(GoalType == "State" or GoalType == "Compute", "InvalidType", "state or compute", GoalType)
-	Debugger.assert(table.find(Animatable, GoalValueType), "SpringNotAnimatable", GoalValueType)
+	local GoalStateType = Is(goal)
+	Debugger.assert(
+		GoalStateType == "State" or GoalStateType == "Compute",
+		"InvalidType",
+		"state or compute",
+		GoalStateType
+	)
+
+	local GoalType = Is((goal :: any)())
+	Debugger.assert(table.find(Animatable, GoalType), "SpringNotAnimatable", GoalType)
 
 	local self = setmetatable({}, Class)
 
-	self._Instances = {}
-	self._Value = goal
+	self._Value = (goal :: any)()
+	self._Observers = {} :: { (changed: any) -> () }
 	self._Damping = damping or 1
 	self._Speed = speed or 1
 	self._Type = "Spring"
+
+	table.insert(((goal :: any)._Observers) :: { (changed: any) -> () }, function(changed)
+		self._Value = changed
+		for _, observer in self._Observers do
+			observer(changed)
+		end
+	end)
 
 	return self :: any
 end

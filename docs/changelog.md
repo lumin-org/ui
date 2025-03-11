@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Revamped state system. Computes, states, and springs now have the same interface are all regarded as states.
+
 ## [0.5.0-rc2] - 2025-03-09
 
 ### Added

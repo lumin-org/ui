@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: Guides
-      link: /guide/installation.md
+      link: /guide/introduction.md
     - theme: alt
       text: API Reference
       link: /api/

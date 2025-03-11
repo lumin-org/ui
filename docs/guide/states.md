@@ -1,6 +1,6 @@
 # States
 
-States allow you to store values that are dynamically changed within your UI. You can write to them by calling them with arguments and listen for changes using `Listen`.
+States allow you to store values that are dynamically changed within your UI. You can write to them by calling them with arguments and get their value by calling with without arguments.
 
 ## Usage
 
@@ -31,19 +31,4 @@ local State = UI.State
 
 local MyState = State("Hi")
 print(MyState()) --> Hi
-```
-
-Along with this, it's also possible to listen to changes. As mentioned before though, the listener will not be run if you set the state's value to the same one as it previously was.
-
-```luau
-local UI = require(path.to.UI)
-local New = UI.New
-local State = UI.State
-
-local MyState = State("Hi")
-MyState:Listen(function(new)
-    print(new) --> Hi, again
-end)
-
-MyState("Hi, again")
 ```

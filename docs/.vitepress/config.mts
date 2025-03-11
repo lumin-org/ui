@@ -37,7 +37,7 @@ export default defineConfig({
 
 function nav(): DefaultTheme.NavItem[] {
   return [
-    { text: "Guide", link: "/guide/installation" },
+    { text: "Guide", link: "/guide/introduction" },
     { text: "API", link: "/api/" },
     { text: "Changelog", link: "/changelog" },
   ];

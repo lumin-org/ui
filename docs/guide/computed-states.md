@@ -22,4 +22,4 @@ Dependency(200)
 print(ComputedValue) --> 600
 ```
 
-You can also computeds for other cases, but they are pretty much useless without states being present.
+You are also able to pass springs, and other computes to the compute itself.

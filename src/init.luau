@@ -2,7 +2,7 @@
 local Types = require(script.types)
 local Logs = require(script.logs)
 local Debugger = require(script.Parent.roblox_packages.debugger)
-local URL = "https://lumin-org.github.io/ui/errors/"
+local URL = "https://lumin-org.github.io/ui/guide/errors"
 
 -- Debugger
 Debugger.set("UI", Logs :: any, URL)

@@ -1,6 +1,5 @@
 -- Variables
 local Types = require("./types")
-local Spawn = require("./spawn")
 
 local Class = {}
 Class.__index = Class
@@ -17,8 +16,8 @@ Class.__call = function<T>(self, ...: T): T
 		self._Value = Value
 
 		-- Run all listeners when the value is changed
-		for _, func in self._Listeners :: { (changed: any) -> () } do
-			Spawn(func, Value)
+		for _, observer in self._Observers do
+			observer(Value)
 		end
 	end
 
@@ -26,30 +25,6 @@ Class.__call = function<T>(self, ...: T): T
 end
 
 -- Functions
-
-function Class._Bind(self: Types.State<any>, prop: string, instance: Instance)
-	if type((self :: any)._Value) ~= "table" then
-		(instance :: any)[prop] = self._Value; -- Set the prop initially to the current value
-		(self :: any):Listen(function(new)
-			(instance :: any)[prop] = new -- Change the prop to the new value when the state is changed
-		end)
-	end
-end
-
---[=[
-	Listens to changes of state within the object.
-
-	[Open Documentation](https://lumin-org.github.io/ui/api/state/#listen)
-]=]
-function Class.Listen(self: Types.State<any>, listener: (changed: any) -> ()): () -> ()
-	table.insert((self :: any)._Listeners :: { () -> () }, listener) -- Add listener
-	return function() -- Disconnect the listener
-		local Listener = table.find((self :: any)._Listeners, listener)
-		if Listener then
-			table.remove((self :: any)._Listeners, Listener)
-		end
-	end
-end
 
 --[=[
 	Destroys the value object.
@@ -72,7 +47,7 @@ return function<T>(initial: T): Types.State<T>
 	local self = setmetatable({}, Class)
 
 	self._Value = initial
-	self._Listeners = {}
+	self._Observers = {}
 	self._Type = "State"
 
 	return self :: any

@@ -10,24 +10,26 @@ local Defaults = require("./defaults") :: { [string]: { [string]: any } }
 
 	[Open Documentation](https://lumin-org.github.io/ui/api/#new)
 ]=]
-return function(class: string)
+return function(class: string | Instance)
 	Debugger.assert(type(class) == "string", "InvalidType", class, "invalid")
-	return function(props: { [any]: any }): Instance & {[any]: any}
-		local Success, New = pcall(Instance.new, class)
-
-		if Success then
-			-- Apply default properties
-			if Defaults[class] then
-				for prop, value in Defaults[class] do
-					(New :: any)[prop] = value
+	return function(props: { [any]: any }): Instance & { [any]: any }
+		if type(class) == "string" then
+			local Success, New = pcall(Instance.new, class)
+			
+			if Success then
+				-- Apply default properties
+				if Defaults[class] then
+					for prop, value in Defaults[class] do
+						(New :: any)[prop] = value
+					end
 				end
+			else
+				Debugger.fatal("InvalidClass", class)
 			end
 
-			Apply(New, props)
+			return Apply(New, props)
 		else
-			Debugger.fatal("InvalidClass", class)
+			return Apply(class:Clone(), props)
 		end
-
-		return New
 	end
 end

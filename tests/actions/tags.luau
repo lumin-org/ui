@@ -7,7 +7,7 @@ local New = UI.New
 local Tags = UI.Tags
 
 local ToTag = New "Frame" {
-    Tags("Tag1 Tag2 Tag3")
+    Tags({"Tag1", "Tag2", "Tag3"}),
 }
 
 print(`{TEST_NAME}:`, ToTag:GetTags())
