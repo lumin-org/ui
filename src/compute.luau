@@ -12,6 +12,7 @@ end
 local DependencyTypes = {
 	"State",
 	"Compute",
+	"Spring",
 }
 
 -- Functions

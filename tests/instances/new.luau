@@ -5,7 +5,7 @@ local TEST_NAME = "NEW-TEST"
 
 local New = UI.New
 local Frame = New "Frame" {
-    Name = "Frame"
+	Name = "Frame",
 }
 
 print(`{TEST_NAME}:`, Frame.Name)

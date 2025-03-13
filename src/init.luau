@@ -22,6 +22,7 @@ return table.freeze({
 	State = require(script.state),
 	Compute = require(script.compute),
 	Spring = require(script.spring),
+	Effect = require(script.effect),
 	Cleanup = require(script.cleanup),
 	Event = require(script.event),
 	Changed = require(script.changed),

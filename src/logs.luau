@@ -13,9 +13,6 @@ return {
 	-- Cleanup
 	CleanupCannotClean = "Cannot clean object without Destroy or Disconnect methods",
 
-	-- ForEach
-	ForEachInvalidReturn = "Expected return type Instance; got '%s'",
-
 	-- View
 	ViewInvalidType = "Expected view type Screen, Billboard, or Surface; got '%s'",
 

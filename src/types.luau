@@ -38,10 +38,12 @@ export type Spring = typeof(setmetatable({} :: {
 }))
 
 -- Compute
-
 export type Compute<T> = typeof(setmetatable({} :: {
 } & Constructor<Compute<T>>, {} :: {
     __call: (self: Compute<T>) -> (T)
 }))
+
+-- Arg
+export type Value<T> = T | State<T>
 
 return {}
